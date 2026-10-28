@@ -22,9 +22,10 @@ the FM-1 with a USB data cable and press Install (allow MIDI when the browser as
 the browser and writes it over USB-MIDI, as Felucca's installer does. Sill keeps its settings and its eight sets
 in Felucca's first two song slots: back up anything you made in Felucca first.
 
-Or **try it in the browser** first: [delirioux.github.io/sill/try](https://delirioux.github.io/sill/try/) runs
-the same firmware, compiled to WebAssembly on Felucca's browser emulator (Chrome, Edge or Firefox; the computer
-keyboard plays the keys).
+Or **try it in the browser** first: [delirioux.github.io/sill/dev/try](https://delirioux.github.io/sill/dev/try/)
+runs the test build's firmware, compiled to WebAssembly on Felucca's browser emulator (Chrome, Edge or Firefox; the
+computer keyboard plays the keys). Once Sill is released, the release plays at
+[delirioux.github.io/sill/try](https://delirioux.github.io/sill/try/).
 
 Test builds: the newest from `dev` installs from [delirioux.github.io/sill/dev](https://delirioux.github.io/sill/dev/);
 every run also leaves its package in the artifact `sill-firmware`. From a terminal: `python3 tools/fm1_install.py sill-X.Y.fwsc`.
