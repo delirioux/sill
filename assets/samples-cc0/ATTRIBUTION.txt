@@ -1,0 +1,9 @@
+DRUMS: Sill's drum kit, seven one-shots (00_kick_punch, 01_kick_round, 02_snare, 03_clap, 04_hat, 05_open_hat,
+06_crash) and the crowd's three shouts (07_hey, 08_ho, 09_whoa), synthesized by tools/si_drums.py (seeded, so it
+always makes the same files): no recording of any instrument or anyone's voice, and no third-party sample, is in
+them. The shouts are eight synthetic voices through formant filters. 16-bit mono WAV at 44.1 kHz;
+tools/gen_samples.py encodes them into the firmware.
+To the extent possible under law, delirioux has waived all copyright and related rights to these sounds:
+CC0 1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/
+Sill uses none of Felucca's CC0 sample sets (Versilian Studios' VCSL and VSCO-2 CE); tools/fetch_cc0.py still
+fetches them for anyone who wants them back.
