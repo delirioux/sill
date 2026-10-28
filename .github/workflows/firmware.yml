@@ -129,10 +129,15 @@ jobs:
           OSHA=$(git rev-parse FETCH_HEAD)
           if [ "$OSHA" = "$GITHUB_SHA" ]; then
             cp build/felucca.fwsc build/other.fwsc
+            [ -d build/si_emu ] && rm -rf build/other_emu && cp -r build/si_emu build/other_emu
           else
             git worktree add ../other "$OSHA"
             (cd ../other && git submodule update --init --depth 1 && FELUCCA_SILL=1 ./build.sh)
             cp ../other/build/felucca.fwsc build/other.fwsc
+            # its browser build too, so its pages keep their try/ (the site goes out without it if this fails)
+            if [ -d "$HOME/wasi/sys" ] && (cd ../other && WASI_SYSROOT="$HOME/wasi/sys" sh web/emu/si_build.sh); then
+              rm -rf build/other_emu && cp -r ../other/build/si_emu build/other_emu
+            fi
           fi
           echo "OTHER=$OTHER" >> "$GITHUB_ENV"
           echo "OSHA=${OSHA::7}" >> "$GITHUB_ENV"
@@ -142,10 +147,10 @@ jobs:
         run: |
           if [ "$GITHUB_REF_NAME" = main ]; then MAIN=build/felucca.fwsc MS=${GITHUB_SHA::7} DEV=build/other.fwsc DS=$OSHA
           else MAIN=build/other.fwsc MS=$OSHA DEV=build/felucca.fwsc DS=${GITHUB_SHA::7}; fi
-          # (try/: the browser build of the branch pushed, so only that branch's pages get it)
-          DT=$([ "$GITHUB_REF_NAME" = dev ] && echo 1 || echo 0); MT=$([ "$GITHUB_REF_NAME" = main ] && echo 1 || echo 0)
-          if [ -f "$DEV" ]; then SI_SITE_TRY=$DT python3 web/si_make_site.py "$DEV" "dev-$DS" _site/dev; fi
-          if [ -f "$MAIN" ]; then SI_SITE_TRY=$MT python3 web/si_make_site.py "$MAIN" "$MS" _site
+          # (try/: each branch's own browser build, build/si_emu for the branch pushed, build/other_emu for the other)
+          if [ "$GITHUB_REF_NAME" = main ]; then ME=build/si_emu DE=build/other_emu; else ME=build/other_emu DE=build/si_emu; fi
+          if [ -f "$DEV" ]; then SI_EMU_DIR=$DE python3 web/si_make_site.py "$DEV" "dev-$DS" _site/dev; fi
+          if [ -f "$MAIN" ]; then SI_EMU_DIR=$ME python3 web/si_make_site.py "$MAIN" "$MS" _site
           else python3 web/si_make_site.py --waiting _site; fi
 
       - uses: actions/upload-pages-artifact@v3

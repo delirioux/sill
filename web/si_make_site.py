@@ -14,8 +14,8 @@
   web/si_make_site.py --waiting OUT_DIR       the start page before the first release: it points to dev/
 
 The workflow makes dev's test build in OUT_DIR/dev first, then main's release in OUT_DIR, whose start page then
-links the test build; with no release yet, the waiting page. Each try/ is the browser build of the branch pushed:
-a push to dev gives dev/ its try/ (SI_SITE_TRY=0 leaves it out of the other branch's pages).
+links the test build; with no release yet, the waiting page. Each try/ is that branch's own browser build:
+SI_EMU_DIR names it (default build/si_emu); SI_SITE_TRY=0 leaves try/ out.
 
 VERSION is the build's (the commit); Sill's own (X.Y) is SI_VERSION in firmware/src/si_version.h.
 
@@ -135,7 +135,7 @@ def main(pkg, build, out):
     for doc in ("LICENSE", "LICENSING.md"):
         shutil.copy(ROOT / doc, fw / doc)
     shutil.copy(ROOT / "docs/sill-logo.png", out / "sill-logo.png")
-    emu = ROOT / "build/si_emu"
+    emu = ROOT / os.environ.get("SI_EMU_DIR", "build/si_emu")   # (the browser build of this package's branch)
     try_link = ""
     if (emu / "sill.wasm").exists() and os.environ.get("SI_SITE_TRY") != "0":
         dst = out / "try"
