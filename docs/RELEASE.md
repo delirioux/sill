@@ -14,4 +14,4 @@ The first release.
 - The LASER palette, by default.
 - In the browser: the same firmware on Felucca's emulator.
 
-To go back: Felucca's or Tuna's installer, or the official V15.
+Runs on the FM-1. To go back: Felucca's or Tuna's installer, or the official V15.

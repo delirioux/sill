@@ -4,8 +4,8 @@ The working notes behind Sill: the agreements, how the work flows, why the code 
 stands and what comes next. What Sill is and how to play it is in the [README](../README.md) and the
 [manual](MANUAL.md).
 
-Status: 28 October 2026. Version 0.1 written: the host tests pass, the screens are drawn, every style renders
-through Felucca's engines. On `dev`, waiting for its first run on an FM-1.
+Status: 29 October 2026. Version 0.1 built by CI, installed from the site and running on an FM-1; released on
+`main`.
 
 ## Agreements
 
@@ -101,9 +101,8 @@ this host (SKANK the least, BALLAD the most), in the range of Daurade's; the rea
 
 ## Plan
 
-1. **On the FM-1.** Install the test build from `dev`: it boots, plays, the screens are right at real size, the
-   settings and sets survive a power cycle, MIDI out. The CPU at EUROSTOMP (the unison hook) and BALLAD.
+1. **On the FM-1.** It installs, boots and plays. Still to check: the settings and sets surviving a power cycle,
+   MIDI out, the CPU at EUROSTOMP (the unison hook) and BALLAD over a long session.
 2. **The sound by ear.** The new sounds (PIANO, SUPER, ORCH, REESE, HOOVER, OOH) and their trims; the shouts (do
    they read as a crowd?); the kick against the bass in the chorus; the break's level.
-3. **Release 0.1 on `main`** with the site and its installer, once it has run on the FM-1.
-4. **Version 2?** More styles, a rap-like spoken part, more shouts: only if Sill earns it; the record has room.
+3. **Version 2?** More styles, a rap-like spoken part, more shouts: only if Sill earns it; the record has room.
