@@ -54,6 +54,7 @@ enum { SI_DR_KICK, SI_DR_SNARE, SI_DR_CLAP, SI_DR_HAT, SI_DR_OPEN, SI_DR_CRASH, 
 enum { SI_SEC_INTRO, SI_SEC_VERSE, SI_SEC_PRE, SI_SEC_CHORUS, SI_SEC_BREAK, SI_SEC_CHORUS2, SI_SECS };
 #define SI_SETS 8
 #define SI_SOUNDS 10                               /* each part's SOUND list (si_sounds.h) */
+#define SI_STABS_PIANO 0                           /* STABS sound 0, PIANO: the offbeat piano chords, any style */
 #define SI_LOOPS 12                                /* the chord loops (si_groove.c SI_LOOP) */
 #define SI_KEYUP_MAX 3                             /* SEQ: up to +3, then home */
 

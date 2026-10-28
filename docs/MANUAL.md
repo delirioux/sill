@@ -50,7 +50,7 @@ Then round again from the VERSE, with a new hook and the key back home. With ARC
 | Page (button) | Cards |
 | --- | --- |
 | **PLAY** (HOME) | **LIFT** the filter's ceiling on the lifted parts (the stabs, and the hook in some styles). **PUMP** how deep the mix ducks on each kick. **VOX** the crowd: OFF, in the CHORUS, or in ALL the song. **ENERGY** density and drive: sixteenth hats, pickup kicks, extra stabs. The panel: the chord loop, the bar as it plays (a column a sixteenth, as tall as the parts that sounded), and the form with the section playing. |
-| **SOUND** (FX) | **STABS**, **BASS**, **HOOK**: ten sounds each. **DRUMS**: the kit, EURO (Sill's own one-shots and the crowd), SESSION or MACHINE (Felucca's DRUM engine, no crowd). |
+| **SOUND** (FX) | **STABS**, **BASS**, **HOOK**: ten sounds each. PIANO on STABS plays the offbeat piano chords in any style, the verse included. **DRUMS**: the kit, EURO (Sill's own one-shots and the crowd), SESSION or MACHINE (Felucca's DRUM engine, no crowd). |
 | **TONE** (FX again) | **RESO** the lifted filter's resonance. **DRIVE** saturation. **DETUNE** the chorus that thickens the stabs and the hook. **CRUSH** bits and rate, down from clean. |
 | **VOX** (LFO) | **VOWELS** the two vowels the OOH sound sings between (OO-AH, AH-EE, OH-AH, OO-EE, AH-OH). **SHIFT** its formants, -12 to +12. **CHANT** what the crowd shouts: HEY, HO, WHOA or a MIX. **GLIDE** between the OOH's notes. The panel shows where the shouts fall in two bars. |
 | **KEY** (SCL) | **KEY** the root. **SCALE** MINOR, MAJOR, DORIAN, HARMONIC MINOR. **CHORDS** one of twelve chord loops. **BARS** a chord lasts 1, 2 or 4 bars. |

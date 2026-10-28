@@ -219,6 +219,19 @@ int main(void)
     si_play(&g, true); run_bars(8); si_play(&g, false);
     CHECK(chant_kind[SI_DR_HO] > 0 && chant_kind[SI_DR_HEY] == 0, "CHANT HO: ho (%d), no hey (%d)", chant_kind[SI_DR_HO],
           chant_kind[SI_DR_HEY]);
+    /* PIANO on the STABS: the offbeat chords, in any style (RAVE's own stabs are not offbeat) */
+    si_style_apply(&g.s, SI_ST_RAVE);
+    g.s.arc = 0;
+    g.s.snd[SI_STABS] = SI_STABS_PIANO;
+    si_rebuild(&g);
+    si_play(&g, true); run_bars(5);
+    {
+        int off = 0, on_beat = 0;
+        for (int k = 0; k < 16; ++k)
+            if ((g.hits_last[SI_STABS] >> k) & 1u) { if (k % 4 == 2) off++; else if (k % 4 == 0) on_beat++; }
+        CHECK(off >= 2 && on_beat == 0, "PIANO: the chords on the offbeats (%d off, %d on the beat)", off, on_beat);
+    }
+    si_play(&g, false);
     /* the hook's phrase: REPEAT bars of it */
     g.s.repeat = 4;
     si_rebuild(&g);

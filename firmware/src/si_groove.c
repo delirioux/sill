@@ -464,10 +464,10 @@ static const uint8_t STAB_PATS[STAB_COUNT][4][16] = {
                    {3, 0, 0, 3, 0, 0, 2, 0, 3, 0, 0, 3, 0, 0, 2, 0},
                    {0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0},
                    {2, 0, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 2, 0}},
-    [STAB_PIANO] = {{0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0},
-                    {2, 0, 0, 1, 0, 0, 2, 0, 0, 1, 0, 0, 2, 0, 0, 0},
-                    {0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 1},
-                    {3, 0, 0, 3, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0}},
+    [STAB_PIANO] = {{0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0},   /* the offbeat piano: every "and" */
+                    {0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2, 0, 0},   /* the last one early */
+                    {0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0},   /* the second and the last early */
+                    {0, 0, 2, 0, 0, 0, 2, 1, 0, 0, 2, 0, 0, 0, 2, 1}},  /* with a sixteenth after */
     [STAB_PAD] = {{16}, {16}, {16}, {16}},
     [STAB_SKANK] = {{0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0},
                     {0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 0},
@@ -982,7 +982,10 @@ static void play_stabs(si_groove *g, int i, uint32_t delay, float sf, float hum)
     const si_chord *c = chord_at(g, g->bar);
     float e = (float)g->s.energy / 100.0f;
     bool pre = g->s.arc && g->sec == SI_SEC_PRE, brk = g->brk || (g->s.arc && g->sec == SI_SEC_BREAK);
-    if (st->stab == STAB_PAD || brk) {             /* a pad, the break: the chord held (REC's break: a bar each) */
+    /* PIANO on the STABS card: the offbeat piano chords, in any style */
+    int fam = g->s.snd[SI_STABS] == SI_STABS_PIANO ? STAB_PIANO : st->stab;
+    bool piano = fam == STAB_PIANO;
+    if (fam == STAB_PAD || brk) {             /* a pad, the break: the chord held (REC's break: a bar each) */
         stabs_held(g, i, delay, sf, clampi(80 + (int)(hum * 8.0f), 1, 127), g->brk);
         return;
     }
@@ -990,18 +993,20 @@ static void play_stabs(si_groove *g, int i, uint32_t delay, float sf, float hum)
         stabs_held(g, i, delay, sf, clampi(76 + g->sec_bar * 10 + (int)(hum * 6.0f), 1, 127), true);
         return;
     }
-    if (g->s.arc && g->sec == SI_SEC_VERSE && (g->bar % 2))   /* the verse: every other bar, room for the rap */
+    bool verse = g->s.arc && g->sec == SI_SEC_VERSE;
+    if (verse && (g->bar % 2) && !piano)           /* the verse: every other bar, room for the rap (the piano plays on) */
         return;
-    int len = STAB_PATS[st->stab][g->stab_pat][i];
+    int len = STAB_PATS[fam][g->stab_pat][i];
     if (!len) {
-        if (e > 0.85f && st->stab == STAB_EURO && i == 15 && (g->stab_pat & 1))   /* high energy: a pickup */
+        if (e > 0.85f && fam == STAB_EURO && i == 15 && (g->stab_pat & 1))   /* high energy: a pickup */
             len = 1;
         else
             return;
     }
-    int vel = st->stab == STAB_SKANK ? (i % 4 == 2 ? 108 : 70) : i % 4 == 0 ? 108 : 98;
+    int vel = fam == STAB_SKANK ? (i % 4 == 2 ? 108 : 70) : piano ? (i % 4 == 2 ? 112 : 96) - (verse ? 10 : 0)
+            : i % 4 == 0 ? 108 : 98;
     vel += (int)(hum * 10.0f);
-    float gate = st->stab == STAB_SKANK ? 0.35f : st->stab == STAB_RAVE ? 0.7f : 0.85f;
+    float gate = fam == STAB_SKANK ? 0.35f : fam == STAB_RAVE ? 0.7f : piano ? 0.6f : 0.85f;
     /* a stab sounds the voicing's top three: the shared voice budget (eight for all four parts) stays for the
      * drums' tails, the bass and the hook */
     int k0 = c->n > 3 ? 1 : 0;

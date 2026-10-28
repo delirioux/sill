@@ -96,7 +96,8 @@ themselves while stopped. [docs/MANUAL.md](docs/MANUAL.md) goes through every pa
 
 Four parts on Felucca's engines, ten sounds each (STABS: PIANO, ORGAN, SUPER, STRINGS, BRASS, PLUCK, HOOVER, ORCH,
 BELLS, PAD; BASS: FM BASS, SQUARE, SUB, FAT, ACID, REESE, SLAP, FRETLESS, OCTAVE, WOW; HOOK: SUPER, SAW, PLUCK, BELL,
-PIANO, HOOVER, OOH, SYNC, FLUTE, CHIP), evened out so a new sound does not jump out of the mix. The SUPER hook is
+PIANO, HOOVER, OOH, SYNC, FLUTE, CHIP), evened out so a new sound does not jump out of the mix. PIANO on STABS turns any style into offbeat piano chords, the 90s
+way. The SUPER hook is
 two detuned saws on every free voice (UNISON); the PIANO and the ORCH hit are FM patches of Sill's own; OOH is
 Felucca's VOICE engine, a formant synthesizer, singing between two vowels (the VOX page).
 
