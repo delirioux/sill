@@ -6,7 +6,7 @@
  *
  * Who runs what:
  *   the audio ISR (audio.c audio_block -> si_audio_pre): the groove in time, its notes straight into Felucca's
- *     tracks (trk_note_on / off) and out as USB MIDI; the sweep and the pump into the tracks (sis_block);
+ *     tracks (trk_note_on / off) and out as USB MIDI; the lift and the pump into the tracks (sis_block);
  *   the main loop (main.c -> si_frame, si_input): the panel into the controls (the audio ISR held off while one
  *     acts), a part's sound loaded when it changed (a preset load is the main loop's), the cards into the tracks,
  *     the LEDs, the settings and sets saved while stopped, the screen.
@@ -237,7 +237,7 @@ static void si_fw_init(void)
     for (i = 0; i < NTRK; i++) {
         track_t *t = &trk[i];
         track_defaults(t);
-        set_engine_of(t, i == 3u ? sis_kit_engine(SI_KIT_CRISP) : SIS_ANALOG);
+        set_engine_of(t, i == 3u ? sis_kit_engine(SI_KIT_EURO) : SIS_ANALOG);
         apply_preset_to(t, 0u);
         t->engine = t->eng_req;
         track_defaults_steps(t);                             /* (Felucca's sequencer stays empty) */
