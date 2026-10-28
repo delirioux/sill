@@ -142,8 +142,11 @@ jobs:
         run: |
           if [ "$GITHUB_REF_NAME" = main ]; then MAIN=build/felucca.fwsc MS=${GITHUB_SHA::7} DEV=build/other.fwsc DS=$OSHA
           else MAIN=build/other.fwsc MS=$OSHA DEV=build/felucca.fwsc DS=${GITHUB_SHA::7}; fi
-          if [ -f "$DEV" ]; then SI_SITE_TRY=0 python3 web/si_make_site.py "$DEV" "dev-$DS" _site/dev; fi
-          if [ -f "$MAIN" ]; then python3 web/si_make_site.py "$MAIN" "$MS" _site; fi
+          # (try/: the browser build of the branch pushed, so only that branch's pages get it)
+          DT=$([ "$GITHUB_REF_NAME" = dev ] && echo 1 || echo 0); MT=$([ "$GITHUB_REF_NAME" = main ] && echo 1 || echo 0)
+          if [ -f "$DEV" ]; then SI_SITE_TRY=$DT python3 web/si_make_site.py "$DEV" "dev-$DS" _site/dev; fi
+          if [ -f "$MAIN" ]; then SI_SITE_TRY=$MT python3 web/si_make_site.py "$MAIN" "$MS" _site
+          else python3 web/si_make_site.py --waiting _site; fi
 
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
