@@ -70,9 +70,9 @@ TR = 22050                                   # stored sample rate
 # from the web editor). TRANH was removed (66 KB of flash); its index 1 stays, an alias of PIANO
 # ("alias": the set named). PERC (the GM kit) was removed (66 KB); its index 4 stays, an alias of
 # PIANO too (PERC_SLOT; its sounds load as the DRUM engine)
-CC0_SETS = [("DRUMS", "kit"), ("DRUMS", "alias"), ("DRUMS", "alias"), ("DRUMS", "alias"), ("DRUMS", "alias")]
-# (Sill: one set, its drum kit (tools/si_drums.py, CC0); the other indexes are aliases of it. Felucca's PIANO,
-# FLUTE and SAX are left out)
+CC0_SETS = [("DRUMS", "kit"), ("PIANO", "oneshot"), ("DRUMS", "alias"), ("DRUMS", "alias"), ("DRUMS", "alias")]
+# (Sill: two sets, its drum kit (tools/si_drums.py, CC0) and its bright club piano (tools/si_piano.py, from VCSL's
+# Kawai grand, CC0); the other indexes are aliases of the kit. Felucca's FLUTE and SAX are left out)
 PERC_SLOT = 4                                # core.h SMP_SET_PERC: SAMPLE's factory presets end before it
 MEASURED_TUNING = ()                         # sets whose recordings are not at A440 (was TRANH, ~+35 ct)
 
@@ -104,7 +104,7 @@ ENV = {"wave":(5, 80, 100, 50), "kit": (0, 127, 127, 60), "multi": (0, 85, 0, 75
 # Sill: DRUMS keeps its one-shots whole (the crash is a second long) and at 44.1 kHz, not TR: the hats' and the
 # cymbal's air lives above 11 kHz, which 22,050 Hz would cut away (SET_RATE; the engine plays each zone at its rate)
 SET_DIR = {}
-SET_KEEP = {"DRUMS": 1.0}
+SET_KEEP = {"DRUMS": 1.0, "PIANO": 1.2}               # (the piano: tools/si_piano.py cut and faded it already)
 SET_KEEP_BY_ROOT = {}
 SET_FADE = {}
 SET_RATE = {"DRUMS": 44100}

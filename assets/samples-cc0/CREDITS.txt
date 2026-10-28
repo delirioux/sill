@@ -5,5 +5,10 @@ them. The shouts are eight synthetic voices through formant filters. 16-bit mono
 tools/gen_samples.py encodes them into the firmware.
 To the extent possible under law, delirioux has waived all copyright and related rights to these sounds:
 CC0 1.0 Universal, https://creativecommons.org/publicdomain/zero/1.0/
-Sill uses none of Felucca's CC0 sample sets (Versilian Studios' VCSL and VSCO-2 CE); tools/fetch_cc0.py still
-fetches them for anyone who wants them back.
+PIANO: Sill's club piano, six notes (00_Piano_C2 .. 05_Piano_F#4, VCSL's names: C3 is middle C) of the Kawai
+grand of the Versilian Community Sample Library (VCSL, by Sam Gossner and contributors, CC0 1.0,
+https://github.com/sgossner/VCSL, "Chordophones/Zithers/Grand Piano, Kawai/Sustains", the v4 layer), changed by
+tools/si_piano.py: summed to mono, cut to 0.85 .. 1.15 s and faded, a high shelf (+10 dB from 2 kHz), a presence
+lift, less body, a soft clip, normalised. CC0 as their source; Sill keeps it so.
+Sill uses none of Felucca's other CC0 sample sets (VCSL and VSCO-2 CE); tools/fetch_cc0.py still fetches them for
+anyone who wants them back.

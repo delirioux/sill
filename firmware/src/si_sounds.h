@@ -5,6 +5,7 @@
  *
  * Tracks: 1 STABS, 2 BASS, 3 HOOK, 4 DRUMS. Each music part has a list of ten sounds (the SOUND page): an engine and
  * its factory preset, or a sound of Sill's own on that engine (sis_own), or one of the FM6 patches (si_fm6.inc).
+ * The PIANO is the SAMPLE engine's set 1: six notes of a Kawai grand (VCSL, CC0) made bright (tools/si_piano.py).
  * The drums are a kit: EURO, Sill's own one-shots and the crowd's shouts (the SAMPLE engine, set DRUMS:
  * tools/si_drums.py, 44.1 kHz), or the DRUM engine's TIGHT or 80 kit (no shouts: the crowd stays home).
  *
@@ -64,7 +65,7 @@ static const preset_t SIS_SAWLEAD = {"SAW LEAD", {0, 0, 12, 12, 0, 96, 25, 64}, 
 /* the three music parts' lists, in the SOUND card's order (si_groove.c names them in the styles) */
 static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
     {   /* STABS */
-        SF("PIANO", SI_FM6_HOUSEPIANO, SIS_KEEP, SIS_POLY, -1),
+        S("PIANO", SIS_SAMPLE, 1, 4, -1),                /* the bright club piano (tools/si_piano.py) */
         S("ORGAN", SIS_WHEEL, 1, 3, 0),                  /* JAZZ PERC: the house organ's click */
         SO("SUPER", SIS_ANALOG, 0, SIS_SUPER, SIS_KEEP, SIS_KEEP, SIS_POLY, 4, 0),
         S("STRINGS", SIS_ANALOG, 11, 4, -6),
@@ -92,7 +93,7 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         SO("SAW", SIS_TRIO, 0, SIS_SAWLEAD, SIS_KEEP, 10, SIS_KEEP, 5, -8),
         S("PLUCK", SIS_ANALOG, 8, 4, 2),
         S("BELL", SIS_FM6, 1, 2, -3),
-        SF("PIANO", SI_FM6_HOUSEPIANO, SIS_KEEP, SIS_POLY, 1),
+        S("PIANO", SIS_SAMPLE, 1, 4, -8),
         SO("HOOVER", SIS_ANALOG, 0, SIS_HOOVER, SIS_KEEP, 14, SIS_LEGATO, 4, -15),
         SO("OOH", SIS_VOICE, 0, SIS_OOH, SIS_KEEP, SIS_KEEP, SIS_LEGATO, -1, -12),
         S("SYNC", SIS_TRIO, 2, 5, -6),
@@ -227,6 +228,13 @@ static inline void sis_track(track_t *t, const si_groove *g, int part)
         }
         t->p[P_DIST] = 0;
         return;
+    }
+    if (snd->engine == SIS_SAMPLE) {             /* the piano: its velocity (the SAMPLE engine has none of its own) */
+        t->p[P_M4SRC] = MS_VEL;
+        t->p[P_M4DST] = MD_AMP;
+        t->p[P_M4AMT] = 64;
+    } else {
+        t->p[P_M4SRC] = MS_OFF;
     }
     if (snd->glide >= 0)
         t->p[P_GLIDE] = snd->glide;

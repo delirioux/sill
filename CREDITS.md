@@ -4,6 +4,8 @@
 
 - **The drum kit and the crowd**: Sill's own, seven one-shots and three shouts synthesized by
   `tools/si_drums.py`, CC0 1.0 ([attribution](assets/samples-cc0/ATTRIBUTION.txt))
+- **The piano**: six notes of the Kawai grand of the [Versilian Community Sample Library](https://github.com/sgossner/VCSL)
+  (Sam Gossner and contributors, CC0 1.0), made bright by `tools/si_piano.py`
 - **Daurade** (delirioux, GPL-3.0-only): the machine Sill runs on: the glue, the cards and pages, the matrix's
   sweep and pump, the sets, the drum kit's one-shots and their generator, the OCTAVE bass
 - **[Tuna](https://github.com/delirioux/tuna)** and Flyfish (delirioux, GPL-3.0-only): the frame Sill's screen is

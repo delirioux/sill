@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-only
-"""Sill's FM6 patches -> firmware/src/si_fm6.inc (packed 128-byte voices): Sill's own HOUSE PNO and ORCH HIT, and
-three of Tuna's own (tools/tuna_fm6.py in Tuna, GPL-3.0, the same author), as they are.
+"""Sill's FM6 patches -> firmware/src/si_fm6.inc (packed 128-byte voices): Sill's own ORCH HIT, and three of Tuna's
+own (tools/tuna_fm6.py in Tuna, GPL-3.0, the same author), as they are.
 
     python3 tools/si_fm6.py            writes it
     python3 tools/si_fm6.py --check    fails if the file differs from what this writes
 
 Patches made for Sill and Tuna (no factory ROM data of any instrument), written as Felucca's own are
 (tools/gen_fm6_patches.py: op() and voice(), OP1..OP6). A family loads one onto FM6 as the track's own patch
-(si_sounds.h). Tuna checked its three by ear in its audition; Sill's two are levelled by tests/si_audition.sh.
+(si_sounds.h). Tuna checked its three by ear in its audition; Sill's is levelled by tests/si_audition.sh.
 
 The algorithms used (the generic 6-operator numbering):
    1  1<-2,  3<-4<-5<-6 (fb 6)             carriers 1 3
@@ -31,15 +31,7 @@ op, voice, pack = _g.op, _g.voice, _g.pack
 OFF = op(ol=0)
 
 # (C name, voice)
-PATCHES = [    # a bright house piano: three pairs, a hard hammer, the tone falling away fast, little sustain
-    ("HOUSEPIANO", voice("HOUSE PNO", 5, [
-        op(r=(99, 42, 26, 60), l=(99, 78, 0, 0), ol=99, kvs=2, rs=3),
-        op(r=(99, 62, 32, 60), l=(99, 48, 0, 0), ol=82, kvs=5, rs=3),
-        op(r=(99, 40, 25, 60), l=(99, 76, 0, 0), ol=94, det=9, kvs=2, rs=3),
-        op(r=(99, 78, 36, 60), l=(99, 28, 0, 0), ol=76, kvs=6, rs=3),
-        op(r=(99, 70, 30, 60), l=(99, 58, 0, 0), ol=80, fc=2, kvs=2, rs=3),
-        op(r=(99, 88, 42, 60), l=(99, 18, 0, 0), ol=72, kvs=7, rs=3)],
-        fb=5, lpms=0)),
+PATCHES = [
     # an orchestra hit: brass, a body an octave down and a bright octave up, struck together, gone in a breath,
     # its pitch falling a hair as it hits
     ("ORCHHIT", voice("ORCH HIT", 5, [

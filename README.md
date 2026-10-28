@@ -98,7 +98,8 @@ Four parts on Felucca's engines, ten sounds each (STABS: PIANO, ORGAN, SUPER, ST
 BELLS, PAD; BASS: FM BASS, SQUARE, SUB, FAT, ACID, REESE, SLAP, FRETLESS, OCTAVE, WOW; HOOK: SUPER, SAW, PLUCK, BELL,
 PIANO, HOOVER, OOH, SYNC, FLUTE, CHIP), evened out so a new sound does not jump out of the mix. PIANO on STABS turns any style into offbeat piano chords, the 90s
 way. The SUPER hook is
-two detuned saws on every free voice (UNISON); the PIANO and the ORCH hit are FM patches of Sill's own; OOH is
+two detuned saws on every free voice (UNISON); the PIANO is six notes of a Kawai grand (VCSL, CC0) made bright
+and hard for the club; the ORCH hit is an FM patch of Sill's own; OOH is
 Felucca's VOICE engine, a formant synthesizer, singing between two vowels (the VOX page).
 
 The drums are Sill's own: seven one-shots (two kicks, snare, clap, closed and open hat, crash) and the crowd's

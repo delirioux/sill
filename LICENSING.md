@@ -3,7 +3,8 @@
 Sill is a fork of Daurade, Flyfish and [Tuna](https://github.com/delirioux/tuna), themselves forks of
 [Felucca](https://github.com/hugelton/Felucca): GPL-3.0-only, as they are. Its own files (`firmware/src/si_*`,
 `tests/si_*`, `tools/si_*`, `tools/draw_logo.py`, `web/si_*`, `web/emu/si_*`, `docs/`, `assets/logo.*`) are
-Copyright (C) 2026 delirioux, GPL-3.0-only; the maths (`tuna_libm.c`, `tuna_sys.h`) are Tuna's. The drum one-shots
+Copyright (C) 2026 delirioux, GPL-3.0-only; the maths (`tuna_libm.c`, `tuna_sys.h`) are Tuna's. The piano in `assets/samples-cc0/PIANO/` (VCSL's Kawai grand, CC0 1.0, made bright by
+`tools/si_piano.py`) stays CC0 too. The drum one-shots
 and shouts in `assets/samples-cc0/DRUMS/` and their generator `tools/si_drums.py` are dedicated to the public domain (CC0 1.0,
 see `assets/samples-cc0/ATTRIBUTION.txt`). Everything else is Felucca's, as Felucca licenses it:
 
