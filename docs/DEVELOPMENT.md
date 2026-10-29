@@ -100,7 +100,7 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
   back with the same sounds. Names stay short enough for a card (the screen test lints every one).
 - **Tuplets between the sixteenths.** The engine counts sixteenths but schedules a note at any frame, so a tuplet's
   notes fall evenly inside its span: 3 in 4 sixteenths, 4 in 6, 5 in 4, 6 in 4. A song's hook may hold one in its
-  motif's second half (20, 40, 55 % of songs at SLOW, MID, FAST), a run through the scale; a fill may be a snare
+  motif's second half (20, 40, 55 % of songs at SLOW, MID, FAST), an arpeggio of the chord playing, so it always fits; a fill may be a snare
   triplet or a sextuplet roll over the last beat.
 - **Headroom, not drive.** The mix sat in Felucca's master limiter and the styles' DRIVE stacked on the sounds' own,
   so it sounded overdriven: MIX 100 is -2 dB now, DRIVE reaches the distortion at half the depth, the styles' DRIVE

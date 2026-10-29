@@ -24,6 +24,7 @@ static int fails, checks;
 static si_groove g;
 static int on[SI_PARTS], off[SI_PARTS], sounding[SI_PARTS][128], bad_pc, hook_in_verse, chants, chant_kind[SI_DR_COUNT], bad_choir;
 static int drum_on[SI_DR_COUNT];
+static int tup_watch, tup_notes, tup_off;   /* the tuplets' notes: how many, how many off the chord */
 static uint32_t hash;
 static int stab_tri, stab_not_tri;
 static void sound(void *ctx, const si_event *e)
@@ -42,6 +43,15 @@ static void sound(void *ctx, const si_event *e)
             bad_pc++;                              /* (in the scale but for the dominant's third and the approach) */
         if (e->part == SI_HOOK && g.s.arc && g.sec == SI_SEC_VERSE && !g.keys)
             hook_in_verse++;
+        if (e->part == SI_HOOK && tup_watch && g.step >= 0)   /* (ARC off, REPEAT 1: the hook's step is the bar's) */
+            for (int k = 0; k <= g.step; ++k)
+                if (g.hook_tup[k] && g.step < k + g.hook_len[k]) {
+                    const si_chord *c = &g.loop[si_chord_now(&g)];
+                    int pc = (e->note - g.tr) % 12;
+                    tup_notes++;
+                    tup_off += pc != c->tone[0] && pc != c->tone[1] && pc != c->tone[2];
+                    break;
+                }
         if (e->part == SI_DRUMS) {
             drum_on[si_drum_of(e->note)]++;
             if (si_is_choir(e->note)) {
@@ -319,6 +329,17 @@ int main(void)
         CHECK(kinds[3] && kinds[4] && kinds[5] && kinds[6], "all four tuplets turn up (3:%d 4:%d 5:%d 6:%d)", kinds[3],
               kinds[4], kinds[5], kinds[6]);
         CHECK(with > 20 && with < 100, "some songs have one, not every song (%d of 120)", with);
+        /* played: every tuplet note is a tone of the chord playing (an arpeggio of it) */
+        g.s.arc = 0;
+        g.s.repeat = 1;
+        tup_watch = 1;
+        for (int song = 0; song < 40; ++song) {
+            g.s.song = (uint16_t)song;
+            si_rebuild(&g);
+            si_play(&g, true); run_bars(4); si_play(&g, false);
+        }
+        tup_watch = 0;
+        CHECK(tup_notes > 20 && tup_off == 0, "the tuplets arpeggiate the chord (%d notes, %d off it)", tup_notes, tup_off);
     }
     /* the hook's phrase: REPEAT bars of it */
     g.s.repeat = 4;

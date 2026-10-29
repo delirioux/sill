@@ -418,7 +418,7 @@ static void make_hook(si_groove *g, uint32_t seed)
     int8_t a[16], b[16];
     uint8_t al[16], bl[16];
     hook_bar(a, al, rhy, &r, &note, lo, hi);
-    /* now and then a tuplet in the motif's second half (more often the faster the hook): a run of 3, 4, 5 or 6
+    /* now and then a tuplet in the motif's second half (more often the faster the hook): an arpeggio of 3, 4, 5 or 6
      * notes in the space of 4 or 6 sixteenths, from the note the walk reached; the answers keep their plain rhythm */
     uint8_t at[16] = {0};
     {
@@ -1175,14 +1175,24 @@ static void play_hook(si_groove *g, int i, uint32_t delay, float sf, float hum)
         return;
     int len = g->hook_len[hp];
     int base = 60 + g->s.key - (g->s.key > 6 ? 12 : 0);
-    if (g->hook_tup[hp]) {                         /* a tuplet: its notes evenly over len sixteenths, a run through the
-                                                    * scale (up, or down from a high start), the first onto the chord */
+    if (g->hook_tup[hp]) {                         /* a tuplet: its notes evenly over len sixteenths, an arpeggio of
+                                                    * the chord playing (up, or down from a high start), from the
+                                                    * chord tone nearest the note the walk reached */
         int tn = g->hook_tup[hp], dir = g->hook[hp] >= 5 ? -1 : 1;
         float each = sf * (float)len / (float)tn;
+        int nn = step_note(g->s.scale, base, g->hook[hp]);
+        for (int d = 0; d < 12; ++d) {             /* the nearest chord tone, below first */
+            int pc = ((nn - d) % 12 + 12) % 12, pu = ((nn + d) % 12 + 12) % 12;
+            if (pc == c->tone[0] || pc == c->tone[1] || pc == c->tone[2]) { nn -= d; break; }
+            if (pu == c->tone[0] || pu == c->tone[1] || pu == c->tone[2]) { nn += d; break; }
+        }
         for (int k = 0; k < tn; ++k) {
-            int nn = step_note(g->s.scale, base, g->hook[hp] + dir * k);
-            if (k == 0)
-                nn = si_snap(&g->s, nn);
+            if (k > 0 && (dir > 0 ? nn >= 81 : nn <= 57))
+                dir = -dir;                        /* (it turns back at the hook's edges) */
+            if (k > 0)
+                do                                 /* the next chord tone up (or down) */
+                    nn += dir;
+                while (nn % 12 != c->tone[0] && nn % 12 != c->tone[1] && nn % 12 != c->tone[2]);
             int v = 96 + (k == 0 ? 14 : 0) + (int)(hum * 6.0f) - (brk ? 18 : 0);
             schedule(g, delay + (uint32_t)(each * (float)k), SI_HOOK, nn, clampi(v, 1, 127), each * 0.9f);
         }

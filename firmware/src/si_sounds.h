@@ -236,8 +236,9 @@ static inline void sis_track(track_t *t, const si_groove *g, int part)
     const sis_sound *snd = part == SI_DRUMS ? 0 : sis_of(g, part);
     bool lifted = (st->lift_parts >> part) & 1u;
     /* MIX: 100 is -2 dB (headroom: the master limiter stays out of it), each step down 0.3 dB (MIX 50: -17 dB), 0 off;
-     * then the sound's trim (F_DB: half-dB steps) */
-    int lvl = 108 - (100 - s->lvl[part]) * 6 / 10 + (snd ? snd->trim : SIS_KIT_TRIM[s->snd[3] % SI_KIT_COUNT]);
+     * then the sound's trim (F_DB: half-dB steps); the stabs sit 2 dB lower, under the hook */
+    int lvl = 108 - (100 - s->lvl[part]) * 6 / 10 + (snd ? snd->trim : SIS_KIT_TRIM[s->snd[3] % SI_KIT_COUNT]) +
+              (part == SI_STABS ? -4 : 0);
     t->p[P_LEVEL] = sis_clamp(s->lvl[part] ? lvl : 0, 1, 127);
     /* the place: the stabs a little left and spread, the hook a little right, the bass and drums centred */
     int w = s->width;
