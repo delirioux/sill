@@ -1,3 +1,15 @@
+# Sill 1.0
+
+It works, it plays: the first main version.
+
+- No brass section: KEYS (a soft keyboard chord) on STABS in place of HORNS. A light solo trumpet, CORNET, on HOOK in
+  place of ROBOT, picked by some SKANK and PARTY songs.
+- ORCH is an effect: no song picks it for its stabs any more; it stays on the card.
+- The footer shows the style and the song's number on every page.
+- Each new version on `main` is tagged and released on GitHub with its package.
+
+Runs on the FM-1. To go back: Felucca's or Tuna's installer, or the official V15.
+
 # Sill 0.4.1
 
 The choir.
