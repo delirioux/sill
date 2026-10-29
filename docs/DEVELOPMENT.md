@@ -83,8 +83,9 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
   -32), EXPR to every part but the drums' level (slot 2, +64), set every 32 frames. The lift follows the form (the
   intro and the pre-chorus open it, the break holds it at 60 %), not a sixteen-bar breath.
 - **A sampled piano, bright.** The FM piano sounded like an electric piano; the club piano is a grand made bright
-  and hard. Six notes of VCSL's Kawai grand (its loudest layer, CC0), cut to about a second, +10 dB from 2 kHz, a
-  presence lift, less body, a soft clip; the SAMPLE engine's set 1, about 64 KB of ADPCM. PIANO on STABS plays the
+  and hard. Six notes of VCSL's Kawai grand (its loudest layer, CC0), cut to about a second, +5 dB from 2 kHz, a
+  presence lift, less body, a soft clip; on the FM-1 a low-pass at about 5 kHz, a room of its own and a lower
+  level push it back; the SAMPLE engine's set 1, about 64 KB of ADPCM. PIANO on STABS plays the
   offbeat chords in any style.
 - **Eight voices for everything.** Felucca shares eight voices across the four tracks. The stabs play three notes,
   the held chords four; every drum and shout has a ring length; the SUPER hook takes every free voice (UNISON) and

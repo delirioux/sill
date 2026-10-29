@@ -65,7 +65,7 @@ static const preset_t SIS_SAWLEAD = {"SAW LEAD", {0, 0, 12, 12, 0, 96, 25, 64}, 
 /* the three music parts' lists, in the SOUND card's order (si_groove.c names them in the styles) */
 static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
     {   /* STABS */
-        S("PIANO", SIS_SAMPLE, 1, 4, -1),                /* the bright club piano (tools/si_piano.py) */
+        S("PIANO", SIS_SAMPLE, 1, 4, -6),                /* the club piano (tools/si_piano.py), pushed back */
         S("ORGAN", SIS_WHEEL, 1, 3, 0),                  /* JAZZ PERC: the house organ's click */
         SO("SUPER", SIS_ANALOG, 0, SIS_SUPER, SIS_KEEP, SIS_KEEP, SIS_POLY, 4, 0),
         S("STRINGS", SIS_ANALOG, 11, 4, -6),
@@ -93,7 +93,7 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         SO("SAW", SIS_TRIO, 0, SIS_SAWLEAD, SIS_KEEP, 10, SIS_KEEP, 5, -8),
         S("PLUCK", SIS_ANALOG, 8, 4, 2),
         S("BELL", SIS_FM6, 1, 2, -3),
-        S("PIANO", SIS_SAMPLE, 1, 4, -8),
+        S("PIANO", SIS_SAMPLE, 1, 4, -12),
         SO("HOOVER", SIS_ANALOG, 0, SIS_HOOVER, SIS_KEEP, 14, SIS_LEGATO, 4, -15),
         SO("OOH", SIS_VOICE, 0, SIS_OOH, SIS_KEEP, SIS_KEEP, SIS_LEGATO, -1, -12),
         S("SYNC", SIS_TRIO, 2, 5, -6),
@@ -154,6 +154,8 @@ static inline void sis_kit_params(const si_settings *s, int16_t *e)
 }
 
 static inline int16_t sis_clamp(int v, int lo, int hi) { return (int16_t)(v < lo ? lo : v > hi ? hi : v); }
+#define SIS_PIANO_CUT 55                  /* the piano's CUT (eng_sample.c: a gentle one-pole, 55: about 5 kHz) */
+#define SIS_PIANO_ROOM 35                 /* the piano's reverb send over SPACE's (0..127) */
 
 /* the TIME card in Felucca's delay times (params.c N_DTIME): 1/16, 1/8, 1/8D, 1/4 */
 static const uint8_t SIS_DTIME[SI_DTIME_COUNT] = {2, 1, 10, 0};
@@ -229,10 +231,12 @@ static inline void sis_track(track_t *t, const si_groove *g, int part)
         t->p[P_DIST] = 0;
         return;
     }
-    if (snd->engine == SIS_SAMPLE) {             /* the piano: its velocity (the SAMPLE engine has none of its own) */
-        t->p[P_M4SRC] = MS_VEL;
-        t->p[P_M4DST] = MD_AMP;
-        t->p[P_M4AMT] = 64;
+    if (snd->engine == SIS_SAMPLE) {             /* the piano: its velocity (the SAMPLE engine has none of its own), */
+        t->p[P_M4SRC] = MS_VEL;                  /* a low-pass at about 5 kHz to take its edge off (the LIFT closes it */
+        t->p[P_M4DST] = MD_AMP;                  /* further), and a room of its own over SPACE's REVERB: a piano */
+        t->p[P_M4AMT] = 64;                      /* in a club, pushed back, not one in the listener's ear */
+        t->p[P_E4] = SIS_PIANO_CUT;
+        t->p[P_REV] = sis_clamp(t->p[P_REV] + SIS_PIANO_ROOM, 0, 127);
     } else {
         t->p[P_M4SRC] = MS_OFF;
     }

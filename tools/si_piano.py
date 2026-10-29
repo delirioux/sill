@@ -3,7 +3,7 @@
 """Sill's PIANO: six notes of a Kawai grand from the Versilian Community Sample Library (VCSL, CC0 1.0,
 github.com/sgossner/VCSL, "Chordophones/Zithers/Grand Piano, Kawai/Sustains"), its loudest layer (v4), made into the
 bright, hard club piano of the 90s: summed to mono, cut short (a stab does not need the long tail), a high shelf
-and a presence lift for the brightness, a soft clip for the hardness, normalised; written as 16-bit mono WAVs at
+and a presence lift for the brightness (the firmware puts a low-pass and a room on it), a soft clip for the hardness, normalised; written as 16-bit mono WAVs at
 44.1 kHz to assets/samples-cc0/PIANO/ (tools/gen_samples.py stores them at 22.05 kHz).
 
     python3 tools/si_piano.py VCSL_DIR      VCSL_DIR: a checkout of VCSL (only that folder is needed:
@@ -74,8 +74,8 @@ def make(src, keep):
     x = x[max(0, on - 32):]
     x = x[:int(keep * SR)]
     x = x / np.max(np.abs(x))
-    x = shelf_high(x, 2000, 10.0)                   # the brightness
-    x = peak_eq(x, 5000, 0.9, 3.0)                  # and its presence
+    x = shelf_high(x, 2000, 5.0)                    # the brightness (the track's CUT and reverb soften it: si_sounds.h)
+    x = peak_eq(x, 5000, 0.9, 1.5)                  # and its presence
     x = peak_eq(x, 250, 0.8, -3.0)                  # less body: a stab, not a ballad
     x = np.tanh(x * 1.8) / np.tanh(1.8)             # the hardness: the hammer flattened a little, the tail lifted
     n = len(x)
