@@ -167,6 +167,7 @@ int main(int argc, char **argv)
     si_init(&g, 44100.0f);
     si_set_sound(&g, sound, 0);
     su_init(&ui, &g);
+    ui.cpu = 47;                                   /* (the screenshots: a load in the footer on PLAY) */
     CHECK(g.s.palette == UI_LASER_INDEX && !strcmp(UI_PALETTES[UI_LASER_INDEX].name, "LASER"), "LASER by default");
     CHECK(g.s.style == SI_ST_EUROSTOMP, "EUROSTOMP first");
     shot("01_play_stopped");
