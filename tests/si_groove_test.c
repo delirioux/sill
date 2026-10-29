@@ -287,6 +287,27 @@ int main(void)
               "song %d: other stabs (%d), reloaded", target + 1, g.s.snd[0]);
     }
     si_play(&g, false);
+    /* tuplets: the songs' hooks hold triplets, quadruplets, quintuplets and sextuplets, played evenly */
+    {
+        int kinds[7] = {0}, with = 0;
+        si_style_apply(&g.s, SI_ST_EUROSTOMP);
+        for (int song = 0; song < 120; ++song) {
+            g.s.song = (uint16_t)song;
+            si_rebuild(&g);
+            int any = 0;
+            for (int k = 0; k < SI_HOOK_LEN; ++k)
+                if (g.hook_tup[k]) {
+                    kinds[g.hook_tup[k]]++;
+                    any = 1;
+                    CHECK(g.hook_len[k] == si_tuplet_span(g.hook_tup[k]), "a tuplet of %d over %d sixteenths (%d)",
+                          g.hook_tup[k], si_tuplet_span(g.hook_tup[k]), g.hook_len[k]);
+                }
+            with += any;
+        }
+        CHECK(kinds[3] && kinds[4] && kinds[5] && kinds[6], "all four tuplets turn up (3:%d 4:%d 5:%d 6:%d)", kinds[3],
+              kinds[4], kinds[5], kinds[6]);
+        CHECK(with > 20 && with < 100, "some songs have one, not every song (%d of 120)", with);
+    }
     /* the hook's phrase: REPEAT bars of it */
     g.s.repeat = 4;
     si_rebuild(&g);

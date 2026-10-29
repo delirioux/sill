@@ -50,6 +50,10 @@ enum { SI_SPEED_SLOW, SI_SPEED_MID, SI_SPEED_FAST, SI_SPEED_PAD, SI_SPEED_COUNT 
 /* the drums as the groove names them, the crowd's chants among them; the glue maps them to the kit (si_sounds.h) */
 enum { SI_DR_KICK, SI_DR_SNARE, SI_DR_CLAP, SI_DR_HAT, SI_DR_OPEN, SI_DR_CRASH, SI_DR_HEY, SI_DR_HO, SI_DR_WHOA,
        SI_DR_COUNT };
+/* the tuplets the hook and the fills play, as (notes, in the space of sixteenths): 3 in 4 (a triplet: three in the
+ * space of two eighths), 4 in 6 (a quadruplet: four in the space of three eighths), 5 in 4 (a quintuplet: five in
+ * the space of four sixteenths), 6 in 4 (a sextuplet: six in the space of four sixteenths) */
+static inline int si_tuplet_span(int n) { return n == 4 ? 6 : 4; }
 /* the form's sections, in the order they play (ARC on); after the second CHORUS, round again from VERSE */
 enum { SI_SEC_INTRO, SI_SEC_VERSE, SI_SEC_PRE, SI_SEC_CHORUS, SI_SEC_BREAK, SI_SEC_CHORUS2, SI_SECS };
 #define SI_SETS 8
@@ -116,6 +120,7 @@ typedef struct {
     uint8_t stab_pat, bass_pat, drum_var, hook_var;
     int8_t hook[SI_HOOK_LEN];                      /* scale steps from the key's tonic (-128: rest); length in hook_len */
     uint8_t hook_len[SI_HOOK_LEN];
+    uint8_t hook_tup[SI_HOOK_LEN];                 /* a tuplet starting there: its notes (3 4 5 6; 0 none), over hook_len */
     uint32_t rnd;                                  /* the per-note randomness (human, ghosts): seeded per bar */
     /* what waits for the next bar line */
     int next_style;                                /* -1 none */

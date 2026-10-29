@@ -809,6 +809,17 @@ static void su_panel_hook(si_ui *u)
             if (g->hook[k] == -128)
                 continue;
             int len = g->hook_len[k];
+            if (g->hook_tup[k]) {                  /* a tuplet: its notes evenly over its span, a run */
+                int tn = g->hook_tup[k], dir = g->hook[k] >= 5 ? -1 : 1;
+                bool on = pos >= k && pos < k + len;
+                for (int j = 0; j < tn; ++j) {
+                    int st = su_clampi(g->hook[k] + dir * j, lo, hi);
+                    int32_t x = x0 + k * w / n + j * (len * w / n) / tn, ww = (len * w / n) / tn - 1;
+                    int32_t y = y0 + h - 7 - (st - lo) * (h - 10) / (hi - lo > 0 ? hi - lo : 1);
+                    cv_rrect(x + 1, y, ww > 2 ? ww : 2, 5, 2, on ? T_ACCENT : T_TEXT, T_SURF);
+                }
+                continue;
+            }
             int32_t x = x0 + k * w / n, ww = len * w / n - 2;
             int32_t y = y0 + h - 7 - (su_clampi(g->hook[k], lo, hi) - lo) * (h - 10) / (hi - lo > 0 ? hi - lo : 1);
             bool on = pos >= k && pos < k + len;

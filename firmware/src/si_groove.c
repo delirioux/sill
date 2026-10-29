@@ -115,23 +115,23 @@ const si_style SI_STYLE[SI_STYLES] = {
     {"EUROSTOMP", SI_SIDE_CLUB, 136, 9, SI_SC_MINOR, 85, 55, SI_VOX_CHORUS, 80, {2, 3, 0, 0}, {0, 1, 3, 5}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HEY,
      STAB_EURO, HOOK_MELODY, DRUMS_EURO, SI_SPEED_FAST, 1, 80, 2, P(SI_STABS) | P(SI_HOOK), 25, 25, SI_DTIME_3_16,
-     30, 20, 45, {{10, 11, 15}, {11, 8, 10}, {11, 14, 13}}},
+     30, 8, 45, {{10, 11, 15}, {11, 8, 10}, {11, 14, 13}}},
     {"VIKING", SI_SIDE_CLUB, 138, 4, SI_SC_HARMONIC, 80, 50, SI_VOX_CHORUS, 85, {4, 3, 1, 0}, {8, 4, 0, 3}, 1,
      0, SI_HATS_16THS, SI_FILLS_4, SI_BL_OCTAVE, SI_KICK_PUNCH, SI_CLAP_BOTH, SI_CRASH_SECTION, SI_CHANT_WHOA,
      STAB_EURO, HOOK_MELODY, DRUMS_EURO, SI_SPEED_MID, 2, 90, 2, P(SI_STABS) | P(SI_HOOK), 35, 20, SI_DTIME_8,
-     25, 30, 35, {{12, 13, 14}, {8, 15, 11}, {11, 12, 0}}},
+     25, 10, 35, {{12, 13, 14}, {8, 15, 11}, {11, 12, 0}}},
     {"BUBBLEGUM", SI_SIDE_CLUB, 130, 2, SI_SC_MAJOR, 90, 45, SI_VOX_CHORUS, 75, {5, 1, 3, 0}, {6, 7, 0, 1}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HO,
      STAB_BOUNCE, HOOK_MELODY, DRUMS_EURO, SI_SPEED_MID, 1, 50, 2, P(SI_STABS), 20, 20, SI_DTIME_8,
-     20, 10, 30, {{8, 10, 0}, {11, 14, 8}, {13, 7, 2}}},
+     20, 5, 30, {{8, 10, 0}, {11, 14, 8}, {13, 7, 2}}},
     {"HEARTACHE", SI_SIDE_CLUB, 134, 2, SI_SC_MINOR, 80, 50, SI_VOX_CHORUS, 70, {0, 0, 6, 0}, {2, 0, 5, 3}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_ROUND, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HEY,
      STAB_PIANO, HOOK_MELODY, DRUMS_EURO, SI_SPEED_SLOW, 1, 95, 4, P(SI_STABS), 40, 25, SI_DTIME_3_16,
-     20, 10, 40, {{0, 11, 13}, {10, 12, 11}, {12, 11, 13}}},
+     20, 5, 40, {{0, 11, 13}, {10, 12, 11}, {12, 11, 13}}},
     {"RAVE", SI_SIDE_CLUB, 140, 6, SI_SC_MINOR, 80, 60, SI_VOX_CHORUS, 90, {6, 4, 5, 0}, {3, 0, 4, 1}, 1,
      0, SI_HATS_16THS, SI_FILLS_4, SI_BL_ROLLING, SI_KICK_PUNCH, SI_CLAP_BOTH, SI_CRASH_8, SI_CHANT_WHOA,
      STAB_RAVE, HOOK_MELODY, DRUMS_RAVE, SI_SPEED_FAST, 1, 60, 1, P(SI_STABS) | P(SI_HOOK), 25, 20, SI_DTIME_8,
-     45, 45, 10, {{15, 11, 7}, {5, 13, 15}, {14, 0, 15}}},
+     45, 18, 10, {{15, 11, 7}, {5, 13, 15}, {14, 0, 15}}},
     {"SKANK", SI_SIDE_RADIO, 95, 1, SI_SC_MINOR, 75, 15, SI_VOX_CHORUS, 55, {1, 2, 8, 0}, {10, 3, 0, 5}, 1,
      15, SI_HATS_8THS, SI_FILLS_8, SI_BL_REGGAE, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_OFF, SI_CHANT_HEY,
      STAB_SKANK, HOOK_MELODY, DRUMS_SKANK, SI_SPEED_MID, 1, 70, 2, P(SI_STABS), 30, 30, SI_DTIME_3_16,
@@ -143,7 +143,7 @@ const si_style SI_STYLE[SI_STYLES] = {
     {"PARTY", SI_SIDE_RADIO, 140, 7, SI_SC_MAJOR, 90, 50, SI_VOX_ALL, 85, {4, 8, 7, 0}, {6, 7, 1, 0}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_4, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_MIX,
      STAB_BOUNCE, HOOK_MELODY, DRUMS_EURO, SI_SPEED_FAST, 1, 55, 1, P(SI_STABS) | P(SI_HOOK), 20, 15, SI_DTIME_8,
-     20, 25, 30, {{12, 10, 5}, {11, 14, 1}, {13, 2, 11}}},
+     20, 10, 30, {{12, 10, 5}, {11, 14, 1}, {13, 2, 11}}},
     {"BALLAD", SI_SIDE_RADIO, 100, 4, SI_SC_MINOR, 90, 0, SI_VOX_OFF, 35, {9, 7, 4, 0}, {2, 0, 6, 5}, 2,
      0, SI_HATS_8THS, SI_FILLS_OFF, SI_BL_LONG, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_SECTION, SI_CHANT_HEY,
      STAB_PAD, HOOK_MELODY, DRUMS_BALLAD, SI_SPEED_SLOW, 2, 95, 4, P(SI_STABS), 50, 25, SI_DTIME_4,
@@ -411,12 +411,36 @@ static void make_hook(si_groove *g, uint32_t seed)
     for (int i = 0; i < SI_HOOK_LEN; ++i) {
         g->hook[i] = -128;
         g->hook_len[i] = 0;
+        g->hook_tup[i] = 0;
     }
     int note = rnd_n(&r, 3) * 2;                   /* starts on the tonic, the third or the fifth */
     const uint8_t *rhy = HOOK_RHY[sp][rnd_n(&r, 4)];
     int8_t a[16], b[16];
     uint8_t al[16], bl[16];
     hook_bar(a, al, rhy, &r, &note, lo, hi);
+    /* now and then a tuplet in the motif's second half (more often the faster the hook): a run of 3, 4, 5 or 6
+     * notes in the space of 4 or 6 sixteenths, from the note the walk reached; the answers keep their plain rhythm */
+    uint8_t at[16] = {0};
+    {
+        static const uint8_t CHANCE[SI_SPEED_PAD] = {20, 40, 55};   /* % a song: SLOW MID FAST */
+        if (rnd_n(&r, 100) < CHANCE[sp]) {
+            static const uint8_t KINDS[4] = {3, 4, 5, 6};
+            int n = KINDS[rnd_n(&r, 4)], span = si_tuplet_span(n);
+            int pos = span == 6 ? (rnd_n(&r, 2) ? 8 : 10) : (rnd_n(&r, 2) ? 8 : 12);
+            int start = -128;
+            for (int k = pos; k >= 0 && start == -128; --k)
+                start = a[k];
+            if (start == -128)
+                start = 2;
+            for (int k = pos; k < pos + span && k < 16; ++k) {
+                a[k] = -128;
+                al[k] = 0;
+            }
+            a[pos] = (int8_t)clampi(start, lo + 1, hi - 1);
+            al[pos] = (uint8_t)span;
+            at[pos] = (uint8_t)n;
+        }
+    }
     /* the answer: A's first half, a new second half; its last note on the tonic or the fifth, held */
     memcpy(b, a, sizeof b);
     memcpy(bl, al, sizeof bl);
@@ -441,6 +465,7 @@ static void make_hook(si_groove *g, uint32_t seed)
         for (int i = 0; i < 16; ++i) {
             g->hook[bar * 16 + i] = answer ? b[i] : a[i];
             g->hook_len[bar * 16 + i] = answer ? bl[i] : al[i];
+            g->hook_tup[bar * 16 + i] = answer ? 0 : at[i];
         }
     }
     if (rep == 4) {                                /* the phrase's last bar: lands home, long */
@@ -909,7 +934,21 @@ static void play_drums(si_groove *g, int i, uint32_t delay, float hum)
         static const uint8_t EVERY[SI_FILLS_COUNT] = {0, 8, 4, 2};
         int ev = EVERY[g->s.fills], b = sec_bar(g);
         bool pre = g->s.arc && g->sec == SI_SEC_PRE;
-        if (!pre && ev && (b % ev) == ev - 1 && i >= 12) {   /* a fill: the backbeat drum on the sixteenths, rising */
+        int fill_kind = (int)(((uint32_t)b * 2654435761u + (uint32_t)g->s.song * 40503u) >> 13) % 3;
+        if (!pre && ev && (b % ev) == ev - 1 && i >= 12 && fill_kind > 0) {
+            /* a fill as a tuplet over the last beat: a snare triplet (3 in the space of 4 sixteenths) or a sextuplet
+             * roll (6 in 4), rising */
+            if (i == 12) {
+                int tn = fill_kind == 1 ? 3 : 6;
+                vel[back_d] = 0;                   /* (the tuplet's first hit is the beat's)*/
+                float each = step_frames(g) * 4.0f / (float)tn;
+                for (int k = 0; k < tn; ++k)
+                    schedule(g, delay + (uint32_t)(each * (float)k), SI_DRUMS, back_d, clampi(72 + k * 40 / tn, 1, 127), 0);
+            }
+            vel[SI_DR_OPEN] = i == 15 ? 100 : 0;
+            if (i >= 13)
+                vel[SI_DR_HAT] = 0;
+        } else if (!pre && ev && (b % ev) == ev - 1 && i >= 12) {   /* a fill: the backbeat drum on the sixteenths, rising */
             if ((g->drum_var & 2) ? (i % 2 == 0 || i >= 14) : (i == 13 || i == 14 || i == 15))
                 vel[back_d] = 70 + (i - 12) * 12;
             vel[SI_DR_OPEN] = i == 15 ? 100 : 0;
@@ -1133,7 +1172,21 @@ static void play_hook(si_groove *g, int i, uint32_t delay, float sf, float hum)
     if (g->hook[hp] == -128)
         return;
     int len = g->hook_len[hp];
-    int n = step_note(g->s.scale, 60 + g->s.key - (g->s.key > 6 ? 12 : 0), g->hook[hp]);
+    int base = 60 + g->s.key - (g->s.key > 6 ? 12 : 0);
+    if (g->hook_tup[hp]) {                         /* a tuplet: its notes evenly over len sixteenths, a run through the
+                                                    * scale (up, or down from a high start), the first onto the chord */
+        int tn = g->hook_tup[hp], dir = g->hook[hp] >= 5 ? -1 : 1;
+        float each = sf * (float)len / (float)tn;
+        for (int k = 0; k < tn; ++k) {
+            int nn = step_note(g->s.scale, base, g->hook[hp] + dir * k);
+            if (k == 0)
+                nn = si_snap(&g->s, nn);
+            int v = 96 + (k == 0 ? 14 : 0) + (int)(hum * 6.0f) - (brk ? 18 : 0);
+            schedule(g, delay + (uint32_t)(each * (float)k), SI_HOOK, nn, clampi(v, 1, 127), each * 0.9f);
+        }
+        return;
+    }
+    int n = step_note(g->s.scale, base, g->hook[hp]);
     if (len >= 2 || i % 4 == 0) {                  /* the long and strong notes onto the chord */
         int best = n, bd = 99;
         for (int t = 0; t < 3; ++t)

@@ -47,9 +47,9 @@ static const preset_t SIS_SUPERLEAD = {"SUPER LEAD", {0, 30, 64, 0, 112, 18, 16,
 /* the octave bass of the offbeat: a saw with its sub-octave, plucked by the filter envelope (Daurade's) */
 static const preset_t SIS_OCTAVE = {"OCTAVE", {6, 0, 40, 0, 62, 35, 20, 64}, {0, 52, 60, 14}, 30, 1, FX(5, 0, 5, 10)};
 /* the reese: two saws beating slowly against each other, low and dark */
-static const preset_t SIS_REESE = {"REESE", {0, 22, 64, 0, 58, 20, 35, 64}, {0, 80, 110, 18}, 6, 1, FX(10, 0, 0, 8)};
+static const preset_t SIS_REESE = {"REESE", {0, 22, 64, 0, 58, 20, 15, 64}, {0, 80, 110, 18}, 6, 1, FX(0, 0, 0, 8)};
 /* the hoover: a wide pulse, detuned, a growl of drive, gliding (the hook's) */
-static const preset_t SIS_HOOVER = {"HOOVER", {4, 38, 64, 0, 96, 30, 45, 64}, {0, 70, 100, 30}, 16, 1, FX(20, 40, 20, 25)};
+static const preset_t SIS_HOOVER = {"HOOVER", {4, 38, 64, 0, 96, 30, 20, 64}, {0, 70, 100, 30}, 16, 1, FX(6, 40, 20, 25)};
 /* the sung hook: the VOICE engine breathy and round, its vowels and their glide the VOX page's */
 static const preset_t SIS_OOH = {"OOH", {127, 0, 40, 0, 70, 35, 80, 8}, {10, 70, 110, 40}, 0, 1, FX(0, 40, 30, 40)};
 /* ---- 0.4's own: the sounds a style can vary between (si_groove.c's pools) ---- */
@@ -61,15 +61,15 @@ static const preset_t SIS_TRANCESTAB = {"TRANCE", {0, 38, 64, 0, 110, 24, 12, 64
 static const preset_t SIS_CHOIR = {"CHOIR", {0, 0, 40, 0, 40, 26, 64, 6}, {14, 90, 112, 60}, 0, 0, FX(0, 70, 15, 70)};
 static const preset_t SIS_CHOIRLEAD = {"CHOIR", {0, 0, 40, 0, 50, 22, 70, 6}, {10, 80, 112, 50}, 0, 1, FX(0, 50, 30, 60)};
 /* BASS: a punchy analogue saw, short and dry */
-static const preset_t SIS_SYNTHBASS = {"SYNTH BASS", {0, 0, 0, 0, 70, 40, 30, 64}, {0, 46, 30, 10}, 34, 1, FX(10, 0, 0, 6)};
+static const preset_t SIS_SYNTHBASS = {"SYNTH BASS", {0, 0, 0, 0, 70, 40, 12, 64}, {0, 46, 30, 10}, 34, 1, FX(0, 0, 0, 6)};
 /* BASS: the trance bass, a bright saw with a little detune, rolling */
-static const preset_t SIS_TRANCEBASS = {"TRANCE BASS", {0, 10, 64, 0, 84, 22, 18, 64}, {0, 62, 82, 12}, 20, 1, FX(5, 0, 0, 8)};
+static const preset_t SIS_TRANCEBASS = {"TRANCE BASS", {0, 10, 64, 0, 84, 22, 8, 64}, {0, 62, 82, 12}, 20, 1, FX(0, 0, 0, 8)};
 /* BASS: a deep sine with a click on top */
 static const preset_t SIS_SINEBASS = {"SINE BASS", {3, 0, 0, 0, 127, 0, 25, 0}, {0, 70, 100, 12}, 0, 1, FX(0, 0, 0, 4)};
 /* HOOK: REEDS, the accordion's musette: two pulses beating against each other, as its reeds do */
 static const preset_t SIS_MUSETTE = {"MUSETTE", {4, 16, 64, 0, 96, 12, 18, 64}, {3, 70, 112, 28}, 0, 1, FX(0, 30, 30, 35)};
 /* HOOK: the anthem lead: saws wide and driven, a slow glide */
-static const preset_t SIS_ANTHEM = {"ANTHEM", {0, 26, 64, 0, 108, 15, 28, 64}, {4, 70, 110, 35}, 10, 1, FX(10, 40, 40, 40)};
+static const preset_t SIS_ANTHEM = {"ANTHEM", {0, 26, 64, 0, 108, 15, 10, 64}, {4, 70, 110, 35}, 10, 1, FX(0, 40, 40, 40)};
 /* HOOK: the whistle: a sine with a breath of noise */
 static const preset_t SIS_WHISTLE = {"WHISTLE", {3, 0, 0, 6, 127, 0, 0, 64}, {6, 70, 110, 25}, 0, 1, FX(0, 20, 40, 45)};
 /* HOOK: a trance pluck lead, snappy */
@@ -118,11 +118,11 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         SO("OCTAVE", SIS_ANALOG, 0, SIS_OCTAVE, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, -1),
         SX("WOW", SIS_VOICE, 2, SIS_KEEP, 24, SIS_LEGATO, -1, -3),
         SX("ORGAN", SIS_WHEEL, 1, SIS_KEEP, SIS_KEEP, SIS_MONO, 3, -4),   /* the 90s organ bass */
-        SO("SYNTH", SIS_ANALOG, 0, SIS_SYNTHBASS, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, 4),
+        SO("SYNTH", SIS_ANALOG, 0, SIS_SYNTHBASS, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, 2),
         SO("SINE", SIS_ANALOG, 0, SIS_SINEBASS, SIS_KEEP, SIS_KEEP, SIS_MONO, -1, -14),
-        SO("TRANCE", SIS_ANALOG, 0, SIS_TRANCEBASS, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, -4),
+        SO("TRANCE", SIS_ANALOG, 0, SIS_TRANCEBASS, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, -6),
         SX("DX", SIS_FM6, 7, SIS_KEEP, SIS_KEEP, SIS_MONO, 2, -1),        /* FM6's PLUCK, low and hard */
-        SX("GROWL", SIS_PHASE, 0, 20, SIS_KEEP, SIS_MONO, 2, -10),         /* PHASE's BRASS in the low end, driven */
+        SX("GROWL", SIS_PHASE, 0, 6, SIS_KEEP, SIS_MONO, 2, -9),          /* PHASE's BRASS in the low end */
     },
     {   /* HOOK */
         SO("SUPER", SIS_ANALOG, 0, SIS_SUPERLEAD, SIS_KEEP, 6, SIS_UNISON, 4, -8),
@@ -130,7 +130,7 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         S("PLUCK", SIS_ANALOG, 8, 4, 2),
         S("BELL", SIS_FM6, 1, 2, -3),
         S("PIANO", SIS_SAMPLE, 1, 4, -18),
-        SO("HOOVER", SIS_ANALOG, 0, SIS_HOOVER, SIS_KEEP, 14, SIS_LEGATO, 4, -15),
+        SO("HOOVER", SIS_ANALOG, 0, SIS_HOOVER, SIS_KEEP, 14, SIS_LEGATO, 4, -14),
         SO("OOH", SIS_VOICE, 0, SIS_OOH, SIS_KEEP, SIS_KEEP, SIS_LEGATO, -1, -12),
         S("SYNC", SIS_TRIO, 2, 5, -6),
         S("FLUTE", SIS_WHEEL, 3, 3, -7),                 /* SOFT FLUTE */
@@ -231,8 +231,9 @@ static inline void sis_track(track_t *t, const si_groove *g, int part)
     const si_style *st = &SI_STYLE[s->style];
     const sis_sound *snd = part == SI_DRUMS ? 0 : sis_of(g, part);
     bool lifted = (st->lift_parts >> part) & 1u;
-    /* MIX: 100 is 0 dB, each step down 0.3 dB (MIX 50: -15 dB), 0 off; then the sound's trim (F_DB: half-dB steps) */
-    int lvl = 112 - (100 - s->lvl[part]) * 6 / 10 + (snd ? snd->trim : SIS_KIT_TRIM[s->snd[3] % SI_KIT_COUNT]);
+    /* MIX: 100 is -2 dB (headroom: the master limiter stays out of it), each step down 0.3 dB (MIX 50: -17 dB), 0 off;
+     * then the sound's trim (F_DB: half-dB steps) */
+    int lvl = 108 - (100 - s->lvl[part]) * 6 / 10 + (snd ? snd->trim : SIS_KIT_TRIM[s->snd[3] % SI_KIT_COUNT]);
     t->p[P_LEVEL] = sis_clamp(s->lvl[part] ? lvl : 0, 1, 127);
     /* the place: the stabs a little left and spread, the hook a little right, the bass and drums centred */
     int w = s->width;
@@ -307,7 +308,7 @@ static inline void sis_track(track_t *t, const si_groove *g, int part)
             t->p[P_E5] = sis_clamp(s->reso * 120 / 100, 0, 127);
         else if (snd->engine == SIS_TRIO)
             t->p[P_E6] = sis_clamp(s->reso * 120 / 100, 0, 127);
-        t->p[P_DIST] = sis_clamp((snd->dist >= 0 ? snd->dist : 0) + s->drive * 90 / 100, 0, 127);
+        t->p[P_DIST] = sis_clamp((snd->dist >= 0 ? snd->dist : 0) + s->drive * 50 / 100, 0, 127);   /* (DRIVE 100: 50) */
         if (s->crush) {
             t->p[P_ITYPE] = 5;                    /* IT_CRUSH: the bits fall as CRUSH rises, the rate with them */
             t->p[P_IA] = sis_clamp(127 - s->crush * 100 / 100, 16, 127);
