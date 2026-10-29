@@ -4,9 +4,8 @@ The working notes behind Sill: the agreements, how the work flows, why the code 
 stands and what comes next. What Sill is and how to play it is in the [README](../README.md) and the
 [manual](MANUAL.md).
 
-Status: 29 October 2026. Version 0.4 (sixteen sounds a part and a sound pool for every style, tuplets, less
-drive) built by CI, installed from the site and running on an FM-1; released on
-`main`.
+Status: 29 October 2026. Version 0.4.1 (a sung choir in place of the crowd's shouts, no bells and no brass, the
+stabs 2 dB lower, the hook's tuplets on the chord) built by CI and running on an FM-1; released on `main`.
 
 ## Agreements
 

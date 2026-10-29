@@ -1,3 +1,15 @@
+# Sill 0.4.1
+
+The choir.
+
+- VOX brings a choir instead of the crowd: the chord's third and fifth sung on OH or AH (CHOIR on the VOX page, or a
+  MIX) at the top of each bar of the chorus, in the verse too with VOX ALL. The shouts are gone.
+- No bells: STABS has EPIANO and HOOK has POP in their place. No brass: STABS has PWM, pulse-width strings.
+- The stabs sit 2 dB lower.
+- A hook's tuplet plays the chord playing, up or down, so it always fits.
+
+Runs on the FM-1. To go back: Felucca's or Tuna's installer, or the official V15.
+
 # Sill 0.4
 
 Variety.
