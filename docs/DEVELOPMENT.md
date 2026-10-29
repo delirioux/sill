@@ -74,6 +74,9 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
   sixteenth riff), its pitches a walk of repeats, steps and now and then a leap; REPEAT plays it over 1, 2 or 4 bars
   as A, A A', A A' A A'' (the answers keep the first half and end on the tonic or the fifth). Its long and strong
   notes snap onto the chord playing, so the riff follows the loop. It rests in the verse and the pre-chorus.
+- **The kick walks with the bass.** On EURO the kick is tuned to the chord's root, the key up in it, the nearest way
+  from its own pitch (PUNCH about E1, ROUND about D1: -6 to +5 semitones): the kicks again as pitched zones below the
+  kit (keys 20 to 32 and 36 to 48, no data of their own), a drum note `SI_KICK_NOTE(shift)`. Sent as MIDI it is 36.
 - **A choir, not a crowd.** The shouts (HEY, HO, WHOA) sounded creepy and are gone. VOX brings a choir instead,
   a layer under the chorus: the chord's third and fifth (the bass and the stabs have the root; eight voices are few)
   sung on OH or AH (CHOIR, MIX: OH, then AH the bar after) at the top of each bar, at the half bar too with ENERGY

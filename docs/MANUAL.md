@@ -56,7 +56,7 @@ Then round again from the VERSE, with a new hook and the key back home. With ARC
 | **VOX** (LFO) | **VOWELS** the two vowels the OOH sound sings between (OO-AH, AH-EE, OH-AH, OO-EE, AH-OH). **SHIFT** its formants, -12 to +12. **CHOIR** what the choir sings, the chord's third and fifth at the top of each bar of the chorus (and at the half bar too, every other bar, with ENERGY high): OH, AH, or a MIX (OH, then AH the bar after). **GLIDE** between the OOH's notes. The panel shows the choir over two bars. |
 | **KEY** (SCL) | **KEY** the root. **SCALE** MINOR, MAJOR, DORIAN, HARMONIC MINOR. **CHORDS** one of twelve chord loops. **BARS** a chord lasts 1, 2 or 4 bars. |
 | **GROOVE** (ARP) | **SWING** on the sixteenths. **HATS** 8THS, 16THS, OFFBEAT or OPEN. **BASS** the bass line: OFFBEAT, OCTAVE, ROLLING, REGGAE, LONG or BOUNCE. **FILLS** every 8, 4 or 2 bars, or none: sixteenths, or a snare triplet or sextuplet roll over the last beat. |
-| **DRUMS** (EDIT) | **KIT** as on SOUND. **KICK** PUNCH or ROUND. **CLAP** the backbeat: CLAP, SNARE or BOTH. **CRASH** OFF, on each SECTION, or every 8 BARS in the chorus too. |
+| **DRUMS** (EDIT) | **KIT** as on SOUND. **KICK** PUNCH or ROUND, tuned to each chord's root (on EURO), so it walks with the bass. **CLAP** the backbeat: CLAP, SNARE or BOTH. **CRASH** OFF, on each SECTION, or every 8 BARS in the chorus too. |
 | **MIX** (GLO) | the four parts' levels (the stabs sit 2 dB under the others at the same number). |
 | **SPACE** (GLO again) | **REVERB**, **DELAY**, **TIME** the delay in 1/16, 1/8, 3/16 or 1/4, **WIDTH** the stereo spread. |
 | **ARC** (ENV) | **ARC** on: the song has its form; off: the chorus on and on. **VERSE** 8 or 16 bars. **CHORUS** 8 or 16 bars. **KEY UP** the last chorus OFF, +1 or +2. |

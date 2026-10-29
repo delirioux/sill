@@ -172,11 +172,19 @@ static inline const sis_sound *sis_of(const si_groove *g, int part)
 static inline uint32_t sis_kit_engine(int kit) { return kit == SI_KIT_EURO ? SIS_SAMPLE : SIS_DRUM; }
 /* the choir on the DRUMS set: a vowel's note n at key n + SIS_CHOIR_KEY[vowel] (tools/gen_samples.py CHOIR_KEY) */
 static const uint8_t SIS_CHOIR_KEY[2] = {16, 40};
+/* the kicks again, pitched, below the kit: PUNCH at its own pitch on key 26 (20..32), ROUND on 42 (36..48)
+ * (tools/gen_samples.py KICK_KEY); a kick shift semitones up at key + shift */
+static const uint8_t SIS_KICK_KEY[2] = {26, 42};
 /* the note a drum (or a choir note, SI_CHOIR_NOTE) plays on the kit; -1: this kit has none (the choir is EURO's) */
 static inline int sis_drum_note(const si_settings *s, int drum)
 {
     if (si_is_choir(drum))
         return s->snd[3] == SI_KIT_EURO ? si_choir_pitch(drum) + SIS_CHOIR_KEY[si_choir_vowel(drum) & 1] : -1;
+    if (si_is_kick_tuned(drum)) {         /* a tuned kick: EURO's kick zones below the kit (SIS_KICK_KEY), else GM's */
+        if (s->snd[3] != SI_KIT_EURO)
+            return 36;
+        return SIS_KICK_KEY[s->kick == SI_KICK_ROUND] + si_kick_shift(drum);
+    }
     if (s->snd[3] == SI_KIT_EURO) {       /* the DRUMS set: KICK PUNCH, KICK ROUND, SNARE, CLAP, HAT, OPEN HAT, CRASH */
         static const uint8_t K[SI_DR_OH] = {0, 2, 3, 4, 5, 6};
         int k = K[drum % SI_DR_OH];
