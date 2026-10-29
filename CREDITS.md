@@ -1,6 +1,6 @@
 # Credits
 
-**Sill** is delirioux's, written with Claude: generative 90s eurodance for the FM-1.
+**Sill** is by delirioux and Claude: generative 90s eurodance for the FM-1.
 
 - **The drum kit and the crowd**: Sill's own, seven one-shots and three shouts synthesized by
   `tools/si_drums.py`, CC0 1.0 ([attribution](assets/samples-cc0/ATTRIBUTION.txt))

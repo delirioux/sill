@@ -128,6 +128,6 @@ sysroot). Design notes and the plan: [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
 ## Credits and licence
 
-GPL-3.0-only. Sill by delirioux, written with Claude; a fork of Daurade, Flyfish and Tuna (delirioux), forks of
+GPL-3.0-only. Sill by delirioux and Claude; a fork of Daurade, Flyfish and Tuna (delirioux), forks of
 Felucca by Leo Kuroshita, Hügelton Instruments; the web installer is Felucca's. The drum and shout samples are CC0.
 See [CREDITS.md](CREDITS.md) and [LICENSING.md](LICENSING.md).
