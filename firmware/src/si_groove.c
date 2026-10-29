@@ -106,10 +106,10 @@ enum { DRUMS_EURO, DRUMS_SKANK, DRUMS_BALLAD, DRUMS_RAVE, DRUMS_HOUSE, DRUMS_ITA
 /* name side bpm key scale | lift pump vox energy | snd[4] | loops | bars swing hats fills bassline |
  * kick clap crash chant | stab hook drums | speed range gate repeat | lift parts | reverb delay dtime |
  * reso drive ensemble | the three more sounds of STABS, BASS and HOOK a song picks from (si_song_sounds).
- * Sounds (si_sounds.h): STABS 0 PIANO 1 ORGAN 2 SUPER 3 STRINGS 4 BRASS 5 PLUCK 6 HOOVER 7 ORCH 8 BELLS 9 PAD
+ * Sounds (si_sounds.h): STABS 0 PIANO 1 ORGAN 2 SUPER 3 STRINGS 4 BRASS 5 PLUCK 6 HOOVER 7 ORCH 8 EPIANO 9 PAD
  * 10 HOUSE 11 DEEP 12 HORNS 13 CHOIR 14 VIOLINS 15 TRANCE; BASS 0 FM 1 SQUARE 2 SUB 3 FAT 4 ACID
  * 5 REESE 6 SLAP 7 SLIDE 8 OCTAVE 9 WOW 10 ORGAN 11 SYNTH 12 SINE 13 TRANCE 14 DX 15 GROWL; HOOK 0 SUPER 1 SAW
- * 2 PLUCK 3 BELL 4 PIANO 5 HOOVER 6 OOH 7 SYNC 8 FLUTE 9 PAD 10 REEDS 11 ANTHEM 12 CHOIR 13 WHISTLE 14 TRANCE
+ * 2 PLUCK 3 POP 4 PIANO 5 HOOVER 6 OOH 7 SYNC 8 FLUTE 9 PAD 10 REEDS 11 ANTHEM 12 CHOIR 13 WHISTLE 14 TRANCE
  * 15 ROBOT; the kit 0 EURO 1 SESSION 2 MACHINE */
 const si_style SI_STYLE[SI_STYLES] = {
     {"EUROSTOMP", SI_SIDE_CLUB, 136, 9, SI_SC_MINOR, 85, 55, SI_VOX_CHORUS, 80, {2, 3, 0, 0}, {0, 1, 3, 5}, 1,

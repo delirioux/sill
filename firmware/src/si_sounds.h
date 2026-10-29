@@ -68,6 +68,8 @@ static const preset_t SIS_TRANCEBASS = {"TRANCE BASS", {0, 10, 64, 0, 84, 22, 8,
 static const preset_t SIS_SINEBASS = {"SINE BASS", {3, 0, 0, 0, 127, 0, 25, 0}, {0, 70, 100, 12}, 0, 1, FX(0, 0, 0, 4)};
 /* HOOK: REEDS, the accordion's musette: two pulses beating against each other, as its reeds do */
 static const preset_t SIS_MUSETTE = {"MUSETTE", {4, 16, 64, 0, 96, 12, 18, 64}, {3, 70, 112, 28}, 0, 1, FX(0, 30, 30, 35)};
+/* HOOK: the pop lead of the bubblegum songs: a square, plucked by the filter */
+static const preset_t SIS_POP = {"POP", {1, 6, 64, 0, 100, 20, 5, 64}, {0, 55, 60, 20}, 25, 1, FX(0, 20, 35, 30)};
 /* HOOK: the anthem lead: saws wide and driven, a slow glide */
 static const preset_t SIS_ANTHEM = {"ANTHEM", {0, 26, 64, 0, 108, 15, 10, 64}, {4, 70, 110, 35}, 10, 1, FX(0, 40, 40, 40)};
 /* HOOK: the whistle: a sine with a breath of noise */
@@ -97,7 +99,7 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         S("PLUCK", SIS_ANALOG, 8, 4, 4),
         S("HOOVER", SIS_ANALOG, 6, 4, -5),               /* RAVE */
         SF("ORCH", SI_FM6_ORCHHIT, SIS_KEEP, SIS_POLY, 6),
-        S("BELLS", SIS_FM6, 1, 2, -9),
+        S("EPIANO", SIS_FM6, 0, 2, -2),                  /* TINE EP: the electric piano of the ballads */
         S("PAD", SIS_FM6, 4, 2, 16),
         S("HOUSE", SIS_WHEEL, 0, 3, 3),                  /* FULL ORGAN, short: the house organ chord */
         SO("DEEP", SIS_ANALOG, 0, SIS_DEEPCHORD, SIS_KEEP, SIS_KEEP, SIS_POLY, 4, 10),
@@ -128,7 +130,7 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         SO("SUPER", SIS_ANALOG, 0, SIS_SUPERLEAD, SIS_KEEP, 6, SIS_UNISON, 4, -8),
         SO("SAW", SIS_TRIO, 0, SIS_SAWLEAD, SIS_KEEP, 10, SIS_KEEP, 5, -8),
         S("PLUCK", SIS_ANALOG, 8, 4, 2),
-        S("BELL", SIS_FM6, 1, 2, -3),
+        SO("POP", SIS_ANALOG, 0, SIS_POP, SIS_KEEP, 4, SIS_MONO, 4, -3),  /* the bubblegum lead */
         S("PIANO", SIS_SAMPLE, 1, 4, -18),
         SO("HOOVER", SIS_ANALOG, 0, SIS_HOOVER, SIS_KEEP, 14, SIS_LEGATO, 4, -14),
         SO("OOH", SIS_VOICE, 0, SIS_OOH, SIS_KEEP, SIS_KEEP, SIS_LEGATO, -1, -12),

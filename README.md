@@ -45,7 +45,7 @@ every run also leaves its package in the artifact `sill-firmware`. From a termin
 | --- | --- | --- | --- |
 | **EUROSTOMP** · 136 | offbeat bass, supersaw stabs and hook, HEY | **SKANK** · 95 | reggae offbeat chops, dub bass, a flute hook |
 | **VIKING** · 138 | harmonic minor, brass stabs, octave bass, WHOA | **PIANOHOUSE** · 125 | offbeat piano with sevenths over a warm pad, open hats |
-| **BUBBLEGUM** · 130 | major key, bouncy plucks, a bell hook, HO | **PARTY** · 140 | bouncing bass, brass, every shout there is |
+| **BUBBLEGUM** · 130 | major key, bouncy plucks, a pop lead, HO | **PARTY** · 140 | bouncing bass, brass, every shout there is |
 | **HEARTACHE** · 134 | piano over a happy beat, the hook sung OOH | **BALLAD** · 100 | the slow radio edit: pads, fretless, piano |
 | **RAVE** · 140 | hoover stabs, rolling bass, 16th hats | **ITALO** · 120 | strings, octave bass, an arpeggio sung OOH |
 
@@ -98,9 +98,9 @@ Four parts on Felucca's engines, sixteen sounds each, evened out so a new sound 
 
 | Part | Sounds |
 | --- | --- |
-| STABS | PIANO, ORGAN, SUPER, STRINGS, BRASS, PLUCK, HOOVER, ORCH, BELLS, PAD, HOUSE (organ), DEEP (house chord), HORNS, CHOIR, VIOLINS, TRANCE |
+| STABS | PIANO, ORGAN, SUPER, STRINGS, BRASS, PLUCK, HOOVER, ORCH, EPIANO, PAD, HOUSE (organ), DEEP (house chord), HORNS, CHOIR, VIOLINS, TRANCE |
 | BASS | FM BASS, SQUARE, SUB, FAT, ACID, REESE, SLAP, SLIDE (fretless), OCTAVE, WOW, ORGAN, SYNTH, SINE, TRANCE, DX, GROWL |
-| HOOK | SUPER, SAW, PLUCK, BELL, PIANO, HOOVER, OOH, SYNC, FLUTE, PAD, REEDS (accordion), ANTHEM, CHOIR, WHISTLE, TRANCE, ROBOT |
+| HOOK | SUPER, SAW, PLUCK, POP, PIANO, HOOVER, OOH, SYNC, FLUTE, PAD, REEDS (accordion), ANTHEM, CHOIR, WHISTLE, TRANCE, ROBOT |
 
 Each style has four sounds a part to choose from: song 1 plays its own, every other song (ALGORITHM) picks from
 those four, so the songs of one style do not all sound alike. A card turned by hand holds until the next song.
