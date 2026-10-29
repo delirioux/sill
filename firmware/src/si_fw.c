@@ -368,6 +368,7 @@ static void si_frame(void)
     song.playing = si_g.playing;                             /* (PLAY's green LED, Felucca's meters) */
     si_leds();
     si_u.batt = (int)batt_shown();
+    si_u.cpu = (int)(song.cpu_q8 * 100u / 256u);
     su_tick(&si_u, dt > 100u ? 100 : (int)dt);
     if (first) {
         su_draw_all(&si_u);

@@ -317,7 +317,8 @@ static void su_draw_head(si_ui *u)
     cv_blit(0, 0);
 }
 
-/* ---- the footer: the section's bars as 16 dashes, the style and its song number, the page ---------------------- */
+/* ---- the footer: the section's bars as 16 dashes, the style and its song number, the page (PLAY playing: the
+ * CPU, the audio's load, in the accent from 85 %: where Felucca starts to shed voices) --------------------------- */
 static void su_draw_foot(si_ui *u)
 {
     const si_groove *g = u->g;
@@ -333,8 +334,19 @@ static void su_draw_foot(si_ui *u)
     const char *style = si_style_name(g->s.style);
     char song[8];                                  /* the song playing (ALGORITHM), on every page */
     su_fmt_int(song, g->s.song + 1);
+    char right[12];
+    bool cpu = u->page == SU_PG_PLAY && g->playing && u->cpu > 0;   /* (the browser measures none) */
+    if (cpu) {
+        char a[8];
+        su_cpy(right, "CPU ", sizeof right);
+        su_fmt_int(a, su_clampi(u->cpu, 0, 100));
+        su_cat(right, a, sizeof right);
+        su_cat(right, "%", sizeof right);
+    } else {
+        su_cpy(right, su_page_name(u->page), sizeof right);
+    }
     uint32_t sig = su_hash(su_hash(su_hash((uint32_t)filled * 7u + (uint32_t)g->playing * 3u + ux.gen * 11u +
-                                           (uint32_t)u->page * 13u, style), su_page_name(u->page)), song);
+                                           (uint32_t)u->page * 13u, style), right), song);
     if (!u->force && sig == u->sig_foot)
         return;
     u->sig_foot = sig;
@@ -345,10 +357,10 @@ static void su_draw_foot(si_ui *u)
     int32_t nx = 10 + text_w(&AF_M, style);
     if (nx > 140) nx = 140;
     int32_t yb = 17 + AF_M_CAP_Y + AF_M_CAP_H - AF_S_CAP_Y - AF_S_CAP_H;
-    int32_t px = 230 - text_w(&AF_S, su_page_name(u->page)) - 8;
+    int32_t px = 230 - text_w(&AF_S, right) - 8;
     if (px - nx - 6 > 24)
         cv_free_text(nx + 6, yb, &AF_S, song, T_TEXT, T_BG, px - nx - 6);
-    cv_text_r(230, yb, &AF_S, su_page_name(u->page), T_MID, T_BG);
+    cv_text_r(230, yb, &AF_S, right, cpu && u->cpu >= 85 ? T_ACCENT : T_MID, T_BG);
     cv_blit(0, SU_FOOT_Y);
 }
 
