@@ -52,6 +52,30 @@ static const preset_t SIS_REESE = {"REESE", {0, 22, 64, 0, 58, 20, 35, 64}, {0, 
 static const preset_t SIS_HOOVER = {"HOOVER", {4, 38, 64, 0, 96, 30, 45, 64}, {0, 70, 100, 30}, 16, 1, FX(20, 40, 20, 25)};
 /* the sung hook: the VOICE engine breathy and round, its vowels and their glide the VOX page's */
 static const preset_t SIS_OOH = {"OOH", {127, 0, 40, 0, 70, 35, 80, 8}, {10, 70, 110, 40}, 0, 1, FX(0, 40, 30, 40)};
+/* ---- 0.4's own: the sounds a style can vary between (si_groove.c's pools) ---- */
+/* STABS: a deep house chord of two squares a little apart, a short pluck of the filter */
+static const preset_t SIS_DEEPCHORD = {"DEEP CHORD", {1, 20, 64, 0, 86, 32, 10, 64}, {0, 58, 46, 20}, 22, 0, FX(0, 40, 30, 30)};
+/* STABS: a short trance pluck, the saws far apart, the filter snapping shut */
+static const preset_t SIS_TRANCESTAB = {"TRANCE", {0, 38, 64, 0, 110, 24, 12, 64}, {0, 58, 30, 18}, 36, 0, FX(0, 50, 40, 30)};
+/* STABS and HOOK: a choir on the VOICE engine, quicker than its factory CHOIR AAH (the VOX page's vowels) */
+static const preset_t SIS_CHOIR = {"CHOIR", {0, 0, 40, 0, 40, 26, 64, 6}, {14, 90, 112, 60}, 0, 0, FX(0, 70, 15, 70)};
+static const preset_t SIS_CHOIRLEAD = {"CHOIR", {0, 0, 40, 0, 50, 22, 70, 6}, {10, 80, 112, 50}, 0, 1, FX(0, 50, 30, 60)};
+/* BASS: a punchy analogue saw, short and dry */
+static const preset_t SIS_SYNTHBASS = {"SYNTH BASS", {0, 0, 0, 0, 70, 40, 30, 64}, {0, 46, 30, 10}, 34, 1, FX(10, 0, 0, 6)};
+/* BASS: the trance bass, a bright saw with a little detune, rolling */
+static const preset_t SIS_TRANCEBASS = {"TRANCE BASS", {0, 10, 64, 0, 84, 22, 18, 64}, {0, 62, 82, 12}, 20, 1, FX(5, 0, 0, 8)};
+/* BASS: a deep sine with a click on top */
+static const preset_t SIS_SINEBASS = {"SINE BASS", {3, 0, 0, 0, 127, 0, 25, 0}, {0, 70, 100, 12}, 0, 1, FX(0, 0, 0, 4)};
+/* HOOK: REEDS, the accordion's musette: two pulses beating against each other, as its reeds do */
+static const preset_t SIS_MUSETTE = {"MUSETTE", {4, 16, 64, 0, 96, 12, 18, 64}, {3, 70, 112, 28}, 0, 1, FX(0, 30, 30, 35)};
+/* HOOK: the anthem lead: saws wide and driven, a slow glide */
+static const preset_t SIS_ANTHEM = {"ANTHEM", {0, 26, 64, 0, 108, 15, 28, 64}, {4, 70, 110, 35}, 10, 1, FX(10, 40, 40, 40)};
+/* HOOK: the whistle: a sine with a breath of noise */
+static const preset_t SIS_WHISTLE = {"WHISTLE", {3, 0, 0, 6, 127, 0, 0, 64}, {6, 70, 110, 25}, 0, 1, FX(0, 20, 40, 45)};
+/* HOOK: a trance pluck lead, snappy */
+static const preset_t SIS_TRANCELEAD = {"TRANCE", {0, 22, 64, 0, 100, 32, 12, 64}, {0, 46, 30, 20}, 45, 1, FX(0, 30, 50, 35)};
+/* HOOK: the robot (Daurade's): the VOICE engine at full buzz and a high Q, a vocoder */
+static const preset_t SIS_ROBOT = {"ROBOT", {0, 64, 40, 0, 127, 0, 110, 0}, {2, 70, 110, 30}, 0, 1, FX(0, 15, 30, 25)};
 static const preset_t SIS_SAWLEAD = {"SAW LEAD", {0, 0, 12, 12, 0, 96, 25, 64}, {2, 70, 100, 35}, 20, 1,
                                      FX(0, 10, 35, 25)};
 
@@ -75,6 +99,12 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         SF("ORCH", SI_FM6_ORCHHIT, SIS_KEEP, SIS_POLY, 6),
         S("BELLS", SIS_FM6, 1, 2, -9),
         S("PAD", SIS_FM6, 4, 2, 16),
+        S("HOUSE", SIS_WHEEL, 0, 3, 3),                  /* FULL ORGAN, short: the house organ chord */
+        SO("DEEP", SIS_ANALOG, 0, SIS_DEEPCHORD, SIS_KEEP, SIS_KEEP, SIS_POLY, 4, 10),
+        S("HORNS", SIS_PHASE, 0, 2, -2),                  /* PHASE's BRASS: a heroic section */
+        SO("CHOIR", SIS_VOICE, 0, SIS_CHOIR, SIS_KEEP, SIS_KEEP, SIS_POLY, -1, -1),
+        S("VIOLINS", SIS_PHASE, 2, 2, -3),                /* PHASE's STRING: wide, orchestral */
+        SO("TRANCE", SIS_ANALOG, 0, SIS_TRANCESTAB, SIS_KEEP, SIS_KEEP, SIS_POLY, 4, 9),
     },
     {   /* BASS */
         S("FM BASS", SIS_FM6, 2, 2, -4),
@@ -84,9 +114,15 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         SX("ACID", SIS_ANALOG, 4, SIS_KEEP, 18, SIS_LEGATO, 4, 6),
         SO("REESE", SIS_ANALOG, 0, SIS_REESE, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, -8),
         SF("SLAP", SI_FM6_SLAPBASS, SIS_KEEP, SIS_POLY, 0),
-        SF("FRETLESS", SI_FM6_FRETLESS, 22, SIS_LEGATO, -5),
+        SF("SLIDE", SI_FM6_FRETLESS, 22, SIS_LEGATO, -5),
         SO("OCTAVE", SIS_ANALOG, 0, SIS_OCTAVE, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, -1),
         SX("WOW", SIS_VOICE, 2, SIS_KEEP, 24, SIS_LEGATO, -1, -3),
+        SX("ORGAN", SIS_WHEEL, 1, SIS_KEEP, SIS_KEEP, SIS_MONO, 3, -4),   /* the 90s organ bass */
+        SO("SYNTH", SIS_ANALOG, 0, SIS_SYNTHBASS, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, 4),
+        SO("SINE", SIS_ANALOG, 0, SIS_SINEBASS, SIS_KEEP, SIS_KEEP, SIS_MONO, -1, -14),
+        SO("TRANCE", SIS_ANALOG, 0, SIS_TRANCEBASS, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, -4),
+        SX("DX", SIS_FM6, 7, SIS_KEEP, SIS_KEEP, SIS_MONO, 2, -1),        /* FM6's PLUCK, low and hard */
+        SX("GROWL", SIS_PHASE, 0, 20, SIS_KEEP, SIS_MONO, 2, -10),         /* PHASE's BRASS in the low end, driven */
     },
     {   /* HOOK */
         SO("SUPER", SIS_ANALOG, 0, SIS_SUPERLEAD, SIS_KEEP, 6, SIS_UNISON, 4, -8),
@@ -99,6 +135,12 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         S("SYNC", SIS_TRIO, 2, 5, -6),
         S("FLUTE", SIS_WHEEL, 3, 3, -7),                 /* SOFT FLUTE */
         S("PAD", SIS_ANALOG, 1, 4, -11),                 /* SOFT PAD: HOOK SPEED PAD holds it on the chords */
+        SO("REEDS", SIS_ANALOG, 0, SIS_MUSETTE, SIS_KEEP, 8, SIS_LEGATO, 4, -14),
+        SO("ANTHEM", SIS_ANALOG, 0, SIS_ANTHEM, SIS_KEEP, 14, SIS_LEGATO, 4, -12),
+        SO("CHOIR", SIS_VOICE, 0, SIS_CHOIRLEAD, SIS_KEEP, 10, SIS_LEGATO, -1, -12),
+        SO("WHISTLE", SIS_ANALOG, 0, SIS_WHISTLE, SIS_KEEP, 16, SIS_LEGATO, -1, -16),
+        SO("TRANCE", SIS_ANALOG, 0, SIS_TRANCELEAD, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, 4),
+        SO("ROBOT", SIS_VOICE, 1, SIS_ROBOT, SIS_KEEP, SIS_KEEP, SIS_LEGATO, -1, -14),
     },
 };
 #undef S

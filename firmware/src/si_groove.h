@@ -53,7 +53,7 @@ enum { SI_DR_KICK, SI_DR_SNARE, SI_DR_CLAP, SI_DR_HAT, SI_DR_OPEN, SI_DR_CRASH, 
 /* the form's sections, in the order they play (ARC on); after the second CHORUS, round again from VERSE */
 enum { SI_SEC_INTRO, SI_SEC_VERSE, SI_SEC_PRE, SI_SEC_CHORUS, SI_SEC_BREAK, SI_SEC_CHORUS2, SI_SECS };
 #define SI_SETS 8
-#define SI_SOUNDS 10                               /* each part's SOUND list (si_sounds.h) */
+#define SI_SOUNDS 16                               /* each part's SOUND list (si_sounds.h) */
 #define SI_STABS_PIANO 0                           /* STABS sound 0, PIANO: the offbeat piano chords, any style */
 #define SI_HOOK_PAD 9                              /* HOOK sound 9, PAD: a warm pad (HOOK SPEED PAD plays it held) */
 #define SI_LOOPS 12                                /* the chord loops (si_groove.c SI_LOOP) */
@@ -171,6 +171,7 @@ typedef struct {
     uint8_t lift_parts;                            /* bit per part: what the LIFT filters */
     uint8_t reverb, delay, dtime;
     uint8_t reso, drive, ensemble;
+    uint8_t alt[3][3];                             /* STABS BASS HOOK: three more sounds each a song can pick (si_song_sounds) */
 } si_style;
 
 extern const si_style SI_STYLE[SI_STYLES];
@@ -179,6 +180,8 @@ void si_defaults(si_settings *s);                  /* EUROSTOMP, as it starts */
 void si_style_apply(si_settings *s, int style);    /* a style's own settings into s (PLAY SOUND TONE VOX KEY GROOVE DRUMS
                                                     * SPACE HOOK and the tempo); MIX ARC MENU stay */
 void si_settings_fix(si_settings *s);              /* every field into its range (a loaded record) */
+void si_song_sounds(si_settings *s);               /* the song's sounds: song 1 (0) the style's own, the others one of four
+                                                    * per part, seeded by the song (the kit stays the style's) */
 void si_init(si_groove *g, float sample_rate);
 void si_set_sound(si_groove *g, void (*fn)(void *ctx, const si_event *e), void *ctx);
 

@@ -82,6 +82,7 @@ int main(int argc, char **argv)
     si_init(&G, (float)FS);
     if (getenv("STYLE")) si_style_apply(&G.s, env_int("STYLE", 0));
     G.s.song = (uint16_t)env_int("SONG", 0);
+    si_song_sounds(&G.s);                         /* (the song's sounds from its style's pool) */
     G.s.arc = (uint8_t)env_int("ARC", 1);
     if (getenv("KIT")) G.s.snd[3] = (uint8_t)env_int("KIT", 0);
     if (getenv("LIFT")) G.s.lift = (uint8_t)env_int("LIFT", 85);

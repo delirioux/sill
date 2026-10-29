@@ -94,13 +94,19 @@ themselves while stopped. [docs/MANUAL.md](docs/MANUAL.md) goes through every pa
 
 ## The sound
 
-Four parts on Felucca's engines, ten sounds each (STABS: PIANO, ORGAN, SUPER, STRINGS, BRASS, PLUCK, HOOVER, ORCH,
-BELLS, PAD; BASS: FM BASS, SQUARE, SUB, FAT, ACID, REESE, SLAP, FRETLESS, OCTAVE, WOW; HOOK: SUPER, SAW, PLUCK, BELL,
-PIANO, HOOVER, OOH, SYNC, FLUTE, PAD), evened out so a new sound does not jump out of the mix. PIANO on STABS turns any style into offbeat piano chords, the 90s
-way. The SUPER hook is
-two detuned saws on every free voice (UNISON); the PIANO is six notes of a Kawai grand (VCSL, CC0) made bright
-and hard for the club; the ORCH hit is an FM patch of Sill's own; OOH is
-Felucca's VOICE engine, a formant synthesizer, singing between two vowels (the VOX page).
+Four parts on Felucca's engines, sixteen sounds each, evened out so a new sound does not jump out of the mix:
+
+| Part | Sounds |
+| --- | --- |
+| STABS | PIANO, ORGAN, SUPER, STRINGS, BRASS, PLUCK, HOOVER, ORCH, BELLS, PAD, HOUSE (organ), DEEP (house chord), HORNS, CHOIR, VIOLINS, TRANCE |
+| BASS | FM BASS, SQUARE, SUB, FAT, ACID, REESE, SLAP, SLIDE (fretless), OCTAVE, WOW, ORGAN, SYNTH, SINE, TRANCE, DX, GROWL |
+| HOOK | SUPER, SAW, PLUCK, BELL, PIANO, HOOVER, OOH, SYNC, FLUTE, PAD, REEDS (accordion), ANTHEM, CHOIR, WHISTLE, TRANCE, ROBOT |
+
+Each style has four sounds a part to choose from: song 1 plays its own, every other song (ALGORITHM) picks from
+those four, so the songs of one style do not all sound alike. A card turned by hand holds until the next song.
+PIANO on STABS turns any style into offbeat piano chords, the 90s way. The SUPER hook is two detuned saws on every
+free voice (UNISON); the PIANO is six notes of a Kawai grand (VCSL, CC0) made bright and hard for the club; the ORCH
+hit is an FM patch of Sill's own; OOH, CHOIR and ROBOT are Felucca's VOICE engine, a formant synthesizer, singing between two vowels (the VOX page).
 
 The drums are Sill's own: seven one-shots (two kicks, snare, clap, closed and open hat, crash) and the crowd's
 three shouts (HEY, HO, WHOA), all synthesized by [`tools/si_drums.py`](tools/si_drums.py). The shouts are eight

@@ -248,6 +248,45 @@ int main(void)
         CHECK(off >= 2 && on_beat == 0, "PIANO: the chords on the offbeats (%d off, %d on the beat)", off, on_beat);
     }
     si_play(&g, false);
+    /* each song its own sounds: song 1 the style's, the others from its pool of four a part */
+    for (int st = 0; st < SI_STYLES; ++st) {
+        si_settings t;
+        si_defaults(&t);
+        si_style_apply(&t, st);
+        si_song_sounds(&t);
+        CHECK(t.snd[0] == SI_STYLE[st].snd[0] && t.snd[1] == SI_STYLE[st].snd[1] && t.snd[2] == SI_STYLE[st].snd[2],
+              "%s: song 1 plays the style's own sounds", si_style_name(st));
+        int seen[3][SI_SOUNDS] = {{0}}, kinds = 0;
+        for (int song = 0; song < 40; ++song) {
+            t.song = (uint16_t)song;
+            si_song_sounds(&t);
+            for (int p = 0; p < 3; ++p) {
+                CHECK(t.snd[p] < SI_SOUNDS, "%s: a sound in the list", si_style_name(st));
+                if (!seen[p][t.snd[p]]++) kinds++;
+            }
+        }
+        CHECK(kinds >= 6, "%s: the songs vary their sounds (%d different over 40 songs)", si_style_name(st), kinds);
+    }
+    /* ALGORITHM: the next song brings its sounds on the bar line, and reloads them */
+    si_style_apply(&g.s, SI_ST_EUROSTOMP);
+    g.s.arc = 0;
+    si_rebuild(&g);
+    si_play(&g, true); run_bars(1);
+    {
+        uint8_t sig = g.sound_sig;
+        int target = -1;
+        for (int song = 1; song < 50 && target < 0; ++song) {
+            si_settings t = g.s;
+            t.song = (uint16_t)song;
+            si_song_sounds(&t);
+            if (t.snd[0] != g.s.snd[0]) target = song;
+        }
+        si_queue_song(&g, target);
+        run_bars(1);
+        CHECK(g.s.song == target && g.s.snd[0] != SI_STYLE[SI_ST_EUROSTOMP].snd[0] && g.sound_sig != sig,
+              "song %d: other stabs (%d), reloaded", target + 1, g.s.snd[0]);
+    }
+    si_play(&g, false);
     /* the hook's phrase: REPEAT bars of it */
     g.s.repeat = 4;
     si_rebuild(&g);

@@ -235,6 +235,17 @@ int main(int argc, char **argv)
     su_knob(&ui, SU_K1, 1);
     CHECK(g.s.snd[SI_STABS] == 5, "K1: the next STABS sound (%d)", g.s.snd[SI_STABS]);
     su_knob(&ui, SU_K1, -1);
+    {                                              /* every sound's name on its card and the panel: the lint */
+        uint8_t keep[4];
+        memcpy(keep, g.s.snd, sizeof keep);
+        for (int i = 0; i < SI_SOUNDS; ++i) {
+            char nm[32];
+            g.s.snd[0] = g.s.snd[1] = g.s.snd[2] = (uint8_t)i;
+            snprintf(nm, sizeof nm, "sound_%02d", i);
+            shot(nm);
+        }
+        memcpy(g.s.snd, keep, sizeof keep);
+    }
     press(SU_B_FX);
     CHECK(ui.page == SU_PG_TONE, "FX again: TONE");
     shot("06_tone");

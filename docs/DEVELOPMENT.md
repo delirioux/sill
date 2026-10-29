@@ -41,8 +41,8 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
 | File | Does |
 | --- | --- |
 | `si_groove.h/.c` | the engine: ten styles, twelve chord loops, the rhythm families of each part, the hook, the form, the crowd, the lift and the pump, BREAK, KEY UP, the keys, swing and human timing. Plain C, no Felucca: it runs on the host as it does on the FM-1 |
-| `si_sounds.h` | the thirty sounds on Felucca's engines and their trims, the kits and the shouts' notes, and how a part's cards set its track (level, pan, sends, the matrix's lift and pump slots, the VOX page, TONE) |
-| `si_fm6.inc` | the FM6 patches (ORCH HIT, Sill's; SLAP, BRASS, FRETLESS, Tuna's), made by `tools/si_fm6.py` |
+| `si_sounds.h` | the forty-eight sounds on Felucca's engines and their trims, the kits and the shouts' notes, and how a part's cards set its track (level, pan, sends, the matrix's lift and pump slots, the VOX page, TONE) |
+| `si_fm6.inc` | the FM6 patches (ORCH HIT, Sill's; SLAP, BRASS, FRETLESS (SLIDE), Tuna's), made by `tools/si_fm6.py` |
 | `tools/si_piano.py` | the PIANO: six notes of VCSL's Kawai grand (CC0), made bright and hard, into `assets/samples-cc0/PIANO/` |
 | `si_ui.h/.c` | the thirteen pages, the cards, the styles list, the sets, on Felucca's `gfx.c` |
 | `si_fw.c` | the glue: the groove on the tracks and MIDI out, loading a part's sound when it changes, the panel, the key LEDs, the settings and the sets in flash, the splash |
@@ -88,6 +88,10 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
   presence lift, less body, a soft clip; on the FM-1 a low-pass at about 5 kHz, a room of its own and a lower
   level (about 3 dB under the bass and the hook in the chorus) push it back; the SAMPLE engine's set 1, about 64 KB of ADPCM. PIANO on STABS plays the
   offbeat chords in any style.
+- **Sixteen sounds a part, four a style, one a song.** The sounds are synthesized on Felucca's engines (their
+  presets cost bytes, not kilobytes: no samples). Each style names its own sound for each part and three more; a
+  song's number picks one of the four (song 1 always the style's own), so the songs of a style vary, and a song comes
+  back with the same sounds. Names stay short enough for a card (the screen test lints every one).
 - **Eight voices for everything.** Felucca shares eight voices across the four tracks. The stabs play three notes,
   the held chords four; every drum and shout has a ring length; the SUPER hook takes every free voice (UNISON) and
   gives its extra ones up first. Measured over 75 s through Felucca's engines: RAVE and SKANK steal 5, EUROSTOMP

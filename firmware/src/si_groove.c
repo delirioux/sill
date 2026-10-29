@@ -105,51 +105,53 @@ enum { DRUMS_EURO, DRUMS_SKANK, DRUMS_BALLAD, DRUMS_RAVE, DRUMS_HOUSE, DRUMS_ITA
 
 /* name side bpm key scale | lift pump vox energy | snd[4] | loops | bars swing hats fills bassline |
  * kick clap crash chant | stab hook drums | speed range gate repeat | lift parts | reverb delay dtime |
- * reso drive ensemble.
- * Sounds (si_sounds.h): STABS 0 PIANO 1 ORGAN 2 SUPER 3 STRINGS 4 BRASS 5 PLUCK 6 HOOVER 7 ORCH 8 BELLS 9 PAD;
- * BASS 0 FM 1 SQUARE 2 SUB 3 FAT 4 ACID 5 REESE 6 SLAP 7 FRETLESS 8 OCTAVE 9 WOW; HOOK 0 SUPER 1 SAW 2 PLUCK 3 BELL
- * 4 PIANO 5 HOOVER 6 OOH 7 SYNC 8 FLUTE 9 PAD; the kit 0 EURO 1 SESSION 2 MACHINE */
+ * reso drive ensemble | the three more sounds of STABS, BASS and HOOK a song picks from (si_song_sounds).
+ * Sounds (si_sounds.h): STABS 0 PIANO 1 ORGAN 2 SUPER 3 STRINGS 4 BRASS 5 PLUCK 6 HOOVER 7 ORCH 8 BELLS 9 PAD
+ * 10 HOUSE 11 DEEP 12 HORNS 13 CHOIR 14 VIOLINS 15 TRANCE; BASS 0 FM 1 SQUARE 2 SUB 3 FAT 4 ACID
+ * 5 REESE 6 SLAP 7 SLIDE 8 OCTAVE 9 WOW 10 ORGAN 11 SYNTH 12 SINE 13 TRANCE 14 DX 15 GROWL; HOOK 0 SUPER 1 SAW
+ * 2 PLUCK 3 BELL 4 PIANO 5 HOOVER 6 OOH 7 SYNC 8 FLUTE 9 PAD 10 REEDS 11 ANTHEM 12 CHOIR 13 WHISTLE 14 TRANCE
+ * 15 ROBOT; the kit 0 EURO 1 SESSION 2 MACHINE */
 const si_style SI_STYLE[SI_STYLES] = {
     {"EUROSTOMP", SI_SIDE_CLUB, 136, 9, SI_SC_MINOR, 85, 55, SI_VOX_CHORUS, 80, {2, 3, 0, 0}, {0, 1, 3, 5}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HEY,
      STAB_EURO, HOOK_MELODY, DRUMS_EURO, SI_SPEED_FAST, 1, 80, 2, P(SI_STABS) | P(SI_HOOK), 25, 25, SI_DTIME_3_16,
-     30, 20, 45},
+     30, 20, 45, {{10, 11, 15}, {11, 8, 10}, {11, 14, 13}}},
     {"VIKING", SI_SIDE_CLUB, 138, 4, SI_SC_HARMONIC, 80, 50, SI_VOX_CHORUS, 85, {4, 3, 1, 0}, {8, 4, 0, 3}, 1,
      0, SI_HATS_16THS, SI_FILLS_4, SI_BL_OCTAVE, SI_KICK_PUNCH, SI_CLAP_BOTH, SI_CRASH_SECTION, SI_CHANT_WHOA,
      STAB_EURO, HOOK_MELODY, DRUMS_EURO, SI_SPEED_MID, 2, 90, 2, P(SI_STABS) | P(SI_HOOK), 35, 20, SI_DTIME_8,
-     25, 30, 35},
+     25, 30, 35, {{12, 13, 14}, {8, 15, 11}, {11, 12, 0}}},
     {"BUBBLEGUM", SI_SIDE_CLUB, 130, 2, SI_SC_MAJOR, 90, 45, SI_VOX_CHORUS, 75, {5, 1, 3, 0}, {6, 7, 0, 1}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HO,
      STAB_BOUNCE, HOOK_MELODY, DRUMS_EURO, SI_SPEED_MID, 1, 50, 2, P(SI_STABS), 20, 20, SI_DTIME_8,
-     20, 10, 30},
+     20, 10, 30, {{8, 10, 0}, {11, 14, 8}, {13, 7, 2}}},
     {"HEARTACHE", SI_SIDE_CLUB, 134, 2, SI_SC_MINOR, 80, 50, SI_VOX_CHORUS, 70, {0, 0, 6, 0}, {2, 0, 5, 3}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_ROUND, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HEY,
      STAB_PIANO, HOOK_MELODY, DRUMS_EURO, SI_SPEED_SLOW, 1, 95, 4, P(SI_STABS), 40, 25, SI_DTIME_3_16,
-     20, 10, 40},
+     20, 10, 40, {{0, 11, 13}, {10, 12, 11}, {12, 11, 13}}},
     {"RAVE", SI_SIDE_CLUB, 140, 6, SI_SC_MINOR, 80, 60, SI_VOX_CHORUS, 90, {6, 4, 5, 0}, {3, 0, 4, 1}, 1,
      0, SI_HATS_16THS, SI_FILLS_4, SI_BL_ROLLING, SI_KICK_PUNCH, SI_CLAP_BOTH, SI_CRASH_8, SI_CHANT_WHOA,
      STAB_RAVE, HOOK_MELODY, DRUMS_RAVE, SI_SPEED_FAST, 1, 60, 1, P(SI_STABS) | P(SI_HOOK), 25, 20, SI_DTIME_8,
-     45, 45, 10},
+     45, 45, 10, {{15, 11, 7}, {5, 13, 15}, {14, 0, 15}}},
     {"SKANK", SI_SIDE_RADIO, 95, 1, SI_SC_MINOR, 75, 15, SI_VOX_CHORUS, 55, {1, 2, 8, 0}, {10, 3, 0, 5}, 1,
      15, SI_HATS_8THS, SI_FILLS_8, SI_BL_REGGAE, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_OFF, SI_CHANT_HEY,
      STAB_SKANK, HOOK_MELODY, DRUMS_SKANK, SI_SPEED_MID, 1, 70, 2, P(SI_STABS), 30, 30, SI_DTIME_3_16,
-     15, 10, 30},
+     15, 10, 30, {{5, 10, 0}, {7, 12, 10}, {10, 13, 3}}},
     {"PIANOHOUSE", SI_SIDE_RADIO, 125, 7, SI_SC_DORIAN, 85, 40, SI_VOX_CHORUS, 70, {0, 0, 9, 0}, {9, 0, 5, 1}, 1,
      10, SI_HATS_OPEN, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_ROUND, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HEY,
      STAB_PIANO, HOOK_MELODY, DRUMS_HOUSE, SI_SPEED_PAD, 2, 60, 2, P(SI_STABS), 30, 20, SI_DTIME_3_16,
-     15, 10, 25},
+     15, 10, 25, {{0, 0, 10}, {10, 12, 11}, {9, 9, 9}}},
     {"PARTY", SI_SIDE_RADIO, 140, 7, SI_SC_MAJOR, 90, 50, SI_VOX_ALL, 85, {4, 8, 7, 0}, {6, 7, 1, 0}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_4, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_MIX,
      STAB_BOUNCE, HOOK_MELODY, DRUMS_EURO, SI_SPEED_FAST, 1, 55, 1, P(SI_STABS) | P(SI_HOOK), 20, 15, SI_DTIME_8,
-     20, 25, 30},
+     20, 25, 30, {{12, 10, 5}, {11, 14, 1}, {13, 2, 11}}},
     {"BALLAD", SI_SIDE_RADIO, 100, 4, SI_SC_MINOR, 90, 0, SI_VOX_OFF, 35, {9, 7, 4, 0}, {2, 0, 6, 5}, 2,
      0, SI_HATS_8THS, SI_FILLS_OFF, SI_BL_LONG, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_SECTION, SI_CHANT_HEY,
      STAB_PAD, HOOK_MELODY, DRUMS_BALLAD, SI_SPEED_SLOW, 2, 95, 4, P(SI_STABS), 50, 25, SI_DTIME_4,
-     10, 0, 50},
+     10, 0, 50, {{14, 0, 13}, {12, 2, 0}, {12, 6, 10}}},
     {"ITALO", SI_SIDE_RADIO, 120, 9, SI_SC_MINOR, 80, 35, SI_VOX_CHORUS, 65, {3, 8, 6, 0}, {11, 0, 3, 4}, 1,
      0, SI_HATS_8THS, SI_FILLS_8, SI_BL_OCTAVE, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_SECTION, SI_CHANT_WHOA,
      STAB_PAD, HOOK_ARP, DRUMS_ITALO, SI_SPEED_MID, 2, 60, 2, P(SI_STABS), 35, 30, SI_DTIME_3_16,
-     20, 10, 45},
+     20, 10, 45, {{14, 11, 15}, {11, 13, 1}, {15, 14, 7}}},
 };
 const char *si_style_name(int i) { return SI_STYLE[clampi(i, 0, SI_STYLES - 1)].name; }
 
@@ -198,6 +200,16 @@ void si_style_apply(si_settings *s, int style)
     s->repeat = st->repeat;
     s->bpm = st->bpm;
     s->song = 0;
+}
+
+void si_song_sounds(si_settings *s)
+{
+    const si_style *st = &SI_STYLE[clampi(s->style, 0, SI_STYLES - 1)];
+    uint32_t r = (uint32_t)s->song * 2654435761u + (uint32_t)s->style * 40503u + 7u;
+    for (int p = 0; p < 3; ++p) {
+        int k = s->song ? rnd_n(&r, 4) : 0;        /* 0: the style's own */
+        s->snd[p] = k ? st->alt[p][k - 1] : st->snd[p];
+    }
 }
 
 void si_defaults(si_settings *s)
@@ -735,8 +747,10 @@ static void bar_line(si_groove *g)
         g->s.keyup = old.keyup;
         g->s.palette = old.palette;
         g->s.look = old.look;
-        if (keep_song >= 0)
+        if (keep_song >= 0) {
             g->s.song = (uint16_t)keep_song;
+            si_song_sounds(&g->s);
+        }
         g->next_style = -1;
         g->next_song = -1;
         g->perf_up = 0;
@@ -748,6 +762,8 @@ static void bar_line(si_groove *g)
         g->s.song = (uint16_t)g->next_song;
         uint32_t r = (uint32_t)g->s.song * 2246822519u + (uint32_t)g->s.style;
         g->s.chords = SI_STYLE[g->s.style].loops[rnd_n(&r, 4)];
+        si_song_sounds(&g->s);                     /* each song its own sounds from the style's pool */
+        g->sound_sig++;
         g->next_song = -1;
         g->perf_up = 0;
         g->perf_next = -1;
