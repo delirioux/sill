@@ -317,8 +317,7 @@ static void su_draw_head(si_ui *u)
     cv_blit(0, 0);
 }
 
-/* ---- the footer: the section's bars as 16 dashes, the style and its song number, the page (PLAY playing: the
- * CPU, the audio's load, in the accent from 85 %: where Felucca starts to shed voices) --------------------------- */
+/* ---- the footer: the section's bars as 16 dashes, the style and its song number, the page ---------------------- */
 static void su_draw_foot(si_ui *u)
 {
     const si_groove *g = u->g;
@@ -334,17 +333,7 @@ static void su_draw_foot(si_ui *u)
     const char *style = si_style_name(g->s.style);
     char song[8];                                  /* the song playing (ALGORITHM), on every page */
     su_fmt_int(song, g->s.song + 1);
-    char right[12];
-    bool cpu = u->page == SU_PG_PLAY && g->playing && u->cpu > 0;   /* (the browser measures none) */
-    if (cpu) {
-        char a[8];
-        su_cpy(right, "CPU ", sizeof right);
-        su_fmt_int(a, su_clampi(u->cpu, 0, 100));
-        su_cat(right, a, sizeof right);
-        su_cat(right, "%", sizeof right);
-    } else {
-        su_cpy(right, su_page_name(u->page), sizeof right);
-    }
+    const char *right = su_page_name(u->page);
     uint32_t sig = su_hash(su_hash(su_hash((uint32_t)filled * 7u + (uint32_t)g->playing * 3u + ux.gen * 11u +
                                            (uint32_t)u->page * 13u, style), right), song);
     if (!u->force && sig == u->sig_foot)
@@ -360,7 +349,7 @@ static void su_draw_foot(si_ui *u)
     int32_t px = 230 - text_w(&AF_S, right) - 8;
     if (px - nx - 6 > 24)
         cv_free_text(nx + 6, yb, &AF_S, song, T_TEXT, T_BG, px - nx - 6);
-    cv_text_r(230, yb, &AF_S, right, cpu && u->cpu >= 85 ? T_ACCENT : T_MID, T_BG);
+    cv_text_r(230, yb, &AF_S, right, T_MID, T_BG);
     cv_blit(0, SU_FOOT_Y);
 }
 
@@ -856,13 +845,21 @@ static void su_panel_sets(si_ui *u)
     }
 }
 
+/* MENU: what Sill is, and the CPU (the audio's load) as Tuna's MENU > SYSTEM > INFO shows it: a row, its value in
+ * the theme and the unit small beside it, taken every SU_CPU_MS */
+#define SU_CPU_MS 500
 static void su_panel_menu(si_ui *u)
 {
-    (void)u;
-    cv_text_on(30, 20, &AF_M, "SILL " SI_VERSION, T_TEXT, T_SURF);
-    cv_text_on(30, 44, &AF_S, "90S EURODANCE FOR THE FM-1", T_MID, T_SURF);
-    cv_text_on(30, 64, &AF_S, "ON FELUCCA, AFTER TUNA", T_MID, T_SURF);
-    cv_text_on(30, 84, &AF_S, "GPL-3.0, HOME CLOSES", T_DIM, T_SURF);
+    char cpu[8];
+    cv_text_on(30, 14, &AF_M, "SILL " SI_VERSION, T_TEXT, T_SURF);
+    cv_text_on(30, 38, &AF_S, "90S EURODANCE FOR THE FM-1", T_MID, T_SURF);
+    cv_text_on(30, 54, &AF_S, "ON FELUCCA, AFTER TUNA", T_MID, T_SURF);
+    cv_rect(30, 72, 180, 1, T_LINE);
+    int32_t vy = 80;
+    cv_text_on(30, vy, &AF_M, "CPU", T_TEXT, T_SURF);
+    su_fmt_int(cpu, su_clampi(u->cpu_shown, 0, 100));
+    cv_text_r(cv_text_r(210, vy + AF_M.asc - AF_S.asc, &AF_S, "%", T_MID, T_SURF) - 3, vy, &AF_M, cpu, T_THEME, T_SURF);
+    cv_text_on(30, 102, &AF_S, "GPL-3.0, HOME CLOSES", T_DIM, T_SURF);
 }
 
 static void su_draw_panel(si_ui *u)
@@ -1151,6 +1148,10 @@ void su_key(si_ui *u, int note, bool down)
 void su_tick(si_ui *u, int ms)
 {
     si_groove *g = u->g;
+    if ((u->cpu_ms -= ms) <= 0) {                  /* MENU's CPU: a reading every SU_CPU_MS, not every frame */
+        u->cpu_ms = SU_CPU_MS;
+        u->cpu_shown = u->cpu;
+    }
     si_seen n;
     while (si_feed_pop(g, &n))
         ;                                          /* (the panels read the groove's own state) */
