@@ -122,7 +122,7 @@ static const su_cdef SU_CARDS[SU_PAGES][4] = {
                     {"CRUSH", SS_(crush), SC_CRUSH, 0, 100, 5, 0, 0}},
     [SU_PG_VOX] = {{"VOWELS", SS_(vowels), SC_LIST, 0, SI_VOWELS_COUNT - 1, 1, SIS_VOWEL_NAMES, 0},
                    {"SHIFT", SS_(shift), SC_SIGNED, -12, 12, 1, 0, 0},
-                   {"CHANT", SS_(chant), SC_LIST, 0, SI_CHANT_COUNT - 1, 1, SIS_CHANT_NAMES, 0}, C_NUM("GLIDE", glide)},
+                   {"CHOIR", SS_(choir), SC_LIST, 0, SI_CHOIR_COUNT - 1, 1, SIS_CHOIR_NAMES, 0}, C_NUM("GLIDE", glide)},
     [SU_PG_KEY] = {{"KEY", SS_(key), SC_KEY, 0, 11, 1, 0, 0}, C_LIST("SCALE", scale, SN_SCALE),
                    {"CHORDS", SS_(chords), SC_LOOP, 0, SI_LOOPS - 1, 1, 0, 0}, C_VALS("BARS", bars, SV_BARS)},
     [SU_PG_GROOVE] = {{"SWING", SS_(swing), SC_NUM, 0, 60, 2, 0, 0}, C_LIST("HATS", hats, SN_HATS),
@@ -557,18 +557,15 @@ static void su_panel_tone(si_ui *u)
     su_label(10, 100, t, T_DIM);
 }
 
-/* the crowd's shouts over two bars as CHANT places them (si_groove.c play_chant), the one just shouted lit */
-static int su_chant_at(int chant, int bar, int i)
+/* the choir's chords over two bars of the chorus as CHOIR sings them (si_groove.c play_choir), the one singing lit */
+static int su_choir_at(int choir, int bar, int i)
 {
-    switch (chant) {
-    case SI_CHANT_HEY: return bar == 1 && i == 12 ? SI_DR_HEY : -1;
-    case SI_CHANT_HO: return bar == 1 && (i == 8 || i == 12) ? SI_DR_HO : -1;
-    case SI_CHANT_WHOA: return bar == 0 && i == 0 ? SI_DR_WHOA : bar == 1 && i == 8 ? SI_DR_WHOA : -1;
-    default: return bar == 0 && i == 0 ? SI_DR_WHOA : bar == 1 && i == 12 ? SI_DR_HEY : bar == 0 && i == 8 ? SI_DR_HO : -1;
-    }
+    if (i != 0)
+        return -1;
+    return choir == SI_CHOIR_MIX ? SI_DR_OH + bar : choir == SI_CHOIR_AH ? SI_DR_AH : SI_DR_OH;
 }
 
-/* the OOH's vowels: the formant gliding from the first to the second after each hook note; the crowd under it */
+/* the OOH's vowels: the formant gliding from the first to the second after each hook note; the choir under it */
 static void su_panel_vox(si_ui *u)
 {
     const si_groove *g = u->g;
@@ -605,25 +602,25 @@ static void su_panel_vox(si_ui *u)
     const sis_sound *hk = sis_of(g, SI_HOOK);
     if (hk->engine != SIS_VOICE)
         su_label(10, 66, "HOOK: OOH SINGS THESE", T_DIM);
-    /* the crowd */
-    su_label(10, 80, "CHANT", T_MID);
+    /* the choir */
+    su_label(10, 80, "CHOIR", T_MID);
     if (g->s.snd[3] != SI_KIT_EURO) {
-        su_label(64, 80, "KIT EURO BRINGS THE CROWD", T_DIM);
+        su_label(64, 80, "KIT EURO BRINGS THE CHOIR", T_DIM);
         return;
     }
-    bool lit = g->playing && (float)(g->clock - g->chant_clock) < g->sr * 0.25f;
-    static const char *const CN[3] = {"HEY", "HO", "WHOA"};
+    bool lit = g->playing && (float)(g->clock - g->choir_clock) < g->sr * 0.6f;
+    static const char *const CN[2] = {"OH", "AH"};
     for (int bar = 0; bar < 2; ++bar)
         for (int i = 0; i < 16; i += 2) {
             int32_t x = 10 + bar * 112 + i * 7;
-            int d = g->s.vox == SI_VOX_OFF ? -1 : su_chant_at(g->s.chant, bar, i);
+            int d = g->s.vox == SI_VOX_OFF ? -1 : su_choir_at(g->s.choir, bar, i);
             if (d < 0) {
                 cv_rect(x + 4, 104, 3, 3, T_LINE);
                 continue;
             }
-            const char *nm = CN[d - SI_DR_HEY];
+            const char *nm = CN[d - SI_DR_OH];
             int32_t w = text_w(&AF_S, nm) + 8;
-            bool on = lit && g->chant_last == d;
+            bool on = lit && g->choir_last == d;
             cv_rrect(x, 97, w, 17, 3, on ? T_ACCENT : T_THEME, T_SURF);
             cv_text_in(x, 97 + CAP_IN(S, 17), w, &AF_S, nm, T_INK, on ? T_ACCENT : T_THEME);
             i += 2 * ((w + 13) / 14);              /* (room for the word) */

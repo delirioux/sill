@@ -15,10 +15,10 @@ drive) built by CI, installed from the site and running on an FM-1; released on
 | Home | GitHub, `github.com/delirioux/sill`, branch `main`; unfinished work on `dev` until it has run on the FM-1. |
 | Upstream | A fork of Daurade, Flyfish and [Tuna](https://github.com/delirioux/tuna) (themselves forks of [Felucca](https://github.com/hugelton/Felucca)). Never push to Tuna or Felucca. Felucca's five engines are a submodule, `firmware/engines`. |
 | Name | Ocean animals, as Tuna, Flyfish, Makohai and Daurade: the sill, the herring. The logo: a herring on a ring of audio bars, four knobs in a row, club lasers, a fat 90s wordmark in magenta and cyan. |
-| What it is | Generative 90s eurodance: offbeat basses, stabs, a chorus hook, a crowd, a key change. Its sounds and styles are its own; the repository names no artist, record or film as a model, in code, docs or history. |
+| What it is | Generative 90s eurodance: offbeat basses, stabs, a chorus hook, a choir, a key change. Its sounds and styles are its own; the repository names no artist, record or film as a model, in code, docs or history. |
 | Description | "Generative 90s eurodance for the FM-1, pickled in 1995." |
 | Language | English throughout: code, comments, commits, docs. |
-| Licence | GPL-3.0-only. The drum one-shots and the shouts are synthesized by `tools/si_drums.py` and dedicated to the public domain (CC0). |
+| Licence | GPL-3.0-only. The drum one-shots and the choir are synthesized by `tools/si_drums.py` and `tools/si_choir.py` and dedicated to the public domain (CC0). |
 | Commits | Author `delirioux <340923392+delirioux@users.noreply.github.com>`. Work done with Claude ends with the `Co-Authored-By` and `Claude-Session` lines. |
 | Repository contents | The firmware, its tests and tools, its docs and its plan (this file). Chat discussions stay out. Docs and screenshots change with the code. |
 | Controls | The keys only ever play music; settings, pages and sets are on knobs and buttons. |
@@ -40,15 +40,16 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
 
 | File | Does |
 | --- | --- |
-| `si_groove.h/.c` | the engine: ten styles, twelve chord loops, the rhythm families of each part, the hook, the form, the crowd, the lift and the pump, BREAK, KEY UP, the keys, swing and human timing. Plain C, no Felucca: it runs on the host as it does on the FM-1 |
-| `si_sounds.h` | the forty-eight sounds on Felucca's engines and their trims, the kits and the shouts' notes, and how a part's cards set its track (level, pan, sends, the matrix's lift and pump slots, the VOX page, TONE) |
+| `si_groove.h/.c` | the engine: ten styles, twelve chord loops, the rhythm families of each part, the hook, the form, the choir, the lift and the pump, BREAK, KEY UP, the keys, swing and human timing. Plain C, no Felucca: it runs on the host as it does on the FM-1 |
+| `si_sounds.h` | the forty-eight sounds on Felucca's engines and their trims, the kits and the choir's notes, and how a part's cards set its track (level, pan, sends, the matrix's lift and pump slots, the VOX page, TONE) |
 | `si_fm6.inc` | the FM6 patches (ORCH HIT, Sill's; SLAP, BRASS, FRETLESS (SLIDE), Tuna's), made by `tools/si_fm6.py` |
 | `tools/si_piano.py` | the PIANO: six notes of VCSL's Kawai grand (CC0), made bright and hard, into `assets/samples-cc0/PIANO/` |
 | `si_ui.h/.c` | the thirteen pages, the cards, the styles list, the sets, on Felucca's `gfx.c` |
 | `si_fw.c` | the glue: the groove on the tracks and MIDI out, loading a part's sound when it changes, the panel, the key LEDs, the settings and the sets in flash, the splash |
 | `si_logo.inc` | the splash logo, made by `tools/si_logo.py` from the same drawing as `assets/logo.svg` (`tools/draw_logo.py`) |
-| `tools/si_drums.py` | the seven drum one-shots and the three shouts, synthesized, seeded, into `assets/samples-cc0/DRUMS/` |
-| `tests/si_groove_test.c` | the engine: every style plays and ends its notes, in key; the form's order and its key up; the break; a song replays exactly; the tempo, style and song on the bar line; BREAK tapped and held; KEY UP; the keys; the crowd; the hook's phrase; a bad record |
+| `tools/si_drums.py` | the seven drum one-shots, synthesized, seeded, into `assets/samples-cc0/DRUMS/` |
+| `tools/si_choir.py` | the choir's OH and AH at F3 and F4, synthesized, seeded, into `assets/samples-cc0/CHOIR/` |
+| `tests/si_groove_test.c` | the engine: every style plays and ends its notes, in key; the form's order and its key up; the break; a song replays exactly; the tempo, style and song on the bar line; BREAK tapped and held; KEY UP; the keys; the choir (the chord's tones, its range, its vowel); the hook's phrase; a bad record |
 | `tests/si_ui_test.c` | the screen: the controls, every page in every palette, the layout lint, PNGs and a GIF (`docs/screens/`) |
 | `tests/si_felucca.c` | a song through Felucca's real engines to a WAV: voices, steals, peaks, the cost |
 | `tests/si_audition.c` | every sound's loudness, for the trims in `si_sounds.h` |
@@ -58,7 +59,7 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
 
 - **Daurade's machine, a new engine.** The frame (the four tracks, the matrix slots, the cards, the sets, the
   flash, the browser build) is Daurade's, proven on the FM-1. The groove engine, the styles, the sounds, the pages
-  and the drums' shouts are Sill's.
+  and the choir are Sill's.
 - **The form is the song.** Eurodance lives on its sections: a verse that leaves room, a pre-chorus that builds, a
   chorus that pays off, a break, the last chorus higher. The arc plays INTRO, VERSE, PRE, CHORUS, BREAK, CHORUS and
   round again from the verse with a new hook; VERSE and CHORUS are 8 or 16 bars (the ARC page).
@@ -73,13 +74,18 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
   sixteenth riff), its pitches a walk of repeats, steps and now and then a leap; REPEAT plays it over 1, 2 or 4 bars
   as A, A A', A A' A A'' (the answers keep the first half and end on the tonic or the fifth). Its long and strong
   notes snap onto the chord playing, so the riff follows the loop. It rests in the verse and the pre-chorus.
-- **The crowd is the drum kit's.** HEY, HO and WHOA are three more one-shots in EURO's sample set (keys 7 to 9 of
-  the set), struck by the drums' part where CHANT and VOX place them. On the DRUM engine's kits the crowd stays home
-  (no note, nothing sent). No General MIDI drum fits a shout, so they are not sent as MIDI.
-- **The shouts are made, not recorded.** Eight voices (five low, three high), each a little late and out of tune,
-  glottal pulses with the mouth's tilt, an aspirated onset, through three formant resonators gliding from vowel to
-  vowel (HEY: e to i; HO: o to u; WHOA: w, o, a), and a hall's first reflections. Measured: HEY's energy spreads to
-  2 to 4 kHz, HO stays dark.
+- **A choir, not a crowd.** The shouts (HEY, HO, WHOA) sounded creepy and are gone. VOX brings a choir instead,
+  a layer under the chorus: the chord's third and fifth (the bass and the stabs have the root; eight voices are few)
+  sung on OH or AH (CHOIR, MIX: OH, then AH the bar after) at the top of each bar, at the half bar too with ENERGY
+  high, and in the verse with VOX ALL as each chord comes in. It plays on the drums' track, as the shouts did: four
+  pitched zones above the kit in EURO's sample set (OH from key 64, AH from 88: a vowel's note n at n + 16 or
+  n + 40, F3 and F4 each over the twelve keys around it, at 22,050 Hz), a note of the DRUMS part
+  `SI_CHOIR_NOTE(vowel, pitch)` with the key up in it. On the DRUM engine's kits the choir stays home; no General
+  MIDI drum fits it, so it is not sent as MIDI. About 40 KB, 3 KB more than the shouts were.
+- **The choir is made, not recorded.** Twelve voices on one note, each a few cents off, a little late, with a slow
+  vibrato of its own; a saw softened to the singing voice's tilt (-12 dB an octave), a breath at the onset, three
+  wide, dark formants (OH 450, 800, 2830 Hz; AH 750, 1150, 2800), a slow swell, a long fade and a hall's first
+  reflections. Measured: its energy sits around 360 to 580 Hz, next to nothing above 2 kHz.
 - **The lift and the pump in the matrix, not in the DSP** (Daurade's): MODW to the lifted parts' brightness (slot 1,
   -32), EXPR to every part but the drums' level (slot 2, +64), set every 32 frames. The lift follows the form (the
   intro and the pre-chorus open it, the break holds it at 60 %), not a sixteen-bar breath.
@@ -100,9 +106,9 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
   so it sounded overdriven: MIX 100 is -2 dB now, DRIVE reaches the distortion at half the depth, the styles' DRIVE
   is lower (RAVE 18, VIKING 10, EUROSTOMP 8), and the hot sounds (HOOVER, REESE, SYNTH, ANTHEM, GROWL) less driven.
 - **Eight voices for everything.** Felucca shares eight voices across the four tracks. The stabs play three notes,
-  the held chords four; every drum and shout has a ring length; the SUPER hook takes every free voice (UNISON) and
-  gives its extra ones up first. Measured over 75 s through Felucca's engines: RAVE and SKANK steal 5, EUROSTOMP
-  264 (the unison hook's extra voices, by design), out of 900 to 2,000 notes.
+  the held chords four; every drum and choir note has a ring length; the SUPER hook takes every free voice (UNISON) and
+  gives its extra ones up first. Measured over 75 s through Felucca's engines, the choir on: SKANK steals 11, RAVE 27,
+  EUROSTOMP 310 (the unison hook's extra voices, by design), out of 500 to 2,000 notes.
 - **Even levels.** `tests/si_audition.c` measures each sound's loudness alone; the trims bring the new sounds to
   their part's mark. The trims Daurade set by ear on the FM-1 are kept.
 - **No libm, no doubles**: floats on the FPU (`-mcpu=r3 -mfprev1`), `sinf` and friends from `tuna_libm.c`.
@@ -121,6 +127,6 @@ this host (SKANK the least, BALLAD the most), in the range of Daurade's; the rea
 
 1. **On the FM-1.** It installs, boots and plays. Still to check: the settings and sets surviving a power cycle,
    MIDI out, the CPU at EUROSTOMP (the unison hook) and BALLAD over a long session.
-2. **The sound by ear.** The new sounds (the sampled PIANO, SUPER, ORCH, REESE, HOOVER, OOH) and their trims; the shouts (do
-   they read as a crowd?); the kick against the bass in the chorus; the break's level.
-3. **Version 2?** More styles, a rap-like spoken part, more shouts: only if Sill earns it; the record has room.
+2. **The sound by ear.** The new sounds (the sampled PIANO, SUPER, ORCH, REESE, HOOVER, OOH) and their trims; the choir (does it
+   sit under the chorus?); the kick against the bass in the chorus; the break's level.
+3. **Version 2?** More styles, a rap-like spoken part, more vowels for the choir: only if Sill earns it; the record has room.

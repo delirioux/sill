@@ -46,7 +46,7 @@ def si_version():
 
 
 BLURB = """Generative 90s eurodance for the M-VAVE FM-1, pickled in 1995: offbeat basses, piano and supersaw stabs,
-big choruses, a crowd that shouts and a key change for the last chorus. Ten styles; press play."""
+big choruses, a choir and a key change for the last chorus. Ten styles; press play."""
 
 
 def page(body, foot):

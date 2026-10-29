@@ -6,8 +6,9 @@
  * Tracks: 1 STABS, 2 BASS, 3 HOOK, 4 DRUMS. Each music part has a list of ten sounds (the SOUND page): an engine and
  * its factory preset, or a sound of Sill's own on that engine (sis_own), or one of the FM6 patches (si_fm6.inc).
  * The PIANO is the SAMPLE engine's set 1: six notes of a Kawai grand (VCSL, CC0) made bright (tools/si_piano.py).
- * The drums are a kit: EURO, Sill's own one-shots and the crowd's shouts (the SAMPLE engine, set DRUMS:
- * tools/si_drums.py, 44.1 kHz), or the DRUM engine's TIGHT or 80 kit (no shouts: the crowd stays home).
+ * The drums are a kit: EURO, Sill's own one-shots and its choir (the SAMPLE engine, set DRUMS: tools/si_drums.py at
+ * 44.1 kHz, the choir's OH and AH tools/si_choir.py's, pitched zones above the kit), or the DRUM engine's TIGHT or 80
+ * kit (no choir there).
  *
  * Two of the matrix's slots carry the groove's controls, set every block by the glue:
  *   slot 1  MODW -> the sound's brightness (ANALOG and TRIO CUT, FM6 MLVL, ...) by -32: the LIFT (t->mw is
@@ -168,21 +169,22 @@ static inline const sis_sound *sis_of(const si_groove *g, int part)
 /* ---- the drums: the kit's engine and each drum's note ---- */
 #define SIS_KIT_BASE 53                   /* the DRUMS set's first key (tools/gen_samples.py KIT_BASE) */
 static inline uint32_t sis_kit_engine(int kit) { return kit == SI_KIT_EURO ? SIS_SAMPLE : SIS_DRUM; }
-/* the note a drum plays on the kit; -1: this kit has none (the shouts are EURO's) */
+/* the choir on the DRUMS set: a vowel's note n at key n + SIS_CHOIR_KEY[vowel] (tools/gen_samples.py CHOIR_KEY) */
+static const uint8_t SIS_CHOIR_KEY[2] = {16, 40};
+/* the note a drum (or a choir note, SI_CHOIR_NOTE) plays on the kit; -1: this kit has none (the choir is EURO's) */
 static inline int sis_drum_note(const si_settings *s, int drum)
 {
-    if (s->snd[3] == SI_KIT_EURO) {       /* the DRUMS set: KICK PUNCH, KICK ROUND, SNARE, CLAP, HAT, OPEN HAT, CRASH,
-                                           * HEY, HO, WHOA */
-        static const uint8_t K[SI_DR_COUNT] = {0, 2, 3, 4, 5, 6, 7, 8, 9};
-        int k = K[drum % SI_DR_COUNT];
+    if (si_is_choir(drum))
+        return s->snd[3] == SI_KIT_EURO ? si_choir_pitch(drum) + SIS_CHOIR_KEY[si_choir_vowel(drum) & 1] : -1;
+    if (s->snd[3] == SI_KIT_EURO) {       /* the DRUMS set: KICK PUNCH, KICK ROUND, SNARE, CLAP, HAT, OPEN HAT, CRASH */
+        static const uint8_t K[SI_DR_OH] = {0, 2, 3, 4, 5, 6};
+        int k = K[drum % SI_DR_OH];
         if (drum == SI_DR_KICK && s->kick == SI_KICK_ROUND)
             k = 1;
         return SIS_KIT_BASE + k;
     }
-    if (drum >= SI_DR_HEY)
-        return -1;
-    static const uint8_t GM[SI_DR_COUNT] = {36, 38, 39, 42, 46, 49, 0, 0, 0};   /* General MIDI */
-    return GM[drum % SI_DR_COUNT];
+    static const uint8_t GM[SI_DR_OH] = {36, 38, 39, 42, 46, 49};   /* General MIDI */
+    return GM[drum % SI_DR_OH];
 }
 /* the DRUM engine's eight (E0 KIT, E1 TUNE, E2 TONE, E3 DECY, E4 SNAP, E5 ACC, E6 KICK, E7 DRV) for a kit */
 static inline void sis_kit_params(const si_settings *s, int16_t *e)
@@ -222,7 +224,7 @@ static inline int16_t sis_talk(const si_settings *s)
 /* the VOWELS card: VOWL and VOWL2 (A 0, E 32, I 64, O 95, U 127: eng_formant.c's five) */
 static const uint8_t SIS_VOWELS[SI_VOWELS_COUNT][2] = {{127, 0}, {0, 64}, {95, 0}, {127, 64}, {0, 95}};
 static const char *const SIS_VOWEL_NAMES[SI_VOWELS_COUNT] = {"OO-AH", "AH-EE", "OH-AH", "OO-EE", "AH-OH"};
-static const char *const SIS_CHANT_NAMES[SI_CHANT_COUNT] = {"HEY", "HO", "WHOA", "MIX"};
+static const char *const SIS_CHOIR_NAMES[SI_CHOIR_COUNT] = {"OH", "AH", "MIX"};
 
 /* a part's track from the cards, over its sound's preset: the level, the place, the sends, TONE on the parts the
  * lift filters, ENSEMBLE on the stabs and the hook, the VOX page on a VOICE sound, and the matrix's slots for the

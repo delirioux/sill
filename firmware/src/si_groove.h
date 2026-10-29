@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* SILL groove engine: ten styles of generative 90s eurodance on four parts (STABS, BASS, HOOK, DRUMS), with a crowd
- * that shouts (HEY, HO, WHOA: the drum kit's chants). It runs in time, sixteenth by sixteenth, and hands each note-on
+/* SILL groove engine: ten styles of generative 90s eurodance on four parts (STABS, BASS, HOOK, DRUMS), with a choir
+ * that sings along (OH, AH: the drum kit's sung chords). It runs in time, sixteenth by sixteenth, and hands each note-on
  * and note-off to the sound (Felucca's tracks on the FM-1, a renderer on the host). Besides the notes it computes,
  * every block, what the glue turns into sound:
  *
@@ -14,7 +14,7 @@
  * the next bar line; the knobs act at once.
  *
  * The song's form (ARC on): INTRO (the parts in one by one), VERSE (no hook: the rap's room), PRE (held chords, a
- * snare roll, the filter lifting), CHORUS (everything, the hook, the crowd), BREAK (the stabs and the hook alone, a
+ * snare roll, the filter lifting), CHORUS (everything, the hook, the choir), BREAK (the stabs and the hook alone, a
  * roll back in), CHORUS again (KEY UP: a semitone or two higher), then round again from the verse with a new hook.
  * ARC off: the chorus on and on.
  *
@@ -43,13 +43,20 @@ enum { SI_KICK_PUNCH, SI_KICK_ROUND, SI_KICK_COUNT };
 enum { SI_CLAP_CLAP, SI_CLAP_SNARE, SI_CLAP_BOTH, SI_CLAP_COUNT };
 enum { SI_CRASH_OFF, SI_CRASH_SECTION, SI_CRASH_8, SI_CRASH_COUNT };
 enum { SI_VOX_OFF, SI_VOX_CHORUS, SI_VOX_ALL, SI_VOX_COUNT };
-enum { SI_CHANT_HEY, SI_CHANT_HO, SI_CHANT_WHOA, SI_CHANT_MIX, SI_CHANT_COUNT };
+enum { SI_CHOIR_OH, SI_CHOIR_AH, SI_CHOIR_MIX, SI_CHOIR_COUNT };
 enum { SI_VOWELS_OO_AH, SI_VOWELS_AH_EE, SI_VOWELS_OH_AH, SI_VOWELS_OO_EE, SI_VOWELS_AH_OH, SI_VOWELS_COUNT };
 enum { SI_DTIME_16, SI_DTIME_8, SI_DTIME_3_16, SI_DTIME_4, SI_DTIME_COUNT };
 enum { SI_SPEED_SLOW, SI_SPEED_MID, SI_SPEED_FAST, SI_SPEED_PAD, SI_SPEED_COUNT };   /* PAD: no tune, the chords held */
-/* the drums as the groove names them, the crowd's chants among them; the glue maps them to the kit (si_sounds.h) */
-enum { SI_DR_KICK, SI_DR_SNARE, SI_DR_CLAP, SI_DR_HAT, SI_DR_OPEN, SI_DR_CRASH, SI_DR_HEY, SI_DR_HO, SI_DR_WHOA,
-       SI_DR_COUNT };
+/* the drums as the groove names them, the choir's two vowels among them; the glue maps them to the kit (si_sounds.h) */
+enum { SI_DR_KICK, SI_DR_SNARE, SI_DR_CLAP, SI_DR_HAT, SI_DR_OPEN, SI_DR_CRASH, SI_DR_OH, SI_DR_AH, SI_DR_COUNT };
+/* a choir note on the DRUMS part: its note is SI_CHOIR_NOTE(vowel, pitch), the pitch SI_CHOIR_LO .. SI_CHOIR_LO + 23
+ * (the key up in it); a drum's note is its SI_DR_* (below 32; bit 7: the open hat's choke) */
+#define SI_CHOIR_LO 48
+#define SI_CHOIR_NOTE(v, p) (32 + 32 * (v) + (p) - SI_CHOIR_LO)
+static inline bool si_is_choir(int n) { return n >= 32 && n < 96; }
+static inline int si_choir_vowel(int n) { return (n - 32) / 32; }           /* 0 OH, 1 AH */
+static inline int si_choir_pitch(int n) { return SI_CHOIR_LO + (n - 32) % 32; }
+static inline int si_drum_of(int n) { return si_is_choir(n) ? SI_DR_OH + si_choir_vowel(n) : n % SI_DR_COUNT; }
 /* the tuplets the hook and the fills play, as (notes, in the space of sixteenths): 3 in 4 (a triplet: three in the
  * space of two eighths), 4 in 6 (a quadruplet: four in the space of three eighths), 5 in 4 (a quintuplet: five in
  * the space of four sixteenths), 6 in 4 (a sextuplet: six in the space of four sixteenths) */
@@ -69,7 +76,7 @@ typedef struct {
     uint8_t lift, pump, vox, energy;               /* PLAY: LIFT 0..100, PUMP 0..100, VOX (SI_VOX_*), ENERGY 0..100 */
     uint8_t snd[4];                                /* SOUND: STABS BASS HOOK (indices into each part's list), DRUMS = kit */
     uint8_t reso, drive, ensemble, crush;          /* TONE 0..100 (CRUSH 0: off) */
-    uint8_t vowels, chant, glide;                  /* VOX: the vowels the OOH sings through, the crowd's shout, glide */
+    uint8_t vowels, choir, glide;                  /* VOX: the vowels the OOH sings through, the choir's vowel, glide */
     int8_t shift;                                  /* VOX: formant shift -12..12 */
     uint8_t key, scale, chords, bars;              /* KEY: 0..11 (C..B), SI_SC_*, the loop (0..SI_LOOPS-1), 1 2 4 */
     uint8_t swing, human, hats, fills;             /* GROOVE: swing 0..60 %, human 0..100 (no card), SI_HATS_*, SI_FILLS_* */
@@ -148,8 +155,8 @@ typedef struct {
     uint16_t hits[SI_PARTS], hits_last[SI_PARTS];
     uint16_t drum_hits[SI_DR_COUNT], drum_last[SI_DR_COUNT];
     uint32_t hook_on_clock;                        /* the hook's latest note-on (the VOX page's vowel) */
-    uint32_t chant_clock;                          /* the crowd's latest shout (the VOX page) */
-    uint8_t chant_last;                            /* which (SI_DR_HEY ..) */
+    uint32_t choir_clock;                          /* the choir's latest chord (the VOX page) */
+    uint8_t choir_last;                            /* which vowel (SI_DR_OH, SI_DR_AH) */
     /* the notes sounding: their note-off at clock off */
     struct { uint8_t note, part; uint32_t off; } held[SI_HELD];
     int nheld;
@@ -170,7 +177,7 @@ typedef struct {
     uint8_t loops[4];                              /* the chord loops a song picks from (SI_LOOP indices) */
     uint8_t bars;                                  /* bars a chord */
     uint8_t swing, hats, fills, bassline;
-    uint8_t kick, clap, crash, chant;
+    uint8_t kick, clap, crash, choir;
     uint8_t stab, hook, drums;                     /* the rhythm families (si_groove.c) */
     uint8_t speed, range, gate, repeat;            /* the HOOK page */
     uint8_t lift_parts;                            /* bit per part: what the LIFT filters */

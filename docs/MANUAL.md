@@ -1,7 +1,7 @@
 # Sill manual
 
 Sill 0.4. Every page, every card. Four parts play: **STABS** (the chords), **BASS**, **HOOK** (the chorus's tune,
-and whatever you play on the keys) and **DRUMS** (with the crowd's shouts). Knob 1 to 4 turn the four cards on the
+and whatever you play on the keys) and **DRUMS** (with the choir). Knob 1 to 4 turn the four cards on the
 screen. A page's button pressed again goes to its second page where it has one.
 
 ## Playing
@@ -37,9 +37,9 @@ With ARC on, a song goes:
 | Section | Bars | What plays |
 | --- | --- | --- |
 | **INTRO** | 8 | The kick alone, then the hats and the bass (bar 3), then the stabs (bar 5); the filter opening. |
-| **VERSE** | 8 or 16 | No hook: the stabs every other bar, the hats a little lighter. With VOX ALL the crowd shouts here too. |
+| **VERSE** | 8 or 16 | No hook: the stabs every other bar, the hats a little lighter. With VOX ALL the choir sings here too, softer, as each chord comes in. |
 | **PRE** | 4 | The stabs held a bar each, louder each bar; a snare roll from quarters to sixteenths; the filter lifting; the last beat the roll alone. |
-| **CHORUS** | 8 or 16 | Everything: the hook, the crowd, a crash to start it. |
+| **CHORUS** | 8 or 16 | Everything: the hook, the choir, a crash to start it. |
 | **BREAK** | 8 | The chords held and the hook, softer; no bass, no drums; the last two bars a roll back in. |
 | **CHORUS** | 8 or 16 | Again, KEY UP's semitones higher. |
 
@@ -49,10 +49,10 @@ Then round again from the VERSE, with a new hook and the key back home. With ARC
 
 | Page (button) | Cards |
 | --- | --- |
-| **PLAY** (HOME) | **LIFT** the filter's ceiling on the lifted parts (the stabs, and the hook in some styles). **PUMP** how deep the mix ducks on each kick. **VOX** the crowd: OFF, in the CHORUS, or in ALL the song. **ENERGY** density and drive: sixteenth hats, pickup kicks, extra stabs. The panel: the chord loop, the bar as it plays (a column a sixteenth, as tall as the parts that sounded), and the form with the section playing. |
-| **SOUND** (FX) | **STABS**, **BASS**, **HOOK**: sixteen sounds each (the README lists them). Each style has four a part; song 1 plays its own, the other songs pick from the four (a card turned by hand holds until the next song). PIANO on STABS plays the offbeat piano chords in any style, the verse included, as plain triads (root, third, fifth). **DRUMS**: the kit, EURO (Sill's own one-shots and the crowd), SESSION or MACHINE (Felucca's DRUM engine, no crowd). |
+| **PLAY** (HOME) | **LIFT** the filter's ceiling on the lifted parts (the stabs, and the hook in some styles). **PUMP** how deep the mix ducks on each kick. **VOX** the choir: OFF, in the CHORUS, or in ALL the song. **ENERGY** density and drive: sixteenth hats, pickup kicks, extra stabs. The panel: the chord loop, the bar as it plays (a column a sixteenth, as tall as the parts that sounded), and the form with the section playing. |
+| **SOUND** (FX) | **STABS**, **BASS**, **HOOK**: sixteen sounds each (the README lists them). Each style has four a part; song 1 plays its own, the other songs pick from the four (a card turned by hand holds until the next song). PIANO on STABS plays the offbeat piano chords in any style, the verse included, as plain triads (root, third, fifth). **DRUMS**: the kit, EURO (Sill's own one-shots and the choir), SESSION or MACHINE (Felucca's DRUM engine, no choir). |
 | **TONE** (FX again) | **RESO** the lifted filter's resonance. **DRIVE** saturation. **DETUNE** the chorus that thickens the stabs and the hook. **CRUSH** bits and rate, down from clean. |
-| **VOX** (LFO) | **VOWELS** the two vowels the OOH sound sings between (OO-AH, AH-EE, OH-AH, OO-EE, AH-OH). **SHIFT** its formants, -12 to +12. **CHANT** what the crowd shouts: HEY, HO, WHOA or a MIX. **GLIDE** between the OOH's notes. The panel shows where the shouts fall in two bars. |
+| **VOX** (LFO) | **VOWELS** the two vowels the OOH sound sings between (OO-AH, AH-EE, OH-AH, OO-EE, AH-OH). **SHIFT** its formants, -12 to +12. **CHOIR** what the choir sings, the chord's third and fifth at the top of each bar of the chorus (and at the half bar too, every other bar, with ENERGY high): OH, AH, or a MIX (OH, then AH the bar after). **GLIDE** between the OOH's notes. The panel shows the choir over two bars. |
 | **KEY** (SCL) | **KEY** the root. **SCALE** MINOR, MAJOR, DORIAN, HARMONIC MINOR. **CHORDS** one of twelve chord loops. **BARS** a chord lasts 1, 2 or 4 bars. |
 | **GROOVE** (ARP) | **SWING** on the sixteenths. **HATS** 8THS, 16THS, OFFBEAT or OPEN. **BASS** the bass line: OFFBEAT, OCTAVE, ROLLING, REGGAE, LONG or BOUNCE. **FILLS** every 8, 4 or 2 bars, or none: sixteenths, or a snare triplet or sextuplet roll over the last beat. |
 | **DRUMS** (EDIT) | **KIT** as on SOUND. **KICK** PUNCH or ROUND. **CLAP** the backbeat: CLAP, SNARE or BOTH. **CRASH** OFF, on each SECTION, or every 8 BARS in the chorus too. |
@@ -63,13 +63,13 @@ Then round again from the VERSE, with a new hook and the key back home. With ARC
 | **SETS** (SAVE) | Eight sets: the whole song, style and all. **SET** picks one, **LOAD** and **STORE** turned right do it, **CLEAR** turned right three times empties it. |
 | **MENU** (hold HOME) | **COLOR** the palette: LASER by default, and Felucca's. **LOOK** FLAT or LINE. |
 
-A style sets its tempo, sounds, key, chord loop, groove, drums, shouts, space and hook; MIX, ARC and MENU stay
+A style sets its tempo, sounds, key, chord loop, groove, drums, choir, space and hook; MIX, ARC and MENU stay
 yours.
 
 ## MIDI out
 
-STABS on channel 1, BASS on 2, HOOK (and the keys) on 3, the drums on 10 with General MIDI notes. The crowd's
-shouts have no General MIDI drum and are not sent.
+STABS on channel 1, BASS on 2, HOOK (and the keys) on 3, the drums on 10 with General MIDI notes. The choir
+has no General MIDI drum and is not sent.
 
 ## Saving
 

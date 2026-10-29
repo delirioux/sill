@@ -104,7 +104,7 @@ enum { DRUMS_EURO, DRUMS_SKANK, DRUMS_BALLAD, DRUMS_RAVE, DRUMS_HOUSE, DRUMS_ITA
 #define P(x) (1u << (x))
 
 /* name side bpm key scale | lift pump vox energy | snd[4] | loops | bars swing hats fills bassline |
- * kick clap crash chant | stab hook drums | speed range gate repeat | lift parts | reverb delay dtime |
+ * kick clap crash choir | stab hook drums | speed range gate repeat | lift parts | reverb delay dtime |
  * reso drive ensemble | the three more sounds of STABS, BASS and HOOK a song picks from (si_song_sounds).
  * Sounds (si_sounds.h): STABS 0 PIANO 1 ORGAN 2 SUPER 3 STRINGS 4 BRASS 5 PLUCK 6 HOOVER 7 ORCH 8 EPIANO 9 PAD
  * 10 HOUSE 11 DEEP 12 HORNS 13 CHOIR 14 VIOLINS 15 TRANCE; BASS 0 FM 1 SQUARE 2 SUB 3 FAT 4 ACID
@@ -113,43 +113,43 @@ enum { DRUMS_EURO, DRUMS_SKANK, DRUMS_BALLAD, DRUMS_RAVE, DRUMS_HOUSE, DRUMS_ITA
  * 15 ROBOT; the kit 0 EURO 1 SESSION 2 MACHINE */
 const si_style SI_STYLE[SI_STYLES] = {
     {"EUROSTOMP", SI_SIDE_CLUB, 136, 9, SI_SC_MINOR, 85, 55, SI_VOX_CHORUS, 80, {2, 3, 0, 0}, {0, 1, 3, 5}, 1,
-     0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HEY,
+     0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHOIR_MIX,
      STAB_EURO, HOOK_MELODY, DRUMS_EURO, SI_SPEED_FAST, 1, 80, 2, P(SI_STABS) | P(SI_HOOK), 25, 25, SI_DTIME_3_16,
      30, 8, 45, {{10, 11, 15}, {11, 8, 10}, {11, 14, 13}}},
     {"VIKING", SI_SIDE_CLUB, 138, 4, SI_SC_HARMONIC, 80, 50, SI_VOX_CHORUS, 85, {4, 3, 1, 0}, {8, 4, 0, 3}, 1,
-     0, SI_HATS_16THS, SI_FILLS_4, SI_BL_OCTAVE, SI_KICK_PUNCH, SI_CLAP_BOTH, SI_CRASH_SECTION, SI_CHANT_WHOA,
+     0, SI_HATS_16THS, SI_FILLS_4, SI_BL_OCTAVE, SI_KICK_PUNCH, SI_CLAP_BOTH, SI_CRASH_SECTION, SI_CHOIR_OH,
      STAB_EURO, HOOK_MELODY, DRUMS_EURO, SI_SPEED_MID, 2, 90, 2, P(SI_STABS) | P(SI_HOOK), 35, 20, SI_DTIME_8,
      25, 10, 35, {{12, 13, 14}, {8, 15, 11}, {11, 12, 0}}},
     {"BUBBLEGUM", SI_SIDE_CLUB, 130, 2, SI_SC_MAJOR, 90, 45, SI_VOX_CHORUS, 75, {5, 1, 3, 0}, {6, 7, 0, 1}, 1,
-     0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HO,
+     0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHOIR_AH,
      STAB_BOUNCE, HOOK_MELODY, DRUMS_EURO, SI_SPEED_MID, 1, 50, 2, P(SI_STABS), 20, 20, SI_DTIME_8,
      20, 5, 30, {{8, 10, 0}, {11, 14, 8}, {13, 7, 2}}},
     {"HEARTACHE", SI_SIDE_CLUB, 134, 2, SI_SC_MINOR, 80, 50, SI_VOX_CHORUS, 70, {0, 0, 6, 0}, {2, 0, 5, 3}, 1,
-     0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_ROUND, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HEY,
+     0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_ROUND, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHOIR_AH,
      STAB_PIANO, HOOK_MELODY, DRUMS_EURO, SI_SPEED_SLOW, 1, 95, 4, P(SI_STABS), 40, 25, SI_DTIME_3_16,
      20, 5, 40, {{0, 11, 13}, {10, 12, 11}, {12, 11, 13}}},
     {"RAVE", SI_SIDE_CLUB, 140, 6, SI_SC_MINOR, 80, 60, SI_VOX_CHORUS, 90, {6, 4, 5, 0}, {3, 0, 4, 1}, 1,
-     0, SI_HATS_16THS, SI_FILLS_4, SI_BL_ROLLING, SI_KICK_PUNCH, SI_CLAP_BOTH, SI_CRASH_8, SI_CHANT_WHOA,
+     0, SI_HATS_16THS, SI_FILLS_4, SI_BL_ROLLING, SI_KICK_PUNCH, SI_CLAP_BOTH, SI_CRASH_8, SI_CHOIR_OH,
      STAB_RAVE, HOOK_MELODY, DRUMS_RAVE, SI_SPEED_FAST, 1, 60, 1, P(SI_STABS) | P(SI_HOOK), 25, 20, SI_DTIME_8,
      45, 18, 10, {{15, 11, 7}, {5, 13, 15}, {14, 0, 15}}},
     {"SKANK", SI_SIDE_RADIO, 95, 1, SI_SC_MINOR, 75, 15, SI_VOX_CHORUS, 55, {1, 2, 8, 0}, {10, 3, 0, 5}, 1,
-     15, SI_HATS_8THS, SI_FILLS_8, SI_BL_REGGAE, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_OFF, SI_CHANT_HEY,
+     15, SI_HATS_8THS, SI_FILLS_8, SI_BL_REGGAE, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_OFF, SI_CHOIR_AH,
      STAB_SKANK, HOOK_MELODY, DRUMS_SKANK, SI_SPEED_MID, 1, 70, 2, P(SI_STABS), 30, 30, SI_DTIME_3_16,
      15, 10, 30, {{5, 10, 0}, {7, 12, 10}, {10, 13, 3}}},
     {"PIANOHOUSE", SI_SIDE_RADIO, 125, 7, SI_SC_DORIAN, 85, 40, SI_VOX_CHORUS, 70, {0, 0, 9, 0}, {9, 0, 5, 1}, 1,
-     10, SI_HATS_OPEN, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_ROUND, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HEY,
+     10, SI_HATS_OPEN, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_ROUND, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHOIR_OH,
      STAB_PIANO, HOOK_MELODY, DRUMS_HOUSE, SI_SPEED_PAD, 2, 60, 2, P(SI_STABS), 30, 20, SI_DTIME_3_16,
      15, 10, 25, {{0, 0, 10}, {10, 12, 11}, {9, 9, 9}}},
     {"PARTY", SI_SIDE_RADIO, 140, 7, SI_SC_MAJOR, 90, 50, SI_VOX_ALL, 85, {4, 8, 7, 0}, {6, 7, 1, 0}, 1,
-     0, SI_HATS_OFFBEAT, SI_FILLS_4, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_MIX,
+     0, SI_HATS_OFFBEAT, SI_FILLS_4, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHOIR_MIX,
      STAB_BOUNCE, HOOK_MELODY, DRUMS_EURO, SI_SPEED_FAST, 1, 55, 1, P(SI_STABS) | P(SI_HOOK), 20, 15, SI_DTIME_8,
      20, 10, 30, {{12, 10, 5}, {11, 14, 1}, {13, 2, 11}}},
     {"BALLAD", SI_SIDE_RADIO, 100, 4, SI_SC_MINOR, 90, 0, SI_VOX_OFF, 35, {9, 7, 4, 0}, {2, 0, 6, 5}, 2,
-     0, SI_HATS_8THS, SI_FILLS_OFF, SI_BL_LONG, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_SECTION, SI_CHANT_HEY,
+     0, SI_HATS_8THS, SI_FILLS_OFF, SI_BL_LONG, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_SECTION, SI_CHOIR_AH,
      STAB_PAD, HOOK_MELODY, DRUMS_BALLAD, SI_SPEED_SLOW, 2, 95, 4, P(SI_STABS), 50, 25, SI_DTIME_4,
      10, 0, 50, {{14, 0, 13}, {12, 2, 0}, {12, 6, 10}}},
     {"ITALO", SI_SIDE_RADIO, 120, 9, SI_SC_MINOR, 80, 35, SI_VOX_CHORUS, 65, {3, 8, 6, 0}, {11, 0, 3, 4}, 1,
-     0, SI_HATS_8THS, SI_FILLS_8, SI_BL_OCTAVE, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_SECTION, SI_CHANT_WHOA,
+     0, SI_HATS_8THS, SI_FILLS_8, SI_BL_OCTAVE, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_SECTION, SI_CHOIR_OH,
      STAB_PAD, HOOK_ARP, DRUMS_ITALO, SI_SPEED_MID, 2, 60, 2, P(SI_STABS), 35, 30, SI_DTIME_3_16,
      20, 10, 45, {{14, 11, 15}, {11, 13, 1}, {15, 14, 7}}},
 };
@@ -174,7 +174,7 @@ void si_style_apply(si_settings *s, int style)
     s->ensemble = st->ensemble;
     s->crush = 0;
     s->vowels = SI_VOWELS_OO_AH;
-    s->chant = st->chant;
+    s->choir = st->choir;
     s->glide = 20;
     s->shift = 0;
     s->key = st->key;
@@ -243,7 +243,7 @@ void si_settings_fix(si_settings *s)
     s->ensemble = (uint8_t)clampi(s->ensemble, 0, 100);
     s->crush = (uint8_t)clampi(s->crush, 0, 100);
     s->vowels = (uint8_t)clampi(s->vowels, 0, SI_VOWELS_COUNT - 1);
-    s->chant = (uint8_t)clampi(s->chant, 0, SI_CHANT_COUNT - 1);
+    s->choir = (uint8_t)clampi(s->choir, 0, SI_CHOIR_COUNT - 1);
     s->glide = (uint8_t)clampi(s->glide, 0, 100);
     s->shift = (int8_t)clampi(s->shift, -12, 12);
     s->key = (uint8_t)clampi(s->key, 0, 11);
@@ -640,11 +640,12 @@ static void note_off_now(si_groove *g, int i)
 static void note(si_groove *g, int part, int n, int vel, float len_frames)
 {
     if (part == SI_DRUMS) {                        /* a drum rings for its own length: then its voice is free again */
-        static const float RING[SI_DR_COUNT] = {0.80f, 0.24f, 0.30f, 0.09f, 0.45f, 1.0f, 0.5f, 0.5f, 0.9f};
-        len_frames = RING[n % SI_DR_COUNT] * g->sr;
-        if (n >= SI_DR_HEY) {
-            g->chant_clock = g->clock;
-            g->chant_last = (uint8_t)n;
+        static const float RING[SI_DR_COUNT] = {0.80f, 0.24f, 0.30f, 0.09f, 0.45f, 1.0f, 0.75f, 0.75f};
+        int d = si_drum_of(n);
+        len_frames = RING[d] * g->sr;
+        if (d >= SI_DR_OH) {
+            g->choir_clock = g->clock;
+            g->choir_last = (uint8_t)d;
         }
     } else {
         n += g->tr;
@@ -665,7 +666,7 @@ static void note(si_groove *g, int part, int n, int vel, float len_frames)
     feed(g, part, n, vel);
     if (g->step >= 0) {
         if (part == SI_DRUMS)
-            g->drum_hits[n % SI_DR_COUNT] |= (uint16_t)(1u << g->step);
+            g->drum_hits[si_drum_of(n)] |= (uint16_t)(1u << g->step);
         else
             g->hits[part] |= (uint16_t)(1u << g->step);
     }
@@ -729,7 +730,7 @@ bool si_in_chorus(const si_groove *g)
 {
     return !g->s.arc || g->sec == SI_SEC_CHORUS || g->sec == SI_SEC_CHORUS2;
 }
-/* bars into the section (ARC off: since PLAY), for the phrases and the crowd */
+/* bars into the section (ARC off: since PLAY), for the phrases and the choir */
 static int sec_bar(const si_groove *g) { return g->s.arc ? g->sec_bar : (g->bar < 0 ? 0 : g->bar); }
 
 /* the key up sounding: the arc's last chorus and SEQ's; a change cuts the held chords and hook (their old key) */
@@ -856,37 +857,38 @@ static int roll_vel(int i, int b, int span)
     return 55 + ((b * 16 + i) * 60) / (span * 16);
 }
 
-/* the crowd: the shouts of the chorus (and the verse with VOX ALL), by CHANT */
-static void play_chant(si_groove *g, int i, uint32_t delay)
+/* the choir: a chord sung on OH or AH (CHOIR) at the top of each bar of the chorus, with ENERGY high at the half bar
+ * of every other bar too; in the verse with VOX ALL, softer, as each chord comes in. The chord's triad near the
+ * stabs' voicing, folded into the choir's range, the key up in it, but for its root (eight voices are few: the bass and
+ * the stabs have the root); MIX sings OH, then AH the bar after */
+static void triad(const si_chord *c, int out[3]);
+static const si_chord *chord_at(const si_groove *g, int b);
+static void play_choir(si_groove *g, int i, uint32_t delay)
 {
     if (g->s.vox == SI_VOX_OFF || g->brk)
         return;
     bool chorus = si_in_chorus(g), verse = g->s.arc && g->sec == SI_SEC_VERSE;
     if (!chorus && !(verse && g->s.vox == SI_VOX_ALL))
         return;
-    int b = sec_bar(g), d = -1, v = 112;
+    int b = sec_bar(g), bpc = si_bars_per_chord(&g->s);
     float e = (float)g->s.energy / 100.0f;
-    switch (g->s.chant) {
-    case SI_CHANT_HEY:
-        if (b % 2 == 1 && (i == 12 || (e > 0.8f && chorus && i == 14 && (g->drum_var & 1))))
-            d = SI_DR_HEY;
-        break;
-    case SI_CHANT_HO:
-        if (b % 2 == 1 && (i == 8 || i == 12))
-            d = SI_DR_HO;
-        break;
-    case SI_CHANT_WHOA:
-        if ((b % 8 == 0 && i == 0 && chorus) || (b % 4 == 3 && i == 8))
-            d = SI_DR_WHOA;
-        break;
-    default:                                       /* MIX */
-        if (b % 8 == 0 && i == 0 && chorus) d = SI_DR_WHOA;
-        else if (b % 2 == 1 && i == 12) d = SI_DR_HEY;
-        else if (b % 4 == 2 && (i == 8 || i == 10)) { d = SI_DR_HO; v = i == 8 ? 104 : 112; }
-        break;
+    bool hit = chorus ? i == 0 || (i == 8 && e > 0.7f && b % 2 == 1) : i == 0 && g->bar % bpc == 0;
+    if (!hit)
+        return;
+    int v = g->s.choir == SI_CHOIR_MIX ? b % 2 : g->s.choir == SI_CHOIR_AH, t[3];
+    triad(chord_at(g, g->bar), t);
+    float sf = step_frames(g);
+    for (int k = 0; k < 3; ++k) {                  /* the third and the fifth: the root is the bass's and the stabs' */
+        if (t[k] % 12 == chord_at(g, g->bar)->root)
+            continue;
+        int p = t[k] + g->tr;
+        while (p > SI_CHOIR_LO + 23)
+            p -= 12;
+        while (p < SI_CHOIR_LO + 7)
+            p += 12;
+        schedule(g, delay + (uint32_t)((float)k * sf * 0.02f), SI_DRUMS, SI_CHOIR_NOTE(v, p),
+                 chorus ? (i == 0 ? 100 : 88) : 80, 0);
     }
-    if (d >= 0)
-        schedule(g, delay, SI_DRUMS, d, verse ? v - 14 : v, 0);
 }
 
 /* the drums of step i, with ENERGY, HATS, CLAP, the fills, the form */
@@ -982,7 +984,7 @@ static void play_drums(si_groove *g, int i, uint32_t delay, float hum)
             schedule(g, delay, SI_DRUMS, 0x80 | SI_DR_OPEN, 1, 0);
         schedule(g, delay, SI_DRUMS, d, clampi(v, 1, 127), 0);
     }
-    play_chant(g, i, delay);
+    play_choir(g, i, delay);
 }
 
 /* the chord sounding at bar b */

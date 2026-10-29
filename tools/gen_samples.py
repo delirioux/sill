@@ -78,6 +78,10 @@ MEASURED_TUNING = ()                         # sets whose recordings are not at 
 
 
 KIT_BASE = 53                     # F3, the lowest FM-1 key
+# (Sill) the choir's zones on the DRUMS set: a vowel's note n (CHOIR_LO .. CHOIR_LO + 23) at key n + its offset
+# (firmware/src/si_sounds.h SIS_CHOIR_KEY and SIS_CHOIR_LO, the same numbers)
+CHOIR_LO = 48
+CHOIR_KEY = {"oh": 16, "ah": 40}
 
 NOTE = {"C": 0, "C#": 1, "D": 2, "D#": 3, "E": 4, "F": 5, "F#": 6, "G": 7, "G#": 8, "A": 9, "A#": 10, "B": 11}
 
@@ -314,7 +318,8 @@ class Builder:
             return
         if kind == "kit":
             for e in entries:
-                e["lo"] = e["hi"] = e["key"]
+                if "lo" not in e:
+                    e["lo"] = e["hi"] = e["key"]
         else:
             entries.sort(key=lambda e: e["root16"])
             for e, (lo, hi) in zip(entries, key_split([e["root16"] // 16 for e in entries])):
@@ -337,7 +342,26 @@ class Builder:
             entries.append(dict(off=off, n=len(s), ls=ls, le=le, looped=bool(loop), sr=SET_RATE.get(name, TR),
                                 root16=int(round(root * 16)), pred=st[0], idx=st[1],
                                 key=KIT_BASE + k if kind == "kit" else None))
+        if name == "DRUMS":
+            entries += self.choir_zones()
         self.add_set(name, kind, entries)
+
+    def choir_zones(self):
+        """Sill's choir (tools/si_choir.py) on the DRUMS set, above the kit: each vowel's notes across 24 keys, a
+        note k of the vowel at key k + its offset (si_sounds.h SIS_CHOIR_KEY), each WAV over the 12 keys nearest it"""
+        out = []
+        for path in sorted((CC0 / "CHOIR").glob("*.wav")):
+            vowel, sung = path.stem.split("_")
+            off = CHOIR_KEY[vowel]
+            sr, x = wav(path)
+            x = resample(x, sr, TR)
+            pk = peak(x)
+            s = [int(v * 30000 / pk) for v in x]
+            o, st = self.add(s, len(s))
+            lo = off + CHOIR_LO + (12 if int(sung) > CHOIR_LO + 11 else 0)
+            out.append(dict(off=o, n=len(s), ls=len(s), le=len(s), looped=False, sr=TR,
+                            root16=(int(sung) + off) * 16, pred=st[0], idx=st[1], key=None, lo=lo, hi=lo + 11))
+        return out
 
     def header(self):
         zones, sets, blob = self.zones, self.sets, self.blob

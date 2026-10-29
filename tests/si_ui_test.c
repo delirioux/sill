@@ -260,7 +260,7 @@ int main(int argc, char **argv)
     shot("07_vox");
     all_palettes("vox");
     su_knob(&ui, SU_K3, 3);
-    CHECK(g.s.chant == SI_CHANT_MIX, "CHANT: MIX (%d)", g.s.chant);
+    CHECK(g.s.choir == SI_CHOIR_MIX, "CHOIR: MIX (%d)", g.s.choir);
     shot("07b_vox_mix");
     /* KEY */
     si_queue_style(&g, SI_ST_EUROSTOMP);

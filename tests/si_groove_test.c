@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 /* SILL's groove engine on its own (firmware/src/si_groove.c): every style plays, in time, in key, every note
  * ends; the form goes intro, verse, pre, chorus, break, chorus (the key up) and round again; a song replays exactly;
- * a style and a song come in on the bar line; BREAK, KEY UP and the keys do what the manual says; the crowd shouts
- * where VOX says; the settings survive a bad record.
+ * a style and a song come in on the bar line; BREAK, KEY UP and the keys do what the manual says; the choir sings
+ * where VOX says, in key and in its range; the settings survive a bad record.
  *   cc -std=c11 -O2 -Ifirmware/src -o build/host/si_groove_test tests/si_groove_test.c firmware/src/si_groove.c -lm */
 #include <stdio.h>
 #include <string.h>
@@ -22,7 +22,7 @@ static int fails, checks;
 
 #define SR 44100.0f
 static si_groove g;
-static int on[SI_PARTS], off[SI_PARTS], sounding[SI_PARTS][128], bad_pc, hook_in_verse, chants, chant_kind[SI_DR_COUNT];
+static int on[SI_PARTS], off[SI_PARTS], sounding[SI_PARTS][128], bad_pc, hook_in_verse, chants, chant_kind[SI_DR_COUNT], bad_choir;
 static int drum_on[SI_DR_COUNT];
 static uint32_t hash;
 static int stab_tri, stab_not_tri;
@@ -43,10 +43,16 @@ static void sound(void *ctx, const si_event *e)
         if (e->part == SI_HOOK && g.s.arc && g.sec == SI_SEC_VERSE && !g.keys)
             hook_in_verse++;
         if (e->part == SI_DRUMS) {
-            drum_on[e->note % SI_DR_COUNT]++;
-            if (e->note >= SI_DR_HEY) {
+            drum_on[si_drum_of(e->note)]++;
+            if (si_is_choir(e->note)) {
+                int p = si_choir_pitch(e->note);
                 chants++;
-                chant_kind[e->note]++;
+                chant_kind[si_drum_of(e->note)]++;
+                const si_chord *c = &g.loop[si_chord_now(&g)];
+                int pc = ((p - g.tr) % 12 + 12) % 12;
+                if (p < SI_CHOIR_LO || p > SI_CHOIR_LO + 23 || si_choir_vowel(e->note) > 1 ||
+                    (pc != c->tone[0] && pc != c->tone[1] && pc != c->tone[2]))
+                    bad_choir++;              /* (the chord's triad, the key up in it) */
             }
         }
     } else {
@@ -61,7 +67,7 @@ static void reset_counts(void)
     memset(sounding, 0, sizeof sounding);
     memset(drum_on, 0, sizeof drum_on);
     memset(chant_kind, 0, sizeof chant_kind);
-    chants = hook_in_verse = bad_pc = 0;
+    chants = hook_in_verse = bad_pc = bad_choir = 0;
 }
 static int still_sounding(int p) { int n = 0; for (int k = 0; k < 128; ++k) n += sounding[p][k]; return n; }
 static void run_bars(int n)
@@ -99,9 +105,10 @@ int main(void)
             CHECK(hook_in_verse == 0, "%s: the hook rests in the verse (%d notes)", si_style_name(st), hook_in_verse);
         CHECK(g.loop[0].name[0], "%s: its first chord has a name (%s)", si_style_name(st), g.loop[0].name);
         if (g.s.vox != SI_VOX_OFF)
-            CHECK(chants > 0, "%s: the crowd shouts (VOX on)", si_style_name(st));
+            CHECK(chants > 0, "%s: the choir sings (VOX on)", si_style_name(st));
         else
-            CHECK(chants == 0, "%s: no shouts with VOX OFF (%d)", si_style_name(st), chants);
+            CHECK(chants == 0, "%s: no choir with VOX OFF (%d)", si_style_name(st), chants);
+        CHECK(bad_choir == 0, "%s: the choir sings the chord, in its range (%d off)", si_style_name(st), bad_choir);
     }
     /* the form: INTRO 8, VERSE, PRE 4, CHORUS, BREAK 8, CHORUS a key up, round again from the verse */
     si_style_apply(&g.s, SI_ST_EUROSTOMP);
@@ -214,20 +221,25 @@ int main(void)
     si_key(&g, 1, 54, false);
     CHECK(off[SI_HOOK] >= 1, "its release lets go");
     si_play(&g, false);
-    /* the crowd: none with VOX OFF; the chant chosen with VOX on */
+    /* the choir: none with VOX OFF; the vowel chosen with VOX on, MIX both */
     si_style_apply(&g.s, SI_ST_EUROSTOMP);
     g.s.arc = 0;
     g.s.vox = SI_VOX_OFF;
     si_rebuild(&g);
     reset_counts();
     si_play(&g, true); run_bars(8); si_play(&g, false);
-    CHECK(chants == 0, "VOX OFF: silence from the crowd (%d)", chants);
+    CHECK(chants == 0, "VOX OFF: silence from the choir (%d)", chants);
     g.s.vox = SI_VOX_CHORUS;
-    g.s.chant = SI_CHANT_HO;
+    g.s.choir = SI_CHOIR_AH;
     reset_counts();
     si_play(&g, true); run_bars(8); si_play(&g, false);
-    CHECK(chant_kind[SI_DR_HO] > 0 && chant_kind[SI_DR_HEY] == 0, "CHANT HO: ho (%d), no hey (%d)", chant_kind[SI_DR_HO],
-          chant_kind[SI_DR_HEY]);
+    CHECK(chant_kind[SI_DR_AH] >= 8 * 2 && chant_kind[SI_DR_OH] == 0, "CHOIR AH: a chord of AH a bar (%d), no OH (%d)",
+          chant_kind[SI_DR_AH], chant_kind[SI_DR_OH]);
+    g.s.choir = SI_CHOIR_MIX;
+    reset_counts();
+    si_play(&g, true); run_bars(8); si_play(&g, false);
+    CHECK(chant_kind[SI_DR_AH] > 0 && chant_kind[SI_DR_OH] > 0, "CHOIR MIX: OH (%d) and AH (%d)", chant_kind[SI_DR_OH],
+          chant_kind[SI_DR_AH]);
     /* PIANO plays triads, even over a loop of sevenths (PIANOHOUSE's) */
     si_style_apply(&g.s, SI_ST_PIANOHOUSE);
     g.s.arc = 1;                                   /* (the whole form: the held chords of the pre and the break too) */

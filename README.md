@@ -5,7 +5,7 @@
 [![License: GPL-3.0-only](https://img.shields.io/badge/license-GPL--3.0--only-blue.svg)](LICENSE)
 
 **Generative 90s eurodance for the M-VAVE FM-1, pickled in 1995.** Press PLAY and Sill writes a song and plays
-it: offbeat basses, piano and supersaw stabs, a hook for the chorus, a crowd that shouts HEY, and a key change for
+it: offbeat basses, piano and supersaw stabs, a hook for the chorus, a choir singing along, and a key change for
 the last chorus. Ten styles on two sides, CLUB and RADIO. You steer it with four knobs, break it down, push the key
 up, and play the hook yourself on the keys. Built on Daurade, [Tuna](https://github.com/delirioux/tuna) and
 [Felucca](docs/FELUCCA.md).
@@ -36,26 +36,26 @@ every run also leaves its package in the artifact `sill-firmware`. From a termin
 | --- | --- |
 | **LIFT** | The low-pass on the stabs (and the hook in some styles). The knob is its ceiling; the intro and the pre-chorus open the filter up to it, the break holds it lower. |
 | **PUMP** | How deep the whole mix ducks on each kick and breathes back. The drums never duck. |
-| **VOX** | The crowd: OFF, shouting in the CHORUS, or in ALL of the song (the verse too). |
+| **VOX** | The choir: OFF, singing in the CHORUS, or in ALL of the song (the verse too). |
 | **ENERGY** | Density and drive together: from a bare groove to sixteenth hats, pickup kicks and extra stabs. |
 
 ## Ten styles
 
 | CLUB | | RADIO | |
 | --- | --- | --- | --- |
-| **EUROSTOMP** · 136 | offbeat bass, supersaw stabs and hook, HEY | **SKANK** · 95 | reggae offbeat chops, dub bass, a flute hook |
-| **VIKING** · 138 | harmonic minor, brass stabs, octave bass, WHOA | **PIANOHOUSE** · 125 | offbeat piano with sevenths over a warm pad, open hats |
-| **BUBBLEGUM** · 130 | major key, bouncy plucks, a pop lead, HO | **PARTY** · 140 | bouncing bass, brass, every shout there is |
+| **EUROSTOMP** · 136 | offbeat bass, supersaw stabs and hook, OH and AH | **SKANK** · 95 | reggae offbeat chops, dub bass, a flute hook |
+| **VIKING** · 138 | harmonic minor, brass stabs, octave bass, OH | **PIANOHOUSE** · 125 | offbeat piano with sevenths over a warm pad, open hats |
+| **BUBBLEGUM** · 130 | major key, bouncy plucks, a pop lead, AH | **PARTY** · 140 | bouncing bass, brass, OH and AH |
 | **HEARTACHE** · 134 | piano over a happy beat, the hook sung OOH | **BALLAD** · 100 | the slow radio edit: pads, fretless, piano |
 | **RAVE** · 140 | hoover stabs, rolling bass, 16th hats | **ITALO** · 120 | strings, octave bass, an arpeggio sung OOH |
 
-A style brings its own tempo, sounds, key, chord loop, groove, drums, shouts and space; your MIX, ARC and MENU
+A style brings its own tempo, sounds, key, chord loop, groove, drums, choir and space; your MIX, ARC and MENU
 stay. A new style or song comes in on the next bar line, so a song never changes mid-bar. ALGORITHM picks another
 song in the same style: a new chord loop, bass line and hook, the same each time you come back to its number.
 
 With **ARC** on (the default) a song has a form: an INTRO that brings the parts in one by one, a VERSE without the
 hook (room for the rap that is not there), a PRE-chorus of held chords, a snare roll and the filter lifting, the
-CHORUS with everything and the crowd, a BREAK of chords and hook alone with a roll back in, and the last CHORUS a
+CHORUS with everything and the choir, a BREAK of chords and hook alone with a roll back in, and the last CHORUS a
 semitone or two higher (KEY UP). Then round again from the verse, with a new hook.
 
 <p align="center">
@@ -80,7 +80,7 @@ semitone or two higher (KEY UP). Then round again from the verse, with a new hoo
 | OCT- / OCT+ | the keys' octave |
 | HOME | PLAY; hold it: MENU (COLOR, LOOK) |
 | FX | SOUND (the four parts' sounds), again: TONE (RESO DRIVE DETUNE CRUSH) |
-| LFO | VOX (VOWELS SHIFT CHANT GLIDE) |
+| LFO | VOX (VOWELS SHIFT CHOIR GLIDE) |
 | SCL | KEY (KEY SCALE CHORDS BARS) |
 | ARP | GROOVE (SWING HATS BASS FILLS) |
 | EDIT | DRUMS (KIT KICK CLAP CRASH) |
@@ -89,7 +89,7 @@ semitone or two higher (KEY UP). Then round again from the verse, with a new hoo
 | SAVE | SETS: eight sets on the knobs (SET, LOAD and STORE turned right, CLEAR turned right three times) |
 
 The keys' LEDs glow on the notes of the chord playing: the ones that fit right now. MIDI out: STABS on channel 1,
-BASS on 2, HOOK on 3, the drums on 10 (General MIDI notes; the shouts are not sent). The settings and the sets save
+BASS on 2, HOOK on 3, the drums on 10 (General MIDI notes; the choir is not sent). The settings and the sets save
 themselves while stopped. [docs/MANUAL.md](docs/MANUAL.md) goes through every page.
 
 ## The sound
@@ -108,11 +108,11 @@ PIANO on STABS turns any style into offbeat piano chords, the 90s way. The SUPER
 free voice (UNISON); the PIANO is six notes of a Kawai grand (VCSL, CC0) made bright and hard for the club; the ORCH
 hit is an FM patch of Sill's own; OOH, CHOIR and ROBOT are Felucca's VOICE engine, a formant synthesizer, singing between two vowels (the VOX page).
 
-The drums are Sill's own: seven one-shots (two kicks, snare, clap, closed and open hat, crash) and the crowd's
-three shouts (HEY, HO, WHOA), all synthesized by [`tools/si_drums.py`](tools/si_drums.py). The shouts are eight
-made-up voices through formant filters, no recording of anyone. Everything is stored at 44.1 kHz and dedicated to
-the public domain (CC0). The KIT card: EURO (these, with the crowd), SESSION or MACHINE (Felucca's DRUM engine,
-without the crowd).
+The drums are Sill's own: seven one-shots (two kicks, snare, clap, closed and open hat, crash) synthesized by
+[`tools/si_drums.py`](tools/si_drums.py), stored at 44.1 kHz. Above them on the same kit sits the choir: a sung OH
+and AH, twelve made-up voices each through formant filters ([`tools/si_choir.py`](tools/si_choir.py)), no recording
+of anyone, singing the chord's third and fifth. All of it is dedicated to the public domain (CC0). The KIT card:
+EURO (these, with the choir), SESSION or MACHINE (Felucca's DRUM engine, without the choir).
 
 Colours: LASER, Sill's own (night purple, laser cyan, hot magenta), and all of Felucca's.
 
@@ -129,5 +129,5 @@ sysroot). Design notes and the plan: [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 ## Credits and licence
 
 GPL-3.0-only. Sill by delirioux and Claude; a fork of Daurade, Flyfish and Tuna (delirioux), forks of
-Felucca by Leo Kuroshita, Hügelton Instruments; the web installer is Felucca's. The drum and shout samples are CC0.
+Felucca by Leo Kuroshita, Hügelton Instruments; the web installer is Felucca's. The drum and choir samples are CC0.
 See [CREDITS.md](CREDITS.md) and [LICENSING.md](LICENSING.md).

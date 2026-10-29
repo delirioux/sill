@@ -32,13 +32,13 @@ static void si_sound(void *ctx, const si_event *e)
     (void)ctx;
     uint32_t p = e->part % SI_PARTS;
     int n = p == SI_DRUMS ? sis_drum_note(&si_g.s, e->note) : e->note;
-    if (n < 0)                                                /* (a shout on a kit without the crowd) */
+    if (n < 0)                                                /* (the choir on a kit without it) */
         return;
     if (e->on)
         trk_note_on(&trk[p], (uint32_t)n, e->vel);
     else
         trk_note_off(&trk[p], (uint32_t)n);
-    if (p == SI_DRUMS && e->note >= SI_DR_HEY)                /* (the shouts have no General MIDI drum: not sent) */
+    if (p == SI_DRUMS && si_is_choir(e->note))                /* (the choir has no General MIDI drum: not sent) */
         return;
     /* MIDI out: STABS on channel 1, BASS 2, HOOK 3, the drums 10 (General MIDI's) */
     uint32_t ch = p == SI_DRUMS ? 9u : p, st = (e->on ? 0x90u : 0x80u) | ch, cin = st >> 4;
