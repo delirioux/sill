@@ -28,7 +28,8 @@ stabs 2 dB lower, the hook's tuplets on the chord) built by CI and running on an
 
 Claude pushes to the repository directly (the Claude GitHub App). Work goes to `dev`; a push there builds a test
 package (Actions > the run > Artifacts > `sill-firmware`) and the test site under `dev/`, installed with the
-installer's "Install a test build". It goes to `main` once it has run on the FM-1.
+installer's "Install a test build". It goes to `main` once it has run on the FM-1. A push to `main` with a version
+(`si_version.h`) not yet tagged tags it `vX.Y` and makes a GitHub release with the package and `docs/RELEASE.md`.
 
 ## Where Sill lives
 
