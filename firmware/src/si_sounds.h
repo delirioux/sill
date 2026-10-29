@@ -96,7 +96,7 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         S("ORGAN", SIS_WHEEL, 1, 3, 0),                  /* JAZZ PERC: the house organ's click */
         SO("SUPER", SIS_ANALOG, 0, SIS_SUPER, SIS_KEEP, SIS_KEEP, SIS_POLY, 4, 0),
         S("STRINGS", SIS_ANALOG, 11, 4, -6),
-        SF("BRASS", SI_FM6_SYNBRASS, SIS_KEEP, SIS_POLY, 2),
+        S("PWM", SIS_ANALOG, 3, 4, -5),                   /* PWM STR: pulse-width strings, wide and soft */
         S("PLUCK", SIS_ANALOG, 8, 4, 4),
         S("HOOVER", SIS_ANALOG, 6, 4, -5),               /* RAVE */
         SF("ORCH", SI_FM6_ORCHHIT, SIS_KEEP, SIS_POLY, 6),

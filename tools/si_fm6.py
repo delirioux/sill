@@ -50,15 +50,6 @@ PATCHES = [
         op(r=(99, 88, 60, 70), l=(99, 0, 0, 0), ol=90, fc=3, kvs=6),
         OFF, OFF],
         fb=0, lpms=0)),
-    # an analogue-style brass section: a feedback saw, its brightness swelling in (Tuna's)
-    ("SYNBRASS", voice("SYN BRASS", 2, [
-        op(r=(70, 45, 30, 60), l=(99, 92, 86, 0), ol=99, kvs=1),
-        op(r=(52, 40, 30, 60), l=(99, 82, 74, 0), ol=82, kvs=3),
-        op(r=(70, 45, 30, 60), l=(99, 92, 86, 0), ol=90, det=10, kvs=1),
-        op(r=(52, 40, 30, 60), l=(99, 80, 70, 0), ol=80, det=4, kvs=3),
-        op(r=(60, 40, 30, 60), l=(99, 80, 70, 0), ol=58),
-        op(r=(60, 40, 30, 60), l=(99, 80, 70, 0), ol=46)],
-        fb=7, pr=(80, 50, 50, 50), pl=(46, 50, 50, 50), lpms=0)),
     # a fretless bass: round, a 'mwah' on velocity, glides (Tuna's)
     ("FRETLESS", voice("FRETLESS", 5, [
         op(r=(80, 40, 25, 62), l=(99, 90, 76, 0), ol=99, kvs=2),

@@ -42,7 +42,7 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
 | --- | --- |
 | `si_groove.h/.c` | the engine: ten styles, twelve chord loops, the rhythm families of each part, the hook, the form, the choir, the lift and the pump, BREAK, KEY UP, the keys, swing and human timing. Plain C, no Felucca: it runs on the host as it does on the FM-1 |
 | `si_sounds.h` | the forty-eight sounds on Felucca's engines and their trims, the kits and the choir's notes, and how a part's cards set its track (level, pan, sends, the matrix's lift and pump slots, the VOX page, TONE) |
-| `si_fm6.inc` | the FM6 patches (ORCH HIT, Sill's; SLAP, BRASS, FRETLESS (SLIDE), Tuna's), made by `tools/si_fm6.py` |
+| `si_fm6.inc` | the FM6 patches (ORCH HIT, Sill's; SLAP, FRETLESS (SLIDE), Tuna's), made by `tools/si_fm6.py` |
 | `tools/si_piano.py` | the PIANO: six notes of VCSL's Kawai grand (CC0), made bright and hard, into `assets/samples-cc0/PIANO/` |
 | `si_ui.h/.c` | the thirteen pages, the cards, the styles list, the sets, on Felucca's `gfx.c` |
 | `si_fw.c` | the glue: the groove on the tracks and MIDI out, loading a part's sound when it changes, the panel, the key LEDs, the settings and the sets in flash, the splash |

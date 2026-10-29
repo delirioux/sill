@@ -233,7 +233,7 @@ int main(int argc, char **argv)
     shot("05_sound");
     all_palettes("sound");
     su_knob(&ui, SU_K1, 1);
-    CHECK(g.s.snd[SI_STABS] == 5, "K1: the next STABS sound (%d)", g.s.snd[SI_STABS]);
+    CHECK(g.s.snd[SI_STABS] == 3, "K1: the next STABS sound (%d)", g.s.snd[SI_STABS]);
     su_knob(&ui, SU_K1, -1);
     {                                              /* every sound's name on its card and the panel: the lint */
         uint8_t keep[4];
