@@ -967,6 +967,7 @@ static int bass_note(const si_groove *g, int tone, const si_chord *c, const si_c
 }
 
 /* the chord held: a pad, or the stabs held through the pre-chorus and the break */
+static void triad(const si_chord *c, int out[3]);
 static void stabs_held(si_groove *g, int i, uint32_t delay, float sf, int vel, bool roll)
 {
     const si_chord *c = chord_at(g, g->bar);
@@ -974,8 +975,37 @@ static void stabs_held(si_groove *g, int i, uint32_t delay, float sf, int vel, b
     if (i != 0 || (!roll && (g->bar % bpc) != 0))  /* (roll: a bar each; else as long as the chord lasts) */
         return;
     int len = roll ? 16 : 16 * bpc;
+    if (g->s.snd[SI_STABS] == SI_STABS_PIANO) {    /* the piano holds its triad */
+        int t[3];
+        triad(c, t);
+        for (int k = 0; k < 3; ++k)
+            schedule(g, delay + (uint32_t)((float)k * sf * 0.04f), SI_STABS, t[k], vel, sf * (float)len - 40.0f);
+        return;
+    }
     for (int k = 0; k < c->n; ++k)
         schedule(g, delay + (uint32_t)((float)k * sf * 0.04f), SI_STABS, c->note[k], vel, sf * (float)len - 40.0f);
+}
+
+/* the chord's triad (root, third, fifth) as three close notes, the lowest the first of them at or above the
+ * voicing's lowest note: an inversion near where the stabs' voice leading put the chord */
+static void triad(const si_chord *c, int out[3])
+{
+    int lo = c->note[0], best = -1;
+    for (int k = 0; k < 3; ++k) {                  /* the tone right at or above the voicing's bottom starts it */
+        int n = lo;
+        while ((n % 12) != c->tone[k])
+            ++n;
+        if (best < 0 || n < out[0]) {
+            best = k;
+            out[0] = n;
+        }
+    }
+    for (int j = 1; j < 3; ++j) {
+        int n = out[j - 1] + 1;
+        while ((n % 12) != c->tone[(best + j) % 3])
+            ++n;
+        out[j] = n;
+    }
 }
 
 static void play_stabs(si_groove *g, int i, uint32_t delay, float sf, float hum)
@@ -1009,6 +1039,14 @@ static void play_stabs(si_groove *g, int i, uint32_t delay, float sf, float hum)
             : i % 4 == 0 ? 108 : 98;
     vel += (int)(hum * 10.0f);
     float gate = fam == STAB_SKANK ? 0.35f : fam == STAB_RAVE ? 0.7f : piano ? 0.6f : 0.85f;
+    if (piano) {                                   /* the piano: the plain triad, root third fifth (a seventh's chord
+                                                    * too), close round the voicing's middle */
+        int t[3];
+        triad(c, t);
+        for (int k = 0; k < 3; ++k)
+            schedule(g, delay, SI_STABS, t[k], clampi(vel - (k == 2 ? 0 : 6), 1, 127), sf * (float)len * gate);
+        return;
+    }
     /* a stab sounds the voicing's top three: the shared voice budget (eight for all four parts) stays for the
      * drums' tails, the bass and the hook */
     int k0 = c->n > 3 ? 1 : 0;

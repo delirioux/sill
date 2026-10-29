@@ -25,9 +25,15 @@ static si_groove g;
 static int on[SI_PARTS], off[SI_PARTS], sounding[SI_PARTS][128], bad_pc, hook_in_verse, chants, chant_kind[SI_DR_COUNT];
 static int drum_on[SI_DR_COUNT];
 static uint32_t hash;
+static int stab_tri, stab_not_tri;
 static void sound(void *ctx, const si_event *e)
 {
     (void)ctx;
+    if (e->on && e->part == SI_STABS && g.nloop) {   /* (the piano test: each stab note a tone of the triad) */
+        const si_chord *c = &g.loop[si_chord_now(&g)];
+        int pc = ((e->note - g.tr) % 12 + 12) % 12;
+        if (pc == c->tone[0] || pc == c->tone[1] || pc == c->tone[2]) stab_tri++; else stab_not_tri++;
+    }
     hash = (hash ^ (uint32_t)(e->on << 24 | e->part << 16 | e->note << 8 | e->vel)) * 16777619u + g.clock;
     if (e->on) {
         on[e->part]++;
@@ -222,6 +228,13 @@ int main(void)
     si_play(&g, true); run_bars(8); si_play(&g, false);
     CHECK(chant_kind[SI_DR_HO] > 0 && chant_kind[SI_DR_HEY] == 0, "CHANT HO: ho (%d), no hey (%d)", chant_kind[SI_DR_HO],
           chant_kind[SI_DR_HEY]);
+    /* PIANO plays triads, even over a loop of sevenths (PIANOHOUSE's) */
+    si_style_apply(&g.s, SI_ST_PIANOHOUSE);
+    g.s.arc = 1;                                   /* (the whole form: the held chords of the pre and the break too) */
+    si_rebuild(&g);
+    stab_tri = stab_not_tri = 0;
+    si_play(&g, true); run_bars(40); si_play(&g, false);
+    CHECK(stab_tri > 50 && stab_not_tri == 0, "PIANO: triads only (%d triad tones, %d others)", stab_tri, stab_not_tri);
     /* PIANO on the STABS: the offbeat chords, in any style (RAVE's own stabs are not offbeat) */
     si_style_apply(&g.s, SI_ST_RAVE);
     g.s.arc = 0;
