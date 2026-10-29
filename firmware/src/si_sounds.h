@@ -65,7 +65,7 @@ static const preset_t SIS_SAWLEAD = {"SAW LEAD", {0, 0, 12, 12, 0, 96, 25, 64}, 
 /* the three music parts' lists, in the SOUND card's order (si_groove.c names them in the styles) */
 static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
     {   /* STABS */
-        S("PIANO", SIS_SAMPLE, 1, 4, -6),                /* the club piano (tools/si_piano.py), pushed back */
+        S("PIANO", SIS_SAMPLE, 1, 4, -14),               /* the club piano (tools/si_piano.py), pushed back */
         S("ORGAN", SIS_WHEEL, 1, 3, 0),                  /* JAZZ PERC: the house organ's click */
         SO("SUPER", SIS_ANALOG, 0, SIS_SUPER, SIS_KEEP, SIS_KEEP, SIS_POLY, 4, 0),
         S("STRINGS", SIS_ANALOG, 11, 4, -6),
@@ -93,7 +93,7 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         SO("SAW", SIS_TRIO, 0, SIS_SAWLEAD, SIS_KEEP, 10, SIS_KEEP, 5, -8),
         S("PLUCK", SIS_ANALOG, 8, 4, 2),
         S("BELL", SIS_FM6, 1, 2, -3),
-        S("PIANO", SIS_SAMPLE, 1, 4, -12),
+        S("PIANO", SIS_SAMPLE, 1, 4, -16),
         SO("HOOVER", SIS_ANALOG, 0, SIS_HOOVER, SIS_KEEP, 14, SIS_LEGATO, 4, -15),
         SO("OOH", SIS_VOICE, 0, SIS_OOH, SIS_KEEP, SIS_KEEP, SIS_LEGATO, -1, -12),
         S("SYNC", SIS_TRIO, 2, 5, -6),
