@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: CC0-1.0
 """Sill's PIANO: six notes of a Kawai grand from the Versilian Community Sample Library (VCSL, CC0 1.0,
 github.com/sgossner/VCSL, "Chordophones/Zithers/Grand Piano, Kawai/Sustains"), its loudest layer (v4), made into the
-bright, hard club piano of the 90s: summed to mono, cut short (a stab does not need the long tail), a high shelf
-and a presence lift for the brightness (the firmware puts a low-pass and a room on it), a soft clip for the hardness, normalised; written as 16-bit mono WAVs at
+bright, hard club piano of the 90s: summed to mono, cut short (a stab does not need the long tail), a high-pass at
+180 Hz, a high shelf and a presence lift for the brightness (the firmware puts a low-pass and a room on it), a soft clip for the hardness, normalised; written as 16-bit mono WAVs at
 44.1 kHz to assets/samples-cc0/PIANO/ (tools/gen_samples.py stores them at 22.05 kHz).
 
     python3 tools/si_piano.py VCSL_DIR      VCSL_DIR: a checkout of VCSL (only that folder is needed:
@@ -68,6 +68,16 @@ def peak_eq(x, fc, q, db):
     return biquad(x, [v / a[0] for v in b], [1.0, a[1] / a[0], a[2] / a[0]])
 
 
+def high_pass(x, fc, q):
+    """RBJ high-pass"""
+    w = 2 * np.pi * fc / SR
+    al = np.sin(w) / (2 * q)
+    c = np.cos(w)
+    b = [(1 + c) / 2, -(1 + c), (1 + c) / 2]
+    a = [1 + al, -2 * c, 1 - al]
+    return biquad(x, [v / a[0] for v in b], [1.0, a[1] / a[0], a[2] / a[0]])
+
+
 def make(src, keep):
     x = read(src)
     on = int(np.argmax(np.abs(x) > 0.02 * np.max(np.abs(x))))   # the hammer: start just before it
@@ -76,7 +86,8 @@ def make(src, keep):
     x = x / np.max(np.abs(x))
     x = shelf_high(x, 2000, 5.0)                    # the brightness (the track's CUT and reverb soften it: si_sounds.h)
     x = peak_eq(x, 5000, 0.9, 1.5)                  # and its presence
-    x = peak_eq(x, 250, 0.8, -3.0)                  # less body: a stab, not a ballad
+    x = high_pass(x, 180, 0.7)                      # no low end: the bass has it, the piano sits above
+    x = peak_eq(x, 300, 0.8, -2.0)                  # less body: a stab, not a ballad
     x = np.tanh(x * 1.8) / np.tanh(1.8)             # the hardness: the hammer flattened a little, the tail lifted
     n = len(x)
     fade = int(0.12 * SR)                           # a raised-cosine fade over the last 120 ms

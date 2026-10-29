@@ -83,7 +83,7 @@ Sill's files are `firmware/src/si_*`, `tests/si_*`, `tools/si_*`, `web/si_*` and
   -32), EXPR to every part but the drums' level (slot 2, +64), set every 32 frames. The lift follows the form (the
   intro and the pre-chorus open it, the break holds it at 60 %), not a sixteen-bar breath.
 - **A sampled piano, bright.** The FM piano sounded like an electric piano; the club piano is a grand made bright
-  and hard. Six notes of VCSL's Kawai grand (its loudest layer, CC0), cut to about a second, +5 dB from 2 kHz, a
+  and hard. Six notes of VCSL's Kawai grand (its loudest layer, CC0), cut to about a second, a high-pass at 180 Hz, +5 dB from 2 kHz, a
   presence lift, less body, a soft clip; on the FM-1 a low-pass at about 5 kHz, a room of its own and a lower
   level (about 3 dB under the bass and the hook in the chorus) push it back; the SAMPLE engine's set 1, about 64 KB of ADPCM. PIANO on STABS plays the
   offbeat chords in any style.
