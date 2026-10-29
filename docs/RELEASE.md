@@ -1,3 +1,14 @@
+# Sill 0.3
+
+The fill.
+
+- HOOK SPEED PAD: no tune but a pad on the chords, held as long as each lasts, through the verse and the pre-chorus
+  too. A new HOOK sound, PAD, in place of CHIP. PIANOHOUSE starts with it, behind the piano.
+- The piano plays plain triads (root, third, fifth), over a loop of sevenths too and in its held chords; 2 dB
+  softer, level with the pad, under the bass.
+
+Runs on the FM-1. To go back: Felucca's or Tuna's installer, or the official V15.
+
 # Sill 0.2
 
 The piano.

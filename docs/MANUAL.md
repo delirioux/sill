@@ -1,6 +1,6 @@
 # Sill manual
 
-Sill 0.2. Every page, every card. Four parts play: **STABS** (the chords), **BASS**, **HOOK** (the chorus's tune,
+Sill 0.3. Every page, every card. Four parts play: **STABS** (the chords), **BASS**, **HOOK** (the chorus's tune,
 and whatever you play on the keys) and **DRUMS** (with the crowd's shouts). Knob 1 to 4 turn the four cards on the
 screen. A page's button pressed again goes to its second page where it has one.
 

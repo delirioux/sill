@@ -4,8 +4,8 @@ The working notes behind Sill: the agreements, how the work flows, why the code 
 stands and what comes next. What Sill is and how to play it is in the [README](../README.md) and the
 [manual](MANUAL.md).
 
-Status: 29 October 2026. Version 0.2 (the sampled piano, the offbeat PIANO in every style) built by CI, installed
-from the site and running on an FM-1; released on
+Status: 29 October 2026. Version 0.3 (the pad, the piano's triads) built by CI, installed from the site and running
+on an FM-1; released on
 `main`.
 
 ## Agreements
