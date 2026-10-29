@@ -317,7 +317,7 @@ static void su_draw_head(si_ui *u)
     cv_blit(0, 0);
 }
 
-/* ---- the footer: the section's bars as 16 dashes, the style and its kit, the page ------------------------------ */
+/* ---- the footer: the section's bars as 16 dashes, the style and its song number, the page ---------------------- */
 static void su_draw_foot(si_ui *u)
 {
     const si_groove *g = u->g;
@@ -331,9 +331,10 @@ static void su_draw_foot(si_ui *u)
         }
     }
     const char *style = si_style_name(g->s.style);
-    const char *kit = sis_name(SI_DRUMS, g->s.snd[3]);
+    char song[8];                                  /* the song playing (ALGORITHM), on every page */
+    su_fmt_int(song, g->s.song + 1);
     uint32_t sig = su_hash(su_hash(su_hash((uint32_t)filled * 7u + (uint32_t)g->playing * 3u + ux.gen * 11u +
-                                           (uint32_t)u->page * 13u, style), su_page_name(u->page)), kit);
+                                           (uint32_t)u->page * 13u, style), su_page_name(u->page)), song);
     if (!u->force && sig == u->sig_foot)
         return;
     u->sig_foot = sig;
@@ -346,7 +347,7 @@ static void su_draw_foot(si_ui *u)
     int32_t yb = 17 + AF_M_CAP_Y + AF_M_CAP_H - AF_S_CAP_Y - AF_S_CAP_H;
     int32_t px = 230 - text_w(&AF_S, su_page_name(u->page)) - 8;
     if (px - nx - 6 > 24)
-        cv_free_text(nx + 6, yb, &AF_S, kit, T_MID, T_BG, px - nx - 6);
+        cv_free_text(nx + 6, yb, &AF_S, song, T_TEXT, T_BG, px - nx - 6);
     cv_text_r(230, yb, &AF_S, su_page_name(u->page), T_MID, T_BG);
     cv_blit(0, SU_FOOT_Y);
 }

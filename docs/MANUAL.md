@@ -12,7 +12,8 @@ style on the next bar: its number seeds the chord loop, the bass line, the hook 
 comes back the same. SELECT is the tempo, MASTER the volume.
 
 The header shows the section playing (INTRO, VERSE, PRE, CHORUS, BREAK) and, on the right, a badge: the key up
-(+1, +2, +3) or HELD while a break is held. The footer's sixteen dashes are the way through the section.
+(+1, +2, +3) or HELD while a break is held. The footer's sixteen dashes are the way through the section; under them the style and the song's number, on
+every page.
 
 **REC is BREAK.** Tap it: everything but the stabs drops out, the stabs hold their chords for three bars, a snare
 roll comes in the fourth and the chorus slams back on the bar line. Hold it: the break stays until you let go, then
