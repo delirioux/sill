@@ -983,7 +983,13 @@ static void play_drums(si_groove *g, int i, uint32_t delay, float hum)
             g->beat_ph = 0;                        /* (the pump follows the kick: si_process) */
         if (d == SI_DR_HAT && g->s.hats != SI_HATS_OPEN)   /* a closed hat chokes the open one */
             schedule(g, delay, SI_DRUMS, 0x80 | SI_DR_OPEN, 1, 0);
-        schedule(g, delay, SI_DRUMS, d, clampi(v, 1, 127), 0);
+        int n = d;
+        if (d == SI_DR_KICK) {                     /* the kick tuned to the chord's root (the key up in it), the
+                                                    * nearest way from its own pitch: it walks with the bass */
+            int sh = ((chord_at(g, g->bar)->root + g->tr - SI_KICK_PC[g->s.kick == SI_KICK_ROUND]) % 12 + 12) % 12;
+            n = SI_KICK_NOTE(sh > 5 ? sh - 12 : sh);
+        }
+        schedule(g, delay, SI_DRUMS, n, clampi(v, 1, 127), 0);
     }
     play_choir(g, i, delay);
 }

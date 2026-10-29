@@ -56,7 +56,16 @@ enum { SI_DR_KICK, SI_DR_SNARE, SI_DR_CLAP, SI_DR_HAT, SI_DR_OPEN, SI_DR_CRASH, 
 static inline bool si_is_choir(int n) { return n >= 32 && n < 96; }
 static inline int si_choir_vowel(int n) { return (n - 32) / 32; }           /* 0 OH, 1 AH */
 static inline int si_choir_pitch(int n) { return SI_CHOIR_LO + (n - 32) % 32; }
-static inline int si_drum_of(int n) { return si_is_choir(n) ? SI_DR_OH + si_choir_vowel(n) : n % SI_DR_COUNT; }
+/* a kick tuned to the chord's root: SI_KICK_NOTE(shift), shift -6..+5 semitones from the kick's own pitch (the
+ * sample's: PUNCH about E1, ROUND about D1, SI_KICK_PC) */
+#define SI_KICK_NOTE(sh) (96 + 6 + (sh))
+static inline bool si_is_kick_tuned(int n) { return n >= 96 && n < 108; }
+static inline int si_kick_shift(int n) { return n - 96 - 6; }
+static const uint8_t SI_KICK_PC[2] = {4, 2};        /* PUNCH, ROUND: their pitch classes (tools/si_drums.py: 41, 36 Hz) */
+static inline int si_drum_of(int n)
+{
+    return si_is_choir(n) ? SI_DR_OH + si_choir_vowel(n) : si_is_kick_tuned(n) ? SI_DR_KICK : n % SI_DR_COUNT;
+}
 /* the tuplets the hook and the fills play, as (notes, in the space of sixteenths): 3 in 4 (a triplet: three in the
  * space of two eighths), 4 in 6 (a quadruplet: four in the space of three eighths), 5 in 4 (a quintuplet: five in
  * the space of four sixteenths), 6 in 4 (a sextuplet: six in the space of four sixteenths) */

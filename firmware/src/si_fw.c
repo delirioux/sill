@@ -42,8 +42,9 @@ static void si_sound(void *ctx, const si_event *e)
         return;
     /* MIDI out: STABS on channel 1, BASS 2, HOOK 3, the drums 10 (General MIDI's) */
     uint32_t ch = p == SI_DRUMS ? 9u : p, st = (e->on ? 0x90u : 0x80u) | ch, cin = st >> 4;
-    int mn = p == SI_DRUMS ? (int)(e->note == SI_DR_KICK ? 36 : e->note == SI_DR_SNARE ? 38 : e->note == SI_DR_CLAP ? 39
-                                   : e->note == SI_DR_HAT ? 42 : e->note == SI_DR_OPEN ? 46 : 49) : n;
+    int dr = si_drum_of(e->note);
+    int mn = p == SI_DRUMS ? (int)(dr == SI_DR_KICK ? 36 : dr == SI_DR_SNARE ? 38 : dr == SI_DR_CLAP ? 39
+                                   : dr == SI_DR_HAT ? 42 : dr == SI_DR_OPEN ? 46 : 49) : n;
     midi_out_event(cin | st << 8 | (uint32_t)mn << 16 | (uint32_t)(e->on ? e->vel : 0u) << 24);
 }
 

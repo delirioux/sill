@@ -82,6 +82,9 @@ KIT_BASE = 53                     # F3, the lowest FM-1 key
 # (firmware/src/si_sounds.h SIS_CHOIR_KEY and SIS_CHOIR_LO, the same numbers)
 CHOIR_LO = 48
 CHOIR_KEY = {"oh": 16, "ah": 40}
+# (Sill) the kicks (the kit's first two WAVs) again below the kit, pitched: each at its own pitch on its key, six
+# semitones either way (si_sounds.h SIS_KICK_KEY)
+KICK_KEY = (26, 42)
 
 NOTE = {"C": 0, "C#": 1, "D": 2, "D#": 3, "E": 4, "F": 5, "F#": 6, "G": 7, "G#": 8, "A": 9, "A#": 10, "B": 11}
 
@@ -344,6 +347,9 @@ class Builder:
                                 key=KIT_BASE + k if kind == "kit" else None))
         if name == "DRUMS":
             entries += self.choir_zones()
+            for k, key in enumerate(KICK_KEY):         # the two kicks again, pitched (no data of their own)
+                z = dict(entries[k], key=None, lo=key - 6, hi=key + 6, root16=key * 16)
+                entries.append(z)
         self.add_set(name, kind, entries)
 
     def choir_zones(self):

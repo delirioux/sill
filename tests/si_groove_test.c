@@ -24,7 +24,7 @@ static int fails, checks;
 static si_groove g;
 static int on[SI_PARTS], off[SI_PARTS], sounding[SI_PARTS][128], bad_pc, hook_in_verse, chants, chant_kind[SI_DR_COUNT], bad_choir;
 static int drum_on[SI_DR_COUNT];
-static int tup_watch, tup_notes, tup_off;   /* the tuplets' notes: how many, how many off the chord */
+static int tup_watch, tup_notes, tup_off, kicks, bad_kick;   /* the tuplets' notes: how many, how many off the chord */
 static uint32_t hash;
 static int stab_tri, stab_not_tri;
 static void sound(void *ctx, const si_event *e)
@@ -54,6 +54,12 @@ static void sound(void *ctx, const si_event *e)
                 }
         if (e->part == SI_DRUMS) {
             drum_on[si_drum_of(e->note)]++;
+            if (si_drum_of(e->note) == SI_DR_KICK) {
+                int pc = SI_KICK_PC[g.s.kick == SI_KICK_ROUND] + si_kick_shift(e->note);
+                kicks++;
+                bad_kick += !si_is_kick_tuned(e->note) ||
+                            ((pc % 12 + 12) % 12) != (g.loop[si_chord_now(&g)].root + g.tr) % 12;
+            }
             if (si_is_choir(e->note)) {
                 int p = si_choir_pitch(e->note);
                 chants++;
@@ -77,7 +83,7 @@ static void reset_counts(void)
     memset(sounding, 0, sizeof sounding);
     memset(drum_on, 0, sizeof drum_on);
     memset(chant_kind, 0, sizeof chant_kind);
-    chants = hook_in_verse = bad_pc = bad_choir = 0;
+    chants = hook_in_verse = bad_pc = bad_choir = kicks = bad_kick = 0;
 }
 static int still_sounding(int p) { int n = 0; for (int k = 0; k < 128; ++k) n += sounding[p][k]; return n; }
 static void run_bars(int n)
@@ -118,6 +124,8 @@ int main(void)
             CHECK(chants > 0, "%s: the choir sings (VOX on)", si_style_name(st));
         else
             CHECK(chants == 0, "%s: no choir with VOX OFF (%d)", si_style_name(st), chants);
+        CHECK(kicks > 0 && bad_kick == 0, "%s: the kick on the chord's root (%d of %d off)", si_style_name(st), bad_kick,
+              kicks);
         CHECK(bad_choir == 0, "%s: the choir sings the chord, in its range (%d off)", si_style_name(st), bad_choir);
     }
     /* the form: INTRO 8, VERSE, PRE 4, CHORUS, BREAK 8, CHORUS a key up, round again from the verse */
