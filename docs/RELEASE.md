@@ -1,3 +1,18 @@
+# Sill 0.4
+
+Variety.
+
+- Sixteen sounds a part. STABS: HOUSE, DEEP, HORNS, CHOIR, VIOLINS, TRANCE; BASS: ORGAN, SYNTH, SINE, TRANCE, DX,
+  GROWL; HOOK: REEDS, ANTHEM, CHOIR, WHISTLE, TRANCE, ROBOT. FRETLESS is called SLIDE.
+- Every style has four sounds a part: song 1 plays its own, every other song picks from the four, so a style's
+  songs do not all sound alike.
+- Tuplets: a song's hook may hold a triplet, a quadruplet, a quintuplet or a sextuplet; a fill may be a snare
+  triplet or a sextuplet roll.
+- Less drive: the mix has 2 dB of headroom against the limiter, the styles' DRIVE is lower and reaches half as
+  deep, and the hottest sounds carry less drive of their own.
+
+Runs on the FM-1. To go back: Felucca's or Tuna's installer, or the official V15.
+
 # Sill 0.3
 
 The fill.
