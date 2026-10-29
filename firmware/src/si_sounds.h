@@ -78,7 +78,8 @@ static const preset_t SIS_WHISTLE = {"WHISTLE", {3, 0, 0, 6, 127, 0, 0, 64}, {6,
 /* HOOK: a trance pluck lead, snappy */
 static const preset_t SIS_TRANCELEAD = {"TRANCE", {0, 22, 64, 0, 100, 32, 12, 64}, {0, 46, 30, 20}, 45, 1, FX(0, 30, 50, 35)};
 /* HOOK: the robot (Daurade's): the VOICE engine at full buzz and a high Q, a vocoder */
-static const preset_t SIS_ROBOT = {"ROBOT", {0, 64, 40, 0, 127, 0, 110, 0}, {2, 70, 110, 30}, 0, 1, FX(0, 15, 30, 25)};
+/* HOOK: CORNET, a solo trumpet, light: one saw, a breath of noise, the filter swelling open on each note (the lip), mono */
+static const preset_t SIS_TRUMPET = {"CORNET", {0, 0, 0, 6, 50, 12, 6, 64}, {12, 60, 96, 26}, 42, 1, FX(0, 20, 25, 35)};
 static const preset_t SIS_SAWLEAD = {"SAW LEAD", {0, 0, 12, 12, 0, 96, 25, 64}, {2, 70, 100, 35}, 20, 1,
                                      FX(0, 10, 35, 25)};
 
@@ -104,7 +105,7 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         S("PAD", SIS_FM6, 4, 2, 16),
         S("HOUSE", SIS_WHEEL, 0, 3, 3),                  /* FULL ORGAN, short: the house organ chord */
         SO("DEEP", SIS_ANALOG, 0, SIS_DEEPCHORD, SIS_KEEP, SIS_KEEP, SIS_POLY, 4, 10),
-        S("HORNS", SIS_PHASE, 0, 2, -2),                  /* PHASE's BRASS: a heroic section */
+        S("KEYS", SIS_ANALOG, 5, 4, 3),                  /* SINE KEY: a soft keyboard chord */
         SO("CHOIR", SIS_VOICE, 0, SIS_CHOIR, SIS_KEEP, SIS_KEEP, SIS_POLY, -1, -1),
         S("VIOLINS", SIS_PHASE, 2, 2, -3),                /* PHASE's STRING: wide, orchestral */
         SO("TRANCE", SIS_ANALOG, 0, SIS_TRANCESTAB, SIS_KEEP, SIS_KEEP, SIS_POLY, 4, 9),
@@ -143,7 +144,7 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         SO("CHOIR", SIS_VOICE, 0, SIS_CHOIRLEAD, SIS_KEEP, 10, SIS_LEGATO, -1, -12),
         SO("WHISTLE", SIS_ANALOG, 0, SIS_WHISTLE, SIS_KEEP, 16, SIS_LEGATO, -1, -16),
         SO("TRANCE", SIS_ANALOG, 0, SIS_TRANCELEAD, SIS_KEEP, SIS_KEEP, SIS_MONO, 4, 4),
-        SO("ROBOT", SIS_VOICE, 1, SIS_ROBOT, SIS_KEEP, SIS_KEEP, SIS_LEGATO, -1, -14),
+        SO("CORNET", SIS_ANALOG, 0, SIS_TRUMPET, SIS_KEEP, 8, SIS_LEGATO, 4, -17),   /* (2 dB under the leads: light) */
     },
 };
 #undef S

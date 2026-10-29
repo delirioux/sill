@@ -98,15 +98,15 @@ Four parts on Felucca's engines, sixteen sounds each, evened out so a new sound 
 
 | Part | Sounds |
 | --- | --- |
-| STABS | PIANO, ORGAN, SUPER, STRINGS, PWM (strings), PLUCK, HOOVER, ORCH, EPIANO, PAD, HOUSE (organ), DEEP (house chord), HORNS, CHOIR, VIOLINS, TRANCE |
+| STABS | PIANO, ORGAN, SUPER, STRINGS, PWM (strings), PLUCK, HOOVER, ORCH, EPIANO, PAD, HOUSE (organ), DEEP (house chord), KEYS, CHOIR, VIOLINS, TRANCE |
 | BASS | FM BASS, SQUARE, SUB, FAT, ACID, REESE, SLAP, SLIDE (fretless), OCTAVE, WOW, ORGAN, SYNTH, SINE, TRANCE, DX, GROWL |
-| HOOK | SUPER, SAW, PLUCK, POP, PIANO, HOOVER, OOH, SYNC, FLUTE, PAD, REEDS (accordion), ANTHEM, CHOIR, WHISTLE, TRANCE, ROBOT |
+| HOOK | SUPER, SAW, PLUCK, POP, PIANO, HOOVER, OOH, SYNC, FLUTE, PAD, REEDS (accordion), ANTHEM, CHOIR, WHISTLE, TRANCE, CORNET (a solo trumpet) |
 
 Each style has four sounds a part to choose from: song 1 plays its own, every other song (ALGORITHM) picks from
 those four, so the songs of one style do not all sound alike. A card turned by hand holds until the next song.
 PIANO on STABS turns any style into offbeat piano chords, the 90s way. The SUPER hook is two detuned saws on every
 free voice (UNISON); the PIANO is six notes of a Kawai grand (VCSL, CC0) made bright and hard for the club; the ORCH
-hit is an FM patch of Sill's own; OOH, CHOIR and ROBOT are Felucca's VOICE engine, a formant synthesizer, singing between two vowels (the VOX page).
+hit is an FM patch of Sill's own; OOH and CHOIR are Felucca's VOICE engine, a formant synthesizer, singing between two vowels (the VOX page).
 
 The drums are Sill's own: seven one-shots (two kicks, snare, clap, closed and open hat, crash) synthesized by
 [`tools/si_drums.py`](tools/si_drums.py), stored at 44.1 kHz. Above them on the same kit sits the choir: a sung OH
