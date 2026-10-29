@@ -44,7 +44,7 @@ every run also leaves its package in the artifact `sill-firmware`. From a termin
 | CLUB | | RADIO | |
 | --- | --- | --- | --- |
 | **EUROSTOMP** · 136 | offbeat bass, supersaw stabs and hook, HEY | **SKANK** · 95 | reggae offbeat chops, dub bass, a flute hook |
-| **VIKING** · 138 | harmonic minor, brass stabs, octave bass, WHOA | **PIANOHOUSE** · 125 | house piano stabs with sevenths, open hats |
+| **VIKING** · 138 | harmonic minor, brass stabs, octave bass, WHOA | **PIANOHOUSE** · 125 | offbeat piano with sevenths over a warm pad, open hats |
 | **BUBBLEGUM** · 130 | major key, bouncy plucks, a bell hook, HO | **PARTY** · 140 | bouncing bass, brass, every shout there is |
 | **HEARTACHE** · 134 | piano over a happy beat, the hook sung OOH | **BALLAD** · 100 | the slow radio edit: pads, fretless, piano |
 | **RAVE** · 140 | hoover stabs, rolling bass, 16th hats | **ITALO** · 120 | strings, octave bass, an arpeggio sung OOH |
@@ -85,7 +85,7 @@ semitone or two higher (KEY UP). Then round again from the verse, with a new hoo
 | ARP | GROOVE (SWING HATS BASS FILLS) |
 | EDIT | DRUMS (KIT KICK CLAP CRASH) |
 | GLO | MIX (the four levels), again: SPACE (REVERB DELAY TIME WIDTH) |
-| ENV | ARC (ARC VERSE CHORUS KEY UP), again: HOOK (SPEED RANGE GATE REPEAT) |
+| ENV | ARC (ARC VERSE CHORUS KEY UP), again: HOOK (SPEED RANGE GATE REPEAT; SPEED PAD: a pad on the chords instead of a tune) |
 | SAVE | SETS: eight sets on the knobs (SET, LOAD and STORE turned right, CLEAR turned right three times) |
 
 The keys' LEDs glow on the notes of the chord playing: the ones that fit right now. MIDI out: STABS on channel 1,
@@ -96,7 +96,7 @@ themselves while stopped. [docs/MANUAL.md](docs/MANUAL.md) goes through every pa
 
 Four parts on Felucca's engines, ten sounds each (STABS: PIANO, ORGAN, SUPER, STRINGS, BRASS, PLUCK, HOOVER, ORCH,
 BELLS, PAD; BASS: FM BASS, SQUARE, SUB, FAT, ACID, REESE, SLAP, FRETLESS, OCTAVE, WOW; HOOK: SUPER, SAW, PLUCK, BELL,
-PIANO, HOOVER, OOH, SYNC, FLUTE, CHIP), evened out so a new sound does not jump out of the mix. PIANO on STABS turns any style into offbeat piano chords, the 90s
+PIANO, HOOVER, OOH, SYNC, FLUTE, PAD), evened out so a new sound does not jump out of the mix. PIANO on STABS turns any style into offbeat piano chords, the 90s
 way. The SUPER hook is
 two detuned saws on every free voice (UNISON); the PIANO is six notes of a Kawai grand (VCSL, CC0) made bright
 and hard for the club; the ORCH hit is an FM patch of Sill's own; OOH is

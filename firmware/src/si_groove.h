@@ -46,7 +46,7 @@ enum { SI_VOX_OFF, SI_VOX_CHORUS, SI_VOX_ALL, SI_VOX_COUNT };
 enum { SI_CHANT_HEY, SI_CHANT_HO, SI_CHANT_WHOA, SI_CHANT_MIX, SI_CHANT_COUNT };
 enum { SI_VOWELS_OO_AH, SI_VOWELS_AH_EE, SI_VOWELS_OH_AH, SI_VOWELS_OO_EE, SI_VOWELS_AH_OH, SI_VOWELS_COUNT };
 enum { SI_DTIME_16, SI_DTIME_8, SI_DTIME_3_16, SI_DTIME_4, SI_DTIME_COUNT };
-enum { SI_SPEED_SLOW, SI_SPEED_MID, SI_SPEED_FAST, SI_SPEED_COUNT };
+enum { SI_SPEED_SLOW, SI_SPEED_MID, SI_SPEED_FAST, SI_SPEED_PAD, SI_SPEED_COUNT };   /* PAD: no tune, the chords held */
 /* the drums as the groove names them, the crowd's chants among them; the glue maps them to the kit (si_sounds.h) */
 enum { SI_DR_KICK, SI_DR_SNARE, SI_DR_CLAP, SI_DR_HAT, SI_DR_OPEN, SI_DR_CRASH, SI_DR_HEY, SI_DR_HO, SI_DR_WHOA,
        SI_DR_COUNT };
@@ -55,6 +55,7 @@ enum { SI_SEC_INTRO, SI_SEC_VERSE, SI_SEC_PRE, SI_SEC_CHORUS, SI_SEC_BREAK, SI_S
 #define SI_SETS 8
 #define SI_SOUNDS 10                               /* each part's SOUND list (si_sounds.h) */
 #define SI_STABS_PIANO 0                           /* STABS sound 0, PIANO: the offbeat piano chords, any style */
+#define SI_HOOK_PAD 9                              /* HOOK sound 9, PAD: a warm pad (HOOK SPEED PAD plays it held) */
 #define SI_LOOPS 12                                /* the chord loops (si_groove.c SI_LOOP) */
 #define SI_KEYUP_MAX 3                             /* SEQ: up to +3, then home */
 
@@ -73,7 +74,8 @@ typedef struct {
     uint8_t lvl[4];                                /* MIX 0..100 */
     uint8_t reverb, delay, dtime, width;           /* SPACE */
     uint8_t arc, verse, chorus, keyup;             /* ARC: on, verse bars 8 16, chorus bars 8 16, the last chorus up 0..2 */
-    uint8_t speed, range, gate, repeat;            /* HOOK: SI_SPEED_*, octaves 1 2, gate 10..100 %, bars 1 2 4 */
+    uint8_t speed, range, gate, repeat;            /* HOOK: SI_SPEED_* (PAD: a pad on the chords), octaves 1 2, gate
+                                                    * 10..100 %, bars 1 2 4 */
     uint8_t bpm;                                   /* SELECT: 60..200 */
     uint8_t palette, look;                         /* MENU: COLOR, LOOK (FLAT, LINE) */
     uint16_t song;                                 /* ALGORITHM: the song number in the style, 0..999 */

@@ -108,7 +108,7 @@ enum { DRUMS_EURO, DRUMS_SKANK, DRUMS_BALLAD, DRUMS_RAVE, DRUMS_HOUSE, DRUMS_ITA
  * reso drive ensemble.
  * Sounds (si_sounds.h): STABS 0 PIANO 1 ORGAN 2 SUPER 3 STRINGS 4 BRASS 5 PLUCK 6 HOOVER 7 ORCH 8 BELLS 9 PAD;
  * BASS 0 FM 1 SQUARE 2 SUB 3 FAT 4 ACID 5 REESE 6 SLAP 7 FRETLESS 8 OCTAVE 9 WOW; HOOK 0 SUPER 1 SAW 2 PLUCK 3 BELL
- * 4 PIANO 5 HOOVER 6 OOH 7 SYNC 8 FLUTE 9 CHIP; the kit 0 EURO 1 SESSION 2 MACHINE */
+ * 4 PIANO 5 HOOVER 6 OOH 7 SYNC 8 FLUTE 9 PAD; the kit 0 EURO 1 SESSION 2 MACHINE */
 const si_style SI_STYLE[SI_STYLES] = {
     {"EUROSTOMP", SI_SIDE_CLUB, 136, 9, SI_SC_MINOR, 85, 55, SI_VOX_CHORUS, 80, {2, 3, 0, 0}, {0, 1, 3, 5}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HEY,
@@ -134,9 +134,9 @@ const si_style SI_STYLE[SI_STYLES] = {
      15, SI_HATS_8THS, SI_FILLS_8, SI_BL_REGGAE, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_OFF, SI_CHANT_HEY,
      STAB_SKANK, HOOK_MELODY, DRUMS_SKANK, SI_SPEED_MID, 1, 70, 2, P(SI_STABS), 30, 30, SI_DTIME_3_16,
      15, 10, 30},
-    {"PIANOHOUSE", SI_SIDE_RADIO, 125, 7, SI_SC_DORIAN, 85, 40, SI_VOX_CHORUS, 70, {0, 0, 4, 0}, {9, 0, 5, 1}, 1,
+    {"PIANOHOUSE", SI_SIDE_RADIO, 125, 7, SI_SC_DORIAN, 85, 40, SI_VOX_CHORUS, 70, {0, 0, 9, 0}, {9, 0, 5, 1}, 1,
      10, SI_HATS_OPEN, SI_FILLS_8, SI_BL_OFFBEAT, SI_KICK_ROUND, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_HEY,
-     STAB_PIANO, HOOK_MELODY, DRUMS_HOUSE, SI_SPEED_MID, 2, 60, 2, P(SI_STABS), 30, 20, SI_DTIME_3_16,
+     STAB_PIANO, HOOK_MELODY, DRUMS_HOUSE, SI_SPEED_PAD, 2, 60, 2, P(SI_STABS), 30, 20, SI_DTIME_3_16,
      15, 10, 25},
     {"PARTY", SI_SIDE_RADIO, 140, 7, SI_SC_MAJOR, 90, 50, SI_VOX_ALL, 85, {4, 8, 7, 0}, {6, 7, 1, 0}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_4, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHANT_MIX,
@@ -351,7 +351,7 @@ static void build_chord(si_chord *c, const si_settings *s, int tr, int deg, int 
 }
 
 /* the hook's one-bar rhythms, by SPEED: per step the length in sixteenths of the note starting there (0 none) */
-static const uint8_t HOOK_RHY[SI_SPEED_COUNT][4][16] = {
+static const uint8_t HOOK_RHY[SI_SPEED_PAD][4][16] = {   /* (PAD has no rhythm: the chords, held) */
     [SI_SPEED_SLOW] = {{4, 0, 0, 0, 2, 0, 4, 0, 0, 0, 2, 0, 4, 0, 0, 0},
                        {6, 0, 0, 0, 0, 0, 2, 0, 8, 0, 0, 0, 0, 0, 0, 0},
                        {3, 0, 0, 3, 0, 0, 2, 0, 6, 0, 0, 0, 0, 0, 2, 0},
@@ -394,7 +394,7 @@ static void make_hook(si_groove *g, uint32_t seed)
 {
     const si_settings *s = &g->s;
     uint32_t r = seed * 2654435761u + 0x51ED27u;
-    int sp = clampi(s->speed, 0, SI_SPEED_COUNT - 1);
+    int sp = clampi(s->speed, 0, SI_SPEED_PAD - 1);  /* (PAD: the MID tune is made but not played) */
     int lo = s->range >= 2 ? -3 : 0, hi = s->range >= 2 ? 10 : 7;
     for (int i = 0; i < SI_HOOK_LEN; ++i) {
         g->hook[i] = -128;
@@ -792,10 +792,12 @@ static bool part_out(const si_groove *g, int p)
     switch (g->sec) {
     case SI_SEC_INTRO: {                           /* the parts come in one by one: drums, bass, the stabs */
         static const uint8_t IN_AT[SI_PARTS] = {4, 2, 99, 0};
+        if (p == SI_HOOK && g->s.speed == SI_SPEED_PAD)   /* a pad comes in with the stabs */
+            return g->sec_bar < 4;
         return g->sec_bar < IN_AT[p];
     }
-    case SI_SEC_VERSE: return p == SI_HOOK;        /* the verse: room for the rap */
-    case SI_SEC_PRE: return p == SI_HOOK;
+    case SI_SEC_VERSE:                             /* the verse: room for the rap (a pad stays: it fills) */
+    case SI_SEC_PRE: return p == SI_HOOK && g->s.speed != SI_SPEED_PAD;
     case SI_SEC_BREAK:                             /* the break: the stabs and the hook; the drums for the roll */
         return p == SI_BASS || (p == SI_DRUMS && g->sec_bar < 6);
     default: return false;
@@ -1043,6 +1045,20 @@ static void play_hook(si_groove *g, int i, uint32_t delay, float sf, float hum)
         return;
     const si_chord *c = chord_at(g, g->bar);
     float gate = (float)g->s.gate / 100.0f;
+    if (g->s.speed == SI_SPEED_PAD) {              /* a pad: two of the chord's notes an octave over the stabs' middle,
+                                                    * held as long as the chord lasts, swelling in */
+        int bpc = si_bars_per_chord(&g->s);
+        if (i != 0 || (g->bar % bpc) != 0)
+            return;
+        for (int k = 1; k <= 2; ++k) {
+            int n = c->note[k] + 12;
+            if (n > 84)
+                n -= 12;
+            schedule(g, delay + (uint32_t)((float)k * sf * 0.05f), SI_HOOK, n, clampi(78 + (int)(hum * 6.0f), 1, 127),
+                     sf * (float)(16 * bpc) - 60.0f);
+        }
+        return;
+    }
     if (st->hook == HOOK_ARP) {                    /* an arpeggiator through the chord, up and down */
         int every = g->s.speed == SI_SPEED_SLOW ? 2 : 1;
         if (i % every)

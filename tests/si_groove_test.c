@@ -87,7 +87,10 @@ int main(void)
         }
         CHECK(bad_pc < on[SI_STABS] / 8 + on[SI_BASS] / 8 + 8, "%s: %d stab and bass notes outside the scale",
               si_style_name(st), bad_pc);
-        CHECK(hook_in_verse == 0, "%s: the hook rests in the verse (%d notes)", si_style_name(st), hook_in_verse);
+        if (g.s.speed == SI_SPEED_PAD)
+            CHECK(hook_in_verse > 0, "%s: the pad fills the verse (%d notes)", si_style_name(st), hook_in_verse);
+        else
+            CHECK(hook_in_verse == 0, "%s: the hook rests in the verse (%d notes)", si_style_name(st), hook_in_verse);
         CHECK(g.loop[0].name[0], "%s: its first chord has a name (%s)", si_style_name(st), g.loop[0].name);
         if (g.s.vox != SI_VOX_OFF)
             CHECK(chants > 0, "%s: the crowd shouts (VOX on)", si_style_name(st));

@@ -98,7 +98,7 @@ static const sis_sound SIS_SOUND[3][SI_SOUNDS] = {
         SO("OOH", SIS_VOICE, 0, SIS_OOH, SIS_KEEP, SIS_KEEP, SIS_LEGATO, -1, -12),
         S("SYNC", SIS_TRIO, 2, 5, -6),
         S("FLUTE", SIS_WHEEL, 3, 3, -7),                 /* SOFT FLUTE */
-        S("CHIP", SIS_LOFI, 0, 7, -12),
+        S("PAD", SIS_ANALOG, 1, 4, -11),                 /* SOFT PAD: HOOK SPEED PAD holds it on the chords */
     },
 };
 #undef S

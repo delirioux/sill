@@ -59,7 +59,7 @@ Then round again from the VERSE, with a new hook and the key back home. With ARC
 | **MIX** (GLO) | the four parts' levels. |
 | **SPACE** (GLO again) | **REVERB**, **DELAY**, **TIME** the delay in 1/16, 1/8, 3/16 or 1/4, **WIDTH** the stereo spread. |
 | **ARC** (ENV) | **ARC** on: the song has its form; off: the chorus on and on. **VERSE** 8 or 16 bars. **CHORUS** 8 or 16 bars. **KEY UP** the last chorus OFF, +1 or +2. |
-| **HOOK** (ENV again) | **SPEED** SLOW (long sung notes), MID (eighths) or FAST (the syncopated sixteenth riff). **RANGE** 1 or 2 octaves. **GATE** how long each note holds. **REPEAT** the hook's phrase: 1, 2 or 4 bars, a motif and its answer. The panel draws the hook, the note playing lit (ITALO: its arpeggio). |
+| **HOOK** (ENV again) | **SPEED** SLOW (long sung notes), MID (eighths), FAST (the syncopated sixteenth riff) or PAD (no tune: the chords held, a fill that plays through the verse too; PIANOHOUSE starts with it, on the PAD sound). **RANGE** 1 or 2 octaves. **GATE** how long each note holds. **REPEAT** the hook's phrase: 1, 2 or 4 bars, a motif and its answer. The panel draws the hook, the note playing lit (ITALO: its arpeggio). |
 | **SETS** (SAVE) | Eight sets: the whole song, style and all. **SET** picks one, **LOAD** and **STORE** turned right do it, **CLEAR** turned right three times empties it. |
 | **MENU** (hold HOME) | **COLOR** the palette: LASER by default, and Felucca's. **LOOK** FLAT or LINE. |
 

@@ -106,7 +106,7 @@ static const char *const SN_CLAP[] = {"CLAP", "SNARE", "BOTH"};
 static const char *const SN_CRASH[] = {"OFF", "SECTION", "8 BARS"};
 static const char *const SN_VOX[] = {"OFF", "CHORUS", "ALL"};
 static const char *const SN_KEYUP[] = {"OFF", "+1", "+2"};
-static const char *const SN_SPEED[] = {"SLOW", "MID", "FAST"};
+static const char *const SN_SPEED[] = {"SLOW", "MID", "FAST", "PAD"};
 static const char *const SN_SCALE[] = {"MIN", "MAJ", "DOR", "HARM"};
 static const char *const SN_SCALE_LONG[] = {"MINOR", "MAJOR", "DORIAN", "HARMONIC MINOR"};
 static const uint8_t SV_BARS[] = {1, 2, 4}, SV_SECTION[] = {8, 16}, SV_REPEAT[] = {1, 2, 4}, SV_RANGE[] = {1, 2};
@@ -763,6 +763,23 @@ static void su_panel_hook(si_ui *u)
     char t[32], a[8];
     int rep = si_repeat_bars(&g->s);
     bool arp = SI_STYLE[g->s.style].hook == 1;     /* (HOOK_ARP) */
+    if (g->s.speed == SI_SPEED_PAD) {              /* a pad: the chords held, a block each, the one sounding lit */
+        su_label(10, 4, "A PAD ON THE CHORDS", T_MID);
+        int bpc = si_bars_per_chord(&g->s), n = g->nloop < 4 ? g->nloop : 4, now = g->playing ? si_chord_now(g) : -1;
+        int32_t gap = 4, w = (224 - gap * (n - 1)) / (n > 0 ? n : 1);
+        for (int i = 0; i < n; ++i) {
+            int32_t x = 10 + i * (w + gap);
+            cv_rrect(x, 30, w, 60, 4, i == now ? T_THEME : su_well(), T_SURF);
+            cv_text_in(x, 30 + CAP_IN(S, 60), w, &AF_S, g->loop[i].name, i == now ? T_INK : T_TEXT,
+                       i == now ? T_THEME : su_well());
+        }
+        char b[24], a2[8];
+        su_fmt_int(a2, bpc);
+        su_cpy(b, a2, sizeof b);
+        su_cat(b, bpc == 1 ? " BAR A CHORD" : " BARS A CHORD", sizeof b);
+        cv_text_in(10, 100, 224, &AF_S, b, T_DIM, T_SURF);
+        return;
+    }
     if (arp) {
         su_cpy(t, "AN ARPEGGIO THROUGH THE CHORD", sizeof t);
     } else {
