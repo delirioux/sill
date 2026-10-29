@@ -105,7 +105,8 @@ enum { DRUMS_EURO, DRUMS_SKANK, DRUMS_BALLAD, DRUMS_RAVE, DRUMS_HOUSE, DRUMS_ITA
 
 /* name side bpm key scale | lift pump vox energy | snd[4] | loops | bars swing hats fills bassline |
  * kick clap crash choir | stab hook drums | speed range gate repeat | lift parts | reverb delay dtime |
- * reso drive ensemble | the three more sounds of STABS, BASS and HOOK a song picks from (si_song_sounds).
+ * reso drive ensemble | the three more sounds of STABS, BASS and HOOK a song picks from (si_song_sounds; never ORCH:
+ * an effect, picked by hand).
  * Sounds (si_sounds.h): STABS 0 PIANO 1 ORGAN 2 SUPER 3 STRINGS 4 PWM 5 PLUCK 6 HOOVER 7 ORCH 8 EPIANO 9 PAD
  * 10 HOUSE 11 DEEP 12 KEYS 13 CHOIR 14 VIOLINS 15 TRANCE; BASS 0 FM 1 SQUARE 2 SUB 3 FAT 4 ACID
  * 5 REESE 6 SLAP 7 SLIDE 8 OCTAVE 9 WOW 10 ORGAN 11 SYNTH 12 SINE 13 TRANCE 14 DX 15 GROWL; HOOK 0 SUPER 1 SAW
@@ -119,7 +120,7 @@ const si_style SI_STYLE[SI_STYLES] = {
     {"VIKING", SI_SIDE_CLUB, 138, 4, SI_SC_HARMONIC, 80, 50, SI_VOX_CHORUS, 85, {14, 3, 1, 0}, {8, 4, 0, 3}, 1,
      0, SI_HATS_16THS, SI_FILLS_4, SI_BL_OCTAVE, SI_KICK_PUNCH, SI_CLAP_BOTH, SI_CRASH_SECTION, SI_CHOIR_OH,
      STAB_EURO, HOOK_MELODY, DRUMS_EURO, SI_SPEED_MID, 2, 90, 2, P(SI_STABS) | P(SI_HOOK), 35, 20, SI_DTIME_8,
-     25, 10, 35, {{7, 13, 3}, {8, 15, 11}, {11, 12, 0}}},
+     25, 10, 35, {{4, 13, 3}, {8, 15, 11}, {11, 12, 0}}},
     {"BUBBLEGUM", SI_SIDE_CLUB, 130, 2, SI_SC_MAJOR, 90, 45, SI_VOX_CHORUS, 75, {5, 1, 3, 0}, {6, 7, 0, 1}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_8, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHOIR_AH,
      STAB_BOUNCE, HOOK_MELODY, DRUMS_EURO, SI_SPEED_MID, 1, 50, 2, P(SI_STABS), 20, 20, SI_DTIME_8,
@@ -131,7 +132,7 @@ const si_style SI_STYLE[SI_STYLES] = {
     {"RAVE", SI_SIDE_CLUB, 140, 6, SI_SC_MINOR, 80, 60, SI_VOX_CHORUS, 90, {6, 4, 5, 0}, {3, 0, 4, 1}, 1,
      0, SI_HATS_16THS, SI_FILLS_4, SI_BL_ROLLING, SI_KICK_PUNCH, SI_CLAP_BOTH, SI_CRASH_8, SI_CHOIR_OH,
      STAB_RAVE, HOOK_MELODY, DRUMS_RAVE, SI_SPEED_FAST, 1, 60, 1, P(SI_STABS) | P(SI_HOOK), 25, 20, SI_DTIME_8,
-     45, 18, 10, {{15, 11, 7}, {5, 13, 15}, {14, 0, 7}}},
+     45, 18, 10, {{15, 11, 2}, {5, 13, 15}, {14, 0, 7}}},
     {"SKANK", SI_SIDE_RADIO, 95, 1, SI_SC_MINOR, 75, 15, SI_VOX_CHORUS, 55, {1, 2, 8, 0}, {10, 3, 0, 5}, 1,
      15, SI_HATS_8THS, SI_FILLS_8, SI_BL_REGGAE, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_OFF, SI_CHOIR_AH,
      STAB_SKANK, HOOK_MELODY, DRUMS_SKANK, SI_SPEED_MID, 1, 70, 2, P(SI_STABS), 30, 30, SI_DTIME_3_16,
@@ -143,7 +144,7 @@ const si_style SI_STYLE[SI_STYLES] = {
     {"PARTY", SI_SIDE_RADIO, 140, 7, SI_SC_MAJOR, 90, 50, SI_VOX_ALL, 85, {2, 8, 7, 0}, {6, 7, 1, 0}, 1,
      0, SI_HATS_OFFBEAT, SI_FILLS_4, SI_BL_BOUNCE, SI_KICK_PUNCH, SI_CLAP_CLAP, SI_CRASH_SECTION, SI_CHOIR_MIX,
      STAB_BOUNCE, HOOK_MELODY, DRUMS_EURO, SI_SPEED_FAST, 1, 55, 1, P(SI_STABS) | P(SI_HOOK), 20, 15, SI_DTIME_8,
-     20, 10, 30, {{7, 10, 5}, {11, 14, 1}, {15, 2, 11}}},
+     20, 10, 30, {{12, 10, 5}, {11, 14, 1}, {15, 2, 11}}},
     {"BALLAD", SI_SIDE_RADIO, 100, 4, SI_SC_MINOR, 90, 0, SI_VOX_OFF, 35, {9, 7, 4, 0}, {2, 0, 6, 5}, 2,
      0, SI_HATS_8THS, SI_FILLS_OFF, SI_BL_LONG, SI_KICK_ROUND, SI_CLAP_SNARE, SI_CRASH_SECTION, SI_CHOIR_AH,
      STAB_PAD, HOOK_MELODY, DRUMS_BALLAD, SI_SPEED_SLOW, 2, 95, 4, P(SI_STABS), 50, 25, SI_DTIME_4,
