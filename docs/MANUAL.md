@@ -13,8 +13,7 @@ comes back the same. SELECT is the tempo, MASTER the volume.
 
 The header shows the section playing (INTRO, VERSE, PRE, CHORUS, BREAK) and, on the right, a badge: the key up
 (+1, +2, +3) or HELD while a break is held. The footer's sixteen dashes are the way through the section; under them the style and the song's number, on
-every page. On PLAY, while it plays, the footer's right corner shows the CPU (the audio's load), in the accent
-from 85 %, where the firmware starts to drop voices.
+every page.
 
 **REC is BREAK.** Tap it: everything but the stabs drops out, the stabs hold their chords for three bars, a snare
 roll comes in the fourth and the chorus slams back on the bar line. Hold it: the break stays until you let go, then
@@ -63,7 +62,7 @@ Then round again from the VERSE, with a new hook and the key back home. With ARC
 | **ARC** (ENV) | **ARC** on: the song has its form; off: the chorus on and on. **VERSE** 8 or 16 bars. **CHORUS** 8 or 16 bars. **KEY UP** the last chorus OFF, +1 or +2. |
 | **HOOK** (ENV again) | Some songs' hooks hold a tuplet: a triplet (3 notes in the space of 2 eighths), a quadruplet (4 in the space of 3 eighths), a quintuplet (5 in the space of 4 sixteenths) or a sextuplet (6 in the space of 4 sixteenths), the chord's tones up or down, more often the faster the SPEED; the panel draws it. **SPEED** SLOW (long sung notes), MID (eighths), FAST (the syncopated sixteenth riff) or PAD (no tune: the chords held, a fill that plays through the verse too; PIANOHOUSE starts with it, on the PAD sound). **RANGE** 1 or 2 octaves. **GATE** how long each note holds. **REPEAT** the hook's phrase: 1, 2 or 4 bars, a motif and its answer. The panel draws the hook, the note playing lit (ITALO: its arpeggio). |
 | **SETS** (SAVE) | Eight sets: the whole song, style and all. **SET** picks one, **LOAD** and **STORE** turned right do it, **CLEAR** turned right three times empties it. |
-| **MENU** (hold HOME) | **COLOR** the palette: LASER by default, and Felucca's. **LOOK** FLAT or LINE. |
+| **MENU** (hold HOME) | **COLOR** the palette: LASER by default, and Felucca's. **LOOK** FLAT or LINE. The panel: the version and the CPU, the audio's load (as Tuna's MENU > SYSTEM > INFO shows it). |
 
 A style sets its tempo, sounds, key, chord loop, groove, drums, choir, space and hook; MIX, ARC and MENU stay
 yours.
