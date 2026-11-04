@@ -1,3 +1,12 @@
+# Sill 1.0.1
+
+The flash of newer FM-1 units.
+
+- Newer FM-1 units carry a UC25HQ80 flash (JEDEC 0xB36014) that 1.0 did not recognise: Sill ran without saving
+  anything there, settings and sets lost at power-off. It recognises it now (Felucca's fix, its issue #320).
+
+Runs on the FM-1. To go back: Felucca's or Tuna's installer, or the official V15.
+
 # Sill 1.0
 
 It works, it plays: the first main version.

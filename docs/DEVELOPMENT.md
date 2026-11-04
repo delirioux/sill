@@ -4,7 +4,7 @@ The working notes behind Sill: the agreements, how the work flows, why the code 
 stands and what comes next. What Sill is and how to play it is in the [README](../README.md) and the
 [manual](MANUAL.md).
 
-Status: 29 October 2026. Version 1.0: it works and it plays. Built by CI and running on an FM-1; released on
+Status: 4 November 2026. Version 1.0.1: it works and it plays, and it saves on newer FM-1 units too. Built by CI and running on an FM-1; released on
 `main`, tagged and released on GitHub by CI.
 
 ## Agreements
