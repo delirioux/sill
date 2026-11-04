@@ -1,3 +1,13 @@
+# Sill 1.0.2
+
+The kick in tune.
+
+- On EURO the kick is tuned to each chord's root (the key up in it), the nearest way from its own pitch, so it walks
+  with the bass.
+- MENU shows the CPU, the audio's load, as Tuna's MENU > SYSTEM > INFO does.
+
+Runs on the FM-1. To go back: Felucca's or Tuna's installer, or the official V15.
+
 # Sill 1.0.1
 
 The flash of newer FM-1 units.
