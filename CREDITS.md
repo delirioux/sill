@@ -6,9 +6,9 @@
   and AH by `tools/si_choir.py`, CC0 1.0 ([attribution](assets/samples-cc0/ATTRIBUTION.txt))
 - **The piano**: six notes of the Kawai grand of the [Versilian Community Sample Library](https://github.com/sgossner/VCSL)
   (Sam Gossner and contributors, CC0 1.0), made bright by `tools/si_piano.py`
-- **Daurade** (delirioux, GPL-3.0-only): the machine Sill runs on: the glue, the cards and pages, the matrix's
+- **[Daurade](https://github.com/delirioux/daurade)** (delirioux, GPL-3.0-only): the machine Sill runs on: the glue, the cards and pages, the matrix's
   sweep and pump, the sets, the drum kit's one-shots and their generator, the OCTAVE bass
-- **[Tuna](https://github.com/delirioux/tuna)** and Flyfish (delirioux, GPL-3.0-only): the frame Sill's screen is
+- **[Tuna](https://github.com/delirioux/tuna)** and [Flyfish](https://github.com/delirioux/flyfish) (delirioux, GPL-3.0-only): the frame Sill's screen is
   drawn in, the single-precision maths (`tuna_libm`), the FM6 patches SLAP, BRASS and FRETLESS and the SAW voicing
 - **Felucca** (below): the hardware layer, the engines, the effects, the drawing, the installer's package format
 

@@ -13,8 +13,8 @@ the chords, the CPU on MENU. Built by CI and running on an FM-1; released on
 | What | Agreed |
 | --- | --- |
 | Home | GitHub, `github.com/delirioux/sill`, branch `main`; unfinished work on `dev` until it has run on the FM-1. |
-| Upstream | A fork of Daurade, Flyfish and [Tuna](https://github.com/delirioux/tuna) (themselves forks of [Felucca](https://github.com/hugelton/Felucca)). Never push to Tuna or Felucca. Felucca's five engines are a submodule, `firmware/engines`. |
-| Name | Ocean animals, as Tuna, Flyfish, Makohai and Daurade: the sill, the herring. The logo: a herring on a ring of audio bars, four knobs in a row, club lasers, a fat 90s wordmark in magenta and cyan. |
+| Upstream | A fork of [Daurade](https://github.com/delirioux/daurade), [Flyfish](https://github.com/delirioux/flyfish) and [Tuna](https://github.com/delirioux/tuna) (themselves forks of [Felucca](https://github.com/hugelton/Felucca)). Never push to Tuna or Felucca. Felucca's five engines are a submodule, `firmware/engines`. |
+| Name | Ocean animals, as Tuna, Flyfish, [Makohai](https://github.com/delirioux/makohai) and Daurade: the sill, the herring. The logo: a herring on a ring of audio bars, four knobs in a row, club lasers, a fat 90s wordmark in magenta and cyan. |
 | What it is | Generative 90s eurodance: offbeat basses, stabs, a chorus hook, a choir, a key change. Its sounds and styles are its own; the repository names no artist, record or film as a model, in code, docs or history. |
 | Description | "Generative 90s eurodance for the FM-1, pickled in 1995." |
 | Language | English throughout: code, comments, commits, docs. |

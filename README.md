@@ -9,10 +9,10 @@
 **Generative 90s eurodance for the M-VAVE FM-1, pickled in 1995.** Press PLAY and Sill writes a song and plays
 it: offbeat basses, piano and supersaw stabs, a hook for the chorus, a choir singing along, and a key change for
 the last chorus. Ten styles on two sides, CLUB and RADIO. You steer it with four knobs, break it down, push the key
-up, and play the hook yourself on the keys. Built on Daurade, [Tuna](https://github.com/delirioux/tuna) and
+up, and play the hook yourself on the keys. Built on [Daurade](https://github.com/delirioux/daurade), [Tuna](https://github.com/delirioux/tuna) and
 [Felucca](docs/FELUCCA.md).
 
-> **Version 1.0.3.** Runs on the FM-1. Built with no warranty. Felucca's or Tuna's installer, or the official V15,
+> **Version 1.0.3.** Runs on the FM-1. Built with no warranty. [Felucca](https://github.com/hugelton/Felucca)'s or Tuna's installer, or the official V15,
 > takes the FM-1 back.
 
 <p align="center"><img src="docs/sill-play.gif" alt="PLAY: the chords, the bar as it plays, the song's form" width="240"></p>
@@ -130,6 +130,6 @@ sysroot). Design notes and the plan: [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
 ## Credits and licence
 
-GPL-3.0-only. Sill by delirioux and Claude; a fork of Daurade, Flyfish and Tuna (delirioux), forks of
+GPL-3.0-only. Sill by delirioux and Claude; a fork of Daurade, [Flyfish](https://github.com/delirioux/flyfish) and Tuna (delirioux), forks of
 Felucca by Leo Kuroshita, Hügelton Instruments; the web installer is Felucca's. The drum and choir samples are CC0.
 See [CREDITS.md](CREDITS.md) and [LICENSING.md](LICENSING.md).

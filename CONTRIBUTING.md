@@ -1,7 +1,7 @@
 # Contributing to Sill
 
 Sill is a small fork. Bugs and ideas: [Issues](https://github.com/delirioux/sill/issues) on this repository,
-please; not Felucca's, Tuna's or Daurade's trackers: Sill is maintained here.
+please; not [Felucca](https://github.com/hugelton/Felucca)'s, [Tuna](https://github.com/delirioux/tuna)'s or [Daurade](https://github.com/delirioux/daurade)'s trackers: Sill is maintained here.
 
 With a bug, say the Sill version (the splash), the style and song, the steps to reproduce it, what you expected
 and what happened. A change to the songs goes in `firmware/src/si_groove.c`, to the sounds in `si_sounds.h` (run
