@@ -1,3 +1,5 @@
+**Patched for FM-1 units with the new chipset.**
+
 # Sill
 
 <p align="center"><img src="docs/sill-logo.png" alt="Sill" width="256"></p>
