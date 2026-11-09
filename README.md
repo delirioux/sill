@@ -1,5 +1,7 @@
 **Patched for FM-1 units with the new chipset.**
 
+**[Quick cheat sheet](docs/CHEATSHEET.md): every control and what it does.**
+
 # Sill
 
 <p align="center"><img src="docs/sill-logo.png" alt="Sill" width="256"></p>
