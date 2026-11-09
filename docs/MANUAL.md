@@ -1,6 +1,6 @@
 # Sill manual
 
-Sill 1.0.3. Every page, every card. Four parts play: **STABS** (the chords), **BASS**, **HOOK** (the chorus's tune,
+Sill 1.0.4. Every page, every card. Four parts play: **STABS** (the chords), **BASS**, **HOOK** (the chorus's tune,
 and whatever you play on the keys) and **DRUMS** (with the choir). Knob 1 to 4 turn the four cards on the
 screen. A page's button pressed again goes to its second page where it has one.
 
@@ -22,7 +22,8 @@ the roll, then the chorus.
 **SEQ is KEY UP.** The whole song a semitone up from the next bar line; again for +2, +3, and once more to go home.
 A new style or song starts at home again. With ARC on, the last chorus goes up on its own as well (ARC > KEY UP).
 
-**The keys** play the HOOK, live, snapped to the scale (and to the key up): any key you press is in key. While you
+**The keys** play the HOOK, live, as you press them: an off note is yours to play. MENU's **SNAP** (hold
+HOME, KNOB 3) snaps them to the scale (and to the key up) instead, so any key you press is in key. While you
 hold one, the written hook makes way. OCT- and OCT+ move the keys' octave. The keys' LEDs glow on the notes of the
 chord playing. The keys never change a setting.
 
@@ -62,7 +63,7 @@ Then round again from the VERSE, with a new hook and the key back home. With ARC
 | **ARC** (ENV) | **ARC** on: the song has its form; off: the chorus on and on. **VERSE** 8 or 16 bars. **CHORUS** 8 or 16 bars. **KEY UP** the last chorus OFF, +1 or +2. |
 | **HOOK** (ENV again) | Some songs' hooks hold a tuplet: a triplet (3 notes in the space of 2 eighths), a quadruplet (4 in the space of 3 eighths), a quintuplet (5 in the space of 4 sixteenths) or a sextuplet (6 in the space of 4 sixteenths), the chord's tones up or down, more often the faster the SPEED; the panel draws it. **SPEED** SLOW (long sung notes), MID (eighths), FAST (the syncopated sixteenth riff) or PAD (no tune: the chords held, a fill that plays through the verse too; PIANOHOUSE starts with it, on the PAD sound). **RANGE** 1 or 2 octaves. **GATE** how long each note holds. **REPEAT** the hook's phrase: 1, 2 or 4 bars, a motif and its answer. The panel draws the hook, the note playing lit (ITALO: its arpeggio). |
 | **SETS** (SAVE) | Eight sets: the whole song, style and all. **SET** picks one, **LOAD** and **STORE** turned right do it, **CLEAR** turned right three times empties it. |
-| **MENU** (hold HOME) | **COLOR** the palette: LASER by default, and Felucca's. **LOOK** FLAT or LINE. The panel: the version and the CPU, the audio's load (as [Tuna](https://github.com/delirioux/tuna)'s MENU > SYSTEM > INFO shows it). |
+| **MENU** (hold HOME) | **COLOR** the palette: LASER by default, and Felucca's. **LOOK** FLAT or LINE. **SNAP** the keys: OFF, as you press them (the default), or ON, onto the scale. The panel: the version and the CPU, the audio's load (as [Tuna](https://github.com/delirioux/tuna)'s MENU > SYSTEM > INFO shows it). |
 
 A style sets its tempo, sounds, key, chord loop, groove, drums, choir, space and hook; MIX, ARC and MENU stay
 yours.

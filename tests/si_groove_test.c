@@ -237,6 +237,22 @@ int main(void)
     si_key(&g, 1, 54, true);
     CHECK(on[SI_HOOK] == 1, "a key plays the hook");
     si_key(&g, 1, 54, false);
+    {   /* SNAP: OFF (the default) the key as pressed, ON onto the scale */
+        int off_out = 0, on_out = 0;
+        for (int n = 53; n <= 79; ++n) {
+            si_key(&g, n - 53, n, true);
+            off_out += g.key_note[n - 53] != n;
+            si_key(&g, n - 53, n, false);
+        }
+        g.s.keysnap = 1;
+        for (int n = 53; n <= 79; ++n) {
+            si_key(&g, n - 53, n, true);
+            on_out += si_snap(&g.s, g.key_note[n - 53] - g.tr) != g.key_note[n - 53] - g.tr;
+            si_key(&g, n - 53, n, false);
+        }
+        g.s.keysnap = 0;
+        CHECK(off_out == 0 && on_out == 0, "SNAP: OFF as pressed (%d off), ON in the scale (%d out)", off_out, on_out);
+    }
     CHECK(off[SI_HOOK] >= 1, "its release lets go");
     si_play(&g, false);
     /* the choir: none with VOX OFF; the vowel chosen with VOX on, MIX both */

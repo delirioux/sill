@@ -138,7 +138,7 @@ static const su_cdef SU_CARDS[SU_PAGES][4] = {
                     {"GATE", SS_(gate), SC_NUM, 10, 100, 5, 0, 0}, C_VALS("REPEAT", repeat, SV_REPEAT)},
     [SU_PG_SETS] = {{"SET", 0, SC_SETSEL, 0, SI_SETS - 1, 1, 0, 0}, {"LOAD", 0, SC_LOAD, 0, 0, 1, 0, 0},
                     {"STORE", 0, SC_STORE, 0, 0, 1, 0, 0}, {"CLEAR", 0, SC_CLEAR, 0, 0, 1, 0, 0}},
-    [SU_PG_MENU] = {{"COLOR", SS_(palette), SC_PAL, 0, 10, 1, 0, 0}, C_LIST("LOOK", look, SN_LOOK), C_OFF, C_OFF},
+    [SU_PG_MENU] = {{"COLOR", SS_(palette), SC_PAL, 0, 10, 1, 0, 0}, C_LIST("LOOK", look, SN_LOOK), C_LIST("SNAP", keysnap, SN_ONOFF), C_OFF},
 };
 static const char *const SU_PAGE_NAMES[SU_PAGES] = {"PLAY", "SOUND", "TONE", "VOX", "KEY", "GROOVE", "DRUMS", "MIX",
                                                     "SPACE", "ARC", "HOOK", "SETS", "MENU"};
@@ -964,6 +964,7 @@ static void su_load_set(si_ui *u, int i)
     si_settings s = u->sets[i];
     s.palette = g->s.palette;
     s.look = g->s.look;
+    s.keysnap = g->s.keysnap;
     si_settings_fix(&s);
     si_all_off(g);
     g->s = s;

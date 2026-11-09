@@ -15,7 +15,7 @@ second page where it has one. HOME takes you back to PLAY. The keys only ever pl
 | Another song | **ALGORITHM**: a new chord loop, bass line, hook and sounds in the same style, on the next bar |
 | Break it down | **REC**: tapped, the stabs alone three bars, a roll, the chorus back; held, the break until you let go |
 | Key change | **SEQ**: the song a semitone up from the next bar; again +2, +3, then home |
-| Play the hook | **Keys**: snapped to the scale, anything you press is in key. **OCT-** / **OCT+**: their octave |
+| Play the hook | **Keys**: as you press them; hold **HOME**, KNOB 3: **SNAP** on, snapped to the scale. **OCT-** / **OCT+**: their octave |
 
 ## The four knobs (PLAY)
 
@@ -51,6 +51,6 @@ second page where it has one. HOME takes you back to PLAY. The keys only ever pl
 | What | How |
 | --- | --- |
 | Sets | **SAVE**: eight sets. **SET** picks, **LOAD** / **STORE** turned right, **CLEAR** turned right three times |
-| Colour, CPU | Hold **HOME**: MENU, **COLOR**, **LOOK** |
+| Colour, CPU | Hold **HOME**: MENU, **COLOR**, **LOOK**, **SNAP** (the keys onto the scale) |
 | MIDI out | STABS on channel 1, BASS 2, HOOK 3, drums 10 (the choir is not sent) |
 | Saving | Automatic, while stopped |

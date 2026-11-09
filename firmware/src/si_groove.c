@@ -227,6 +227,7 @@ void si_defaults(si_settings *s)
     s->keyup = 1;
     s->palette = 10;                               /* LASER (ui_palettes.h UI_LASER_INDEX) */
     s->look = 0;
+    s->keysnap = 0;                                /* (the keys as pressed) */
 }
 
 void si_settings_fix(si_settings *s)
@@ -276,6 +277,7 @@ void si_settings_fix(si_settings *s)
     s->repeat = (uint8_t)(s->repeat >= 4 ? 4 : s->repeat >= 2 ? 2 : 1);
     s->bpm = (uint8_t)clampi(s->bpm ? s->bpm : 136, 60, 200);
     s->look = (uint8_t)(s->look ? 1 : 0);
+    s->keysnap = (uint8_t)(s->keysnap == 1);       /* (an old record's padding: OFF) */
     if (s->song > 999)
         s->song = 0;
 }
@@ -774,6 +776,7 @@ static void bar_line(si_groove *g)
         g->s.keyup = old.keyup;
         g->s.palette = old.palette;
         g->s.look = old.look;
+        g->s.keysnap = old.keysnap;
         if (keep_song >= 0) {
             g->s.song = (uint16_t)keep_song;
             si_song_sounds(&g->s);
@@ -1368,7 +1371,7 @@ void si_key(si_groove *g, int k, int note, bool down)
     if (k < 0 || k >= 27)
         return;
     if (down) {
-        int n = si_snap(&g->s, note) + g->tr;      /* in the key, the key up in it */
+        int n = g->s.keysnap ? si_snap(&g->s, note) + g->tr : note;   /* (SNAP on: in the key, the key up in it; off: as pressed) */
         if (g->key_note[k] >= 0)
             emit(g, 0, SI_HOOK, g->key_note[k], 0);
         if (!g->keys)                              /* the hook makes way */

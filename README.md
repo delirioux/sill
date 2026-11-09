@@ -14,7 +14,7 @@ the last chorus. Ten styles on two sides, CLUB and RADIO. You steer it with four
 up, and play the hook yourself on the keys. Built on [Daurade](https://github.com/delirioux/daurade), [Tuna](https://github.com/delirioux/tuna) and
 [Felucca](docs/FELUCCA.md).
 
-> **Version 1.0.3.** Runs on the FM-1. Built with no warranty. [Felucca](https://github.com/hugelton/Felucca)'s or Tuna's installer, or the official V15,
+> **Version 1.0.4.** Runs on the FM-1. Built with no warranty. [Felucca](https://github.com/hugelton/Felucca)'s or Tuna's installer, or the official V15,
 > takes the FM-1 back.
 
 <p align="center"><img src="docs/sill-play.gif" alt="PLAY: the chords, the bar as it plays, the song's form" width="240"></p>
@@ -80,9 +80,9 @@ semitone or two higher (KEY UP). Then round again from the verse, with a new hoo
 | PLAY | start (with the intro) / stop |
 | REC | BREAK: tapped, everything but the stabs drops out for three bars, a snare roll comes in the fourth, and the chorus slams back on the bar line; held, the break stays until you let go, then the roll |
 | SEQ | KEY UP: the song a semitone up from the next bar; again +2, +3, then home |
-| keys | the hook, live, snapped to the scale: whatever you press is in key. The keys only ever play music |
+| keys | the hook, live, as you press them; MENU's SNAP on: snapped to the scale. The keys only ever play music |
 | OCT- / OCT+ | the keys' octave |
-| HOME | PLAY; hold it: MENU (COLOR, LOOK) |
+| HOME | PLAY; hold it: MENU (COLOR, LOOK, SNAP) |
 | FX | SOUND (the four parts' sounds), again: TONE (RESO DRIVE DETUNE CRUSH) |
 | LFO | VOX (VOWELS SHIFT CHOIR GLIDE) |
 | SCL | KEY (KEY SCALE CHORDS BARS) |

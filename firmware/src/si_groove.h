@@ -98,6 +98,9 @@ typedef struct {
                                                     * 10..100 %, bars 1 2 4 */
     uint8_t bpm;                                   /* SELECT: 60..200 */
     uint8_t palette, look;                         /* MENU: COLOR, LOOK (FLAT, LINE) */
+    uint8_t keysnap;                               /* MENU: SNAP, the keys onto the scale (1) or as pressed (0, the
+                                                    * default); in the byte that was padding, so the size and the
+                                                    * saved sets stay as they were */
     uint16_t song;                                 /* ALGORITHM: the song number in the style, 0..999 */
 } si_settings;
 
