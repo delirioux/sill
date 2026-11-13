@@ -7,5 +7,6 @@
   "play": "https://delirioux.github.io/sill/try/",
   "cheat": "https://github.com/delirioux/sill/blob/main/docs/CHEATSHEET.md",
   "image": "docs/card.png",
-  "color": "#F03CC4"
+  "color": "#F03CC4",
+  "sounds": "CC0: Kawai grand from Versilian Studios' VCSL; own drums and choir synthesized by tools/si_drums.py and tools/si_choir.py; drums synthesized by Felucca's tools/gen_waves.py (Hügelton Sample Pack, GPL-3.0-only)"
 }
