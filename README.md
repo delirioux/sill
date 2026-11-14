@@ -135,3 +135,5 @@ sysroot). Design notes and the plan: [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 GPL-3.0-only. Sill by delirioux and Claude; a fork of Daurade, [Flyfish](https://github.com/delirioux/flyfish) and Tuna (delirioux), forks of
 Felucca by Leo Kuroshita, Hügelton Instruments; the web installer is Felucca's. The drum and choir samples are CC0.
 See [CREDITS.md](CREDITS.md) and [LICENSING.md](LICENSING.md).
+
+You can also try Sill in the browser, no flashing needed, in the free community [FM-1 Emulator](https://fm1-emulator.atst.tools/).
